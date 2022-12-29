@@ -1,7 +1,9 @@
-import * as React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+import styled from "@emotion/styled";
 import Box from "@mui/material/Box";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Button from "@mui/material/Button";
+import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
@@ -49,19 +51,31 @@ const subMenuList = [
   },
 ];
 
-export default function SwipeableTemporaryDrawer() {
-  const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-      role="presentation"
-    >
+const Menu = () => {
+  const [openMenu, setOpenMenu] = useState(true);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setOpenMenu(open);
+  };
+
+  const list = (
+    <Box sx={{ width: 250 }} role="presentation">
       <List>
         {menuList.map((item) => (
           <ListItem key={item.id} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
+            <Link to={item.link}>
+              <ListItemButton>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>
@@ -82,10 +96,22 @@ export default function SwipeableTemporaryDrawer() {
   return (
     <div>
       <React.Fragment>
-        <SwipeableDrawer anchor={"left"} open={false}>
-          {list("left")}
-        </SwipeableDrawer>
+        <Drawer
+          PaperProps={{
+            sx: {
+              backgroundColor: "rgba(12,52,86,1)",
+              color: "white",
+            },
+          }}
+          anchor={"left"}
+          open={openMenu}
+          onClose={toggleDrawer(false)}
+        >
+          {list}
+        </Drawer>
       </React.Fragment>
     </div>
   );
-}
+};
+
+export default Menu;

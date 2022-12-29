@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Menu from "./Menu";
 
 const Layout = (props) => {
   return (
-    <div className="flex flex-col w-full max-w-[1200px]">
+    <div className="flex flex-col w-full">
       <Menu />
       <NavBar />
 
-      <div className="grow bg-black/75">{props.children}</div>
+      <div className="flex grow bg-black/75 justify-center items-center">
+        <div className="text-white text-2xl">{props.children}</div>
+      </div>
     </div>
   );
 };

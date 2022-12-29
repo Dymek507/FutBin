@@ -6,20 +6,23 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { SportsRugbySharp } from "@mui/icons-material";
+import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import { Drawer } from "@mui/material";
 
 const Logo = (props) => {
   return (
     <Typography
       variant="h5"
+      fontSize="2rem"
       sx={{ border: 2, borderColor: "white", borderRadius: 2, px: 0.5 }}
     >
-      {props.children}
+      {props.children}{" "}
+      <SportsSoccerIcon fontSize="1rem" sx={{ paddingBottom: 0.5 }} />
     </Typography>
   );
 };
 
-const NavBar = () => {
+const NavBar = ({ toogleMenu }) => {
   return (
     <AppBar
       position="static"
@@ -28,19 +31,21 @@ const NavBar = () => {
       }}
     >
       <Toolbar>
-        <div className="flex grow">
-          <Logo>FutDraft</Logo>
-        </div>
-        <Button color="inherit">Login</Button>
         <IconButton
           size="large"
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ ml: 1 }}
+          sx={{ mr: 1 }}
         >
-          <MenuIcon />
+          <MenuIcon sx={{ fontSize: "2.5rem" }} />
         </IconButton>
+        <div className="flex grow">
+          <Logo>FutDraft</Logo>
+        </div>
+        <Button color="inherit">
+          <Typography fontSize="1.5rem">Login</Typography>
+        </Button>
       </Toolbar>
     </AppBar>
   );
