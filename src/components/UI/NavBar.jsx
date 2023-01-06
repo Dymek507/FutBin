@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
 import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -22,7 +24,12 @@ const Logo = (props) => {
   );
 };
 
-const NavBar = ({ toogleMenu }) => {
+const NavBar = () => {
+  const dispatch = useDispatch();
+
+  const toogleMenu = () => {
+    dispatch(uiActions.toggle());
+  };
   return (
     <AppBar
       position="static"
@@ -32,6 +39,7 @@ const NavBar = ({ toogleMenu }) => {
     >
       <Toolbar>
         <IconButton
+          onClick={toogleMenu}
           size="large"
           edge="start"
           color="inherit"

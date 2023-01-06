@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { uiActions } from "../../store/ui-slice";
+import { useDispatch, useSelector } from "react-redux";
 
 import styled from "@emotion/styled";
 import Box from "@mui/material/Box";
@@ -52,7 +54,8 @@ const subMenuList = [
 ];
 
 const Menu = () => {
-  const [openMenu, setOpenMenu] = useState(true);
+  const dispatch = useDispatch();
+  const showMenu = useSelector((state) => state.ui.menuIsVisible);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -61,8 +64,7 @@ const Menu = () => {
     ) {
       return;
     }
-
-    setOpenMenu(open);
+    dispatch(uiActions.toggle());
   };
 
   const list = (
@@ -104,8 +106,8 @@ const Menu = () => {
             },
           }}
           anchor={"left"}
-          open={openMenu}
-          onClose={toggleDrawer(false)}
+          open={showMenu}
+          onClose={toggleDrawer()}
         >
           {list}
         </Drawer>
