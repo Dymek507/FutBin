@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useFetcherSWR } from "./useFetcherSWR";
 import axios from "axios";
 
 const AuthToken = "9da99810-9712-4bb5-a2a6-73e3df0078c0";
@@ -13,20 +14,23 @@ const axiosFetchBlob = {
 
 export const useFetchImages = (playerObject) => {
   const { id, club, nation } = playerObject;
+
+  const playerPhoto = useFetcherSWR(`players/${id}/image`);
+
   const [playerImages, setPlayerImages] = useState({});
+
+  useEffect(() => {
+    if (playerPhoto) {
+      setPlayerImages((prev) => ({ ...prev, playerPhoto }));
+    }
+  }, [playerPhoto]);
+
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
         // 2.Generuj zdjęcie piłkarza
-        axios
-          .get(`https://futdb.app/api/players/${id}/image`, axiosFetchBlob)
-          .then((response) => response)
-          .then((blob) => {
-            const playerPhoto = URL.createObjectURL(blob.data);
-            // console.log("2");
-            setPlayerImages((prev) => ({ ...prev, playerPhoto }));
-            // playerImages.playerPhoto = playerPhoto;
-          });
+        // const playerPhoto = URL.createObjectURL(data);
+        // setPlayerImages((prev) => ({ ...prev, playerPhoto }));
 
         //3.Generuj zdjęcie kraju
         axios

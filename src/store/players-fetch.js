@@ -33,7 +33,6 @@ export const drawPlayer = (playerRating, person) => {
         playerData.rating > playerRating &&
         playerData.rarity <= 1
       ) {
-        console.log(playerData);
         dispatch(playersActions.addPlayer(playerData));
       } else {
         return rerender();

@@ -17,6 +17,7 @@ const Card = ({ playerData }) => {
   const [pickPlayer, setPickPlayer] = useState(false);
 
   const fetchImages = useFetchImages(playerData);
+  console.log(fetchImages);
 
   //Dodawanie zdjęc
 

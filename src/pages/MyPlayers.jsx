@@ -10,7 +10,6 @@ const MyPlayers = () => {
   const dispatch = useDispatch();
 
   const playersArray = useSelector((state) => state.players.playersArray);
-  console.log(playersArray);
 
   const drawPlayers = () => {
     pack.forEach((player) => dispatch(drawPlayer(player)));
