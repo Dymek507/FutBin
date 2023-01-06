@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "../components/UI/Layout";
 
-const Packs = () => {
+const NewPacks = () => {
   return <Layout>Losowanie kart</Layout>;
 };
 
-export default Packs;
+export default NewPacks;

@@ -51,7 +51,14 @@ const NavBar = () => {
         <div className="flex grow">
           <Logo>FutDraft</Logo>
         </div>
-        <Button color="inherit">
+        <Button
+          color="inherit"
+          sx={{
+            "& .MuiTypography-root": {
+              textTransform: "none",
+            },
+          }}
+        >
           <Typography fontSize="1.5rem">Login</Typography>
         </Button>
       </Toolbar>

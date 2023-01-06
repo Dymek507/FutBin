@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { uiActions } from "../../store/ui-slice";
 import { useDispatch, useSelector } from "react-redux";
 
-import styled from "@emotion/styled";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -33,9 +32,9 @@ const menuList = [
   },
   {
     id: 3,
-    text: "My Packs",
+    text: "My Players",
     icon: <BusinessCenterIcon />,
-    link: "/my-packs",
+    link: "/my-players",
   },
 ];
 const subMenuList = [
@@ -71,21 +70,60 @@ const Menu = () => {
     <Box sx={{ width: 250 }} role="presentation">
       <List>
         {menuList.map((item) => (
-          <ListItem key={item.id} disablePadding>
-            <Link to={item.link}>
-              <ListItemButton>
+          <Link
+            key={item.id}
+            to={item.link}
+            onClick={() => dispatch(uiActions.hideMenu())}
+          >
+            <ListItem
+              disablePadding
+              sx={{
+                "&:hover": {
+                  backgroundColor: "rgba(7,26,42,1)",
+                  color: "white",
+                  "& .MuiListItemIcon-root": {
+                    color: "white",
+                  },
+                },
+              }}
+            >
+              <ListItemButton
+                sx={{
+                  "& .MuiSvgIcon-root": {
+                    color: "white",
+                  },
+                }}
+              >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItemButton>
-            </Link>
-          </ListItem>
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />
       <List>
         {subMenuList.map((item) => (
-          <ListItem key={item.id} disablePadding>
-            <ListItemButton>
+          <ListItem
+            key={item.id}
+            disablePadding
+            sx={{
+              "&:hover": {
+                backgroundColor: "rgba(7,26,42,1)",
+                color: "white",
+                "& .MuiListItemIcon-root": {
+                  color: "white",
+                },
+              },
+            }}
+          >
+            <ListItemButton
+              sx={{
+                "& .MuiSvgIcon-root": {
+                  color: "white",
+                },
+              }}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>

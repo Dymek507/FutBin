@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: { menuIsVisible: true },
+  initialState: { menuIsVisible: false },
   reducers: {
     toggle(state) {
       state.menuIsVisible = !state.menuIsVisible;
+    },
+    hideMenu(state) {
+      state.menuIsVisible = false;
     },
   },
 });

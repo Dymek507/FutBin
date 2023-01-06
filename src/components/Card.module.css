@@ -1,0 +1,75 @@
+/* Player card */
+.playerCard {
+  background-position: center;
+  background-size: 360px;
+  background-repeat: no-repeat;
+  height: 450px;
+  width: 280px;
+  position: relative;
+}
+.playerPicContainer {
+  position: absolute;
+  top: 45px;
+  right: 3px;
+}
+.playerPic {
+  object-fit: contain;
+  height: 190px;
+}
+.playerInfo {
+  position: absolute;
+  top: 42px;
+  left: 45px;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  align-items: center;
+}
+.playerOveral {
+  font-family: "DIN_Pro";
+  font-weight: 500;
+  font-size: 62px;
+  line-height: 44px;
+}
+
+.playerPosition {
+  width: 30px;
+  text-align: center;
+  font-family: "DIN_Pro_thin";
+  font-weight: bold;
+  font-size: 30px;
+  border-bottom: 1px solid black;
+}
+.playerNationality {
+  width: 44px;
+  padding: 6px 0;
+}
+.playerClub {
+  width: 36px;
+  padding-top: 5px;
+  border-top: 1px solid black;
+}
+
+.playerStatsContainer {
+  font-family: "DIN_Pro";
+  font-size: 32px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  display: grid;
+  grid-template-columns: 1fr auto 8px 1fr 60px auto 8px 1fr 1fr;
+  grid-template-rows: repeat(3, 30px);
+}
+.playerStatsContainer div:nth-child(even) {
+  font-family: "DIN_Pro_thin";
+  font-weight: 200;
+}
+.playerStatsContainer div {
+  text-align: left;
+}
+
+.statsVerticalLine {
+  grid-column: 5/6;
+  grid-row: 1/4;
+  justify-self: center;
+  align-self: center;
+}
