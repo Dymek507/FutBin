@@ -8,8 +8,8 @@ const Layout = (props) => {
       <Menu />
       <NavBar />
 
-      <div className="flex grow bg-black/75 justify-center items-center">
-        <div className="">{props.children}</div>
+      <div className="flex grow justify-center items-center">
+        <div className="bg-black/75">{props.children}</div>
       </div>
     </div>
   );

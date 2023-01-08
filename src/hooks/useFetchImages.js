@@ -16,6 +16,8 @@ export const useFetchImages = (playerObject) => {
   const { id, club, nation } = playerObject;
 
   const playerPhoto = useFetcherSWR(`players/${id}/image`);
+  const playerNation = useFetcherSWR(`nations/${nation}/image`);
+  const playerClub = useFetcherSWR(`clubs/${club}/image`);
 
   const [playerImages, setPlayerImages] = useState({});
 
@@ -26,38 +28,16 @@ export const useFetchImages = (playerObject) => {
   }, [playerPhoto]);
 
   useEffect(() => {
-    const fetchPhotos = async () => {
-      try {
-        // 2.Generuj zdjęcie piłkarza
-        // const playerPhoto = URL.createObjectURL(data);
-        // setPlayerImages((prev) => ({ ...prev, playerPhoto }));
+    if (playerNation) {
+      setPlayerImages((prev) => ({ ...prev, playerNation }));
+    }
+  }, [playerNation]);
 
-        //3.Generuj zdjęcie kraju
-        axios
-          .get(`https://futdb.app/api/nations/${nation}/image`, axiosFetchBlob)
-          .then((response) => response)
-          .then((blob) => {
-            const playerNation = URL.createObjectURL(blob.data);
-            // console.log("3");
-            setPlayerImages((prev) => ({ ...prev, playerNation }));
-            playerImages.playerNation = playerNation;
-          });
+  useEffect(() => {
+    if (playerClub) {
+      setPlayerImages((prev) => ({ ...prev, playerClub }));
+    }
+  }, [playerClub]);
 
-        //4.Generuj zdjęcie klubu
-        axios
-          .get(`https://futdb.app/api/clubs/${club}/image`, axiosFetchBlob)
-          .then((response) => response)
-          .then((blob) => {
-            const playerClub = URL.createObjectURL(blob.data);
-            // console.log("4");
-            setPlayerImages((prev) => ({ ...prev, playerClub }));
-            playerImages.playerClub = playerClub;
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchPhotos();
-  }, [playerObject]);
   return playerImages;
 };

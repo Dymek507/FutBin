@@ -8,11 +8,13 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import NewPacks from "./pages/NewPacks";
 import MyPlayers from "./pages/MyPlayers";
+import LoginPage from "./pages/LoginPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomeScreen /> },
   { path: "/new-packs", element: <NewPacks /> },
   { path: "/my-players", element: <MyPlayers /> },
+  { path: "/signup", element: <LoginPage /> },
 ]);
 
 function App() {

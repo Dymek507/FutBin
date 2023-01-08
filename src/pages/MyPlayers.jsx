@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { drawPlayer } from "../store/players-fetch";
 
-const pack = [55, 55, 55];
+const pack = [55, 55];
 
 const MyPlayers = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const MyPlayers = () => {
   return (
     <Layout>
       <button onClick={drawPlayers}>Losuj</button>
-      <div className="relative flex grow flex-wrap gap-4 justify-center m-4 bg-board-opacity  overflow-hidden">
+      <div className="h-full w-screen relative flex grow flex-wrap gap-0.5 justify-center bg-board-opacity overflow-hidden">
         {playersArray &&
           playersArray.map((player) => (
             <Card key={player.id} playerData={player} />

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import React from "react";
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,14 +14,16 @@ import { Drawer } from "@mui/material";
 
 const Logo = (props) => {
   return (
-    <Typography
-      variant="h5"
-      fontSize="2rem"
-      sx={{ border: 2, borderColor: "white", borderRadius: 2, px: 0.5 }}
-    >
-      {props.children}{" "}
-      <SportsSoccerIcon fontSize="1rem" sx={{ paddingBottom: 0.5 }} />
-    </Typography>
+    <Link to={"/"}>
+      <Typography
+        variant="h5"
+        fontSize="2rem"
+        sx={{ border: 2, borderColor: "white", borderRadius: 2, px: 0.5 }}
+      >
+        {props.children}{" "}
+        <SportsSoccerIcon fontSize="1rem" sx={{ paddingBottom: 0.5 }} />
+      </Typography>
+    </Link>
   );
 };
 
@@ -51,16 +54,19 @@ const NavBar = () => {
         <div className="flex grow">
           <Logo>FutDraft</Logo>
         </div>
-        <Button
-          color="inherit"
-          sx={{
-            "& .MuiTypography-root": {
-              textTransform: "none",
-            },
-          }}
-        >
-          <Typography fontSize="1.5rem">Login</Typography>
-        </Button>
+
+        <Link to={"/signup"}>
+          <Button
+            color="inherit"
+            sx={{
+              "& .MuiTypography-root": {
+                textTransform: "none",
+              },
+            }}
+          >
+            <Typography fontSize="1.5rem">Login</Typography>
+          </Button>
+        </Link>
       </Toolbar>
     </AppBar>
   );

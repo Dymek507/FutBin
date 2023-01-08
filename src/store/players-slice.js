@@ -4,7 +4,7 @@ const initialState = {
   playersArray: [],
   changed: false,
 };
-export const playersDataSlice = createSlice({
+const playersDataSlice = createSlice({
   name: "PlayersDatabase",
   initialState,
   reducers: {
