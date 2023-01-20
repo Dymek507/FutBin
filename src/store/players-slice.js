@@ -1,18 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  playersArray: [],
+  myPlayers: [],
+  currentPack: [],
   changed: false,
 };
 const playersDataSlice = createSlice({
   name: "PlayersDatabase",
   initialState,
   reducers: {
-    replacePlayers: (state, action) => {
-      state.playersArray = action.payload.playersArray;
+    addPlayerToMyPlayers: (state, action) => {
+      state.myPlayers.push(action.payload);
     },
-    addPlayer: (state, action) => {
-      state.playersArray.push(action.payload);
+    deleteFromMyPlayers: (state, action) => {
+      const playerId = action.payload;
+      const newMyPlayers = [...state.myPlayers];
+      state.myPlayers = newMyPlayers.filter((player) => player.id !== playerId);
+    },
+    addPlayerToPack: (state, action) => {
+      state.currentPack.push(action.payload);
+    },
+    deleteCurrentPack: (state, action) => {
+      state.currentPack = [];
     },
   },
 });

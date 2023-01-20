@@ -19,8 +19,8 @@ const NewPacks = () => {
 
   return (
     <Layout>
-      <OpeningModal onOpen={showModal} onClose={clickModal} />
-      <div className="flex justify-center gap-6 w-screen my-6">
+      {showModal && <OpeningModal onOpen={showModal} onClose={clickModal} />}
+      <div className="flex justify-center gap-6 w-[90vw] my-2">
         {packs.length === 0 && (
           <p className="text-white text-6xl">Brak Paczek Biedaku</p>
         )}
@@ -31,7 +31,7 @@ const NewPacks = () => {
               id={pack.id}
               minRating={pack.packRating}
               color={pack.packColor}
-              players={pack.playersAmount}
+              playersNum={pack.playersAmount}
               amount={pack.packAmount}
               openModal={clickModal}
             />

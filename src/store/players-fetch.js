@@ -11,7 +11,7 @@ const axiosGetData = {
   },
 };
 
-export const drawPlayer = (playerRating, person) => {
+export const drawPlayer = (playerRating) => {
   return async (dispatch) => {
     const fetchPlayerData = async () => {
       const playerId = Math.floor(Math.random() * 16000);
@@ -20,20 +20,19 @@ export const drawPlayer = (playerRating, person) => {
         .get(`https://futdb.app/api/players/${playerId}`, axiosGetData)
         .then((res) => res.data.player)
         .then((player) => {
-          // console.log("1");
           playerData = player;
         });
       return playerData;
     };
 
     const rerender = async () => {
-      const playerData = await fetchPlayerData(person);
+      const playerData = await fetchPlayerData();
       if (
         playerData &&
         playerData.rating > playerRating &&
         playerData.rarity <= 1
       ) {
-        dispatch(playersActions.addPlayer(playerData));
+        dispatch(playersActions.addPlayerToPack(playerData));
       } else {
         return rerender();
       }

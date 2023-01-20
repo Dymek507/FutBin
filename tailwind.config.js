@@ -7,6 +7,7 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
+        "main-b-stadium": "url('/src/assets/a-stadium.jpg')",
         "pack-1": "url('/src/assets/packs/special_pack.png')",
         "opening-c": "url('/src/assets/concrete-bg.jpg')",
       },

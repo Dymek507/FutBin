@@ -9,23 +9,25 @@ import {
   bronzeR,
 } from "../assets/CardBackgrounds";
 import { useFetchImages } from "../hooks/useFetchImages";
+import useGeneratePrice from "../hooks/useGeneratePrice";
 
 import styles from "./Card.module.css";
 
-const Card = ({ playerData }) => {
+const Card = ({ playerData, sendPlayer }) => {
   // console.log("renderowanie karty");
   const [pickPlayer, setPickPlayer] = useState(false);
 
-  const fetchImages = useFetchImages(playerData);
-  console.log(fetchImages);
+  const images = useFetchImages(playerData);
+  const [price, displayPrice] = useGeneratePrice(playerData);
+
+  const addPlayer = () => {
+    setPickPlayer((prevState) => !prevState);
+    sendPlayer({ ...playerData, price });
+  };
 
   //Dodawanie zdjęc
 
-  let {
-    playerPhoto = blankPhoto,
-    playerClub = "",
-    playerNation = "",
-  } = fetchImages;
+  let { playerPhoto = blankPhoto, playerClub = "", playerNation = "" } = images;
 
   // Destrukturyzacja danych zawodnika oraz dane startowe
   let {
@@ -79,71 +81,55 @@ const Card = ({ playerData }) => {
 
   return (
     <div
-      onClick={() => {
-        console.log(id, pace);
-        setPickPlayer((prevState) => !prevState);
+      onClick={addPlayer}
+      className={styles.playerCard}
+      style={{
+        backgroundColor: `${pickPlayer ? "green" : ""}`,
+        backgroundImage: `url('${cardBackground}')`,
       }}
-      className="text-center cursor-pointer rounded-xl"
-      style={{ backgroundColor: `${pickPlayer ? "green" : ""}` }}
     >
+      <div className={styles.playerInfo}>
+        <div className={styles.playerOveral}>{rating}</div>
+        <div className={styles.playerPosition}>{position}</div>
+        <div className={styles.playerNationality}>
+          <img src={playerNation} alt="NationFlag" />
+        </div>
+        <div className={styles.playerClub}>
+          <img src={playerClub} alt="ClubLogo" />
+        </div>
+      </div>
+      <div className={styles.playerPicContainer}>
+        <img
+          className={styles.playerPic}
+          src={playerPhoto}
+          alt="Player_photo"
+        />
+      </div>
+      <div className="font-din card-text text-[28px] font-bold truncate uppercase text-center absolute w-[210px] top-[234px] left-[35px] border-b border-black">
+        {commonName}
+      </div>
       <div
-        className={styles.playerCard}
-        style={{
-          backgroundImage: `url('${cardBackground}')`,
-        }}
+        className={`flex flex-col justify-center items-center absolute bottom-[52px] left-[5px] h-[100px] w-[270px]`}
       >
-        <div className={styles.playerInfo}>
-          <div className={styles.playerOveral}>{rating}</div>
-          <div className={styles.playerPosition}>{position}</div>
-          <div className={styles.playerNationality}>
-            <img src={playerNation} alt="NationFlag" />
-          </div>
-          <div className={styles.playerClub}>
-            <img src={playerClub} alt="ClubLogo" />
+        <div className={styles.playerStatsContainer}>
+          <div className="col-start-2">{pace}</div>
+          <div className="col-start-4">{position !== "GK" ? "PAC" : "DIV"}</div>
+          <div className="col-start-6">{dribbling}</div>
+          <div className="col-start-8">{position !== "GK" ? "DRI" : "REF"}</div>
+          <div className="col-start-2">{shooting}</div>
+          <div className="col-start-4">{position !== "GK" ? "SHO" : "HAN"}</div>
+          <div className="col-start-6">{defending}</div>
+          <div className="col-start-8">{position !== "GK" ? "DEF" : "SPE"}</div>
+          <div className="col-start-2">{passing}</div>
+          <div className="col-start-4">{position !== "GK" ? "PAS" : "KIC"}</div>
+          <div className="col-start-6">{physicality}</div>
+          <div className="col-start-8">{position !== "GK" ? "PHY" : "POS"}</div>
+          <div className={styles.statsVerticalLine}>
+            <div className="bg-black h-[78px] w-[1px] mt-[14px]"></div>
           </div>
         </div>
-        <div className={styles.playerPicContainer}>
-          <img
-            className={styles.playerPic}
-            src={playerPhoto}
-            alt="Player_photo"
-          />
-        </div>
-        <div className="font-din card-text text-[28px] font-bold truncate uppercase text-center absolute w-[210px] top-[234px] left-[35px] border-b border-black">
-          {commonName}
-        </div>
-        <div
-          className={`flex justify-center items-center absolute bottom-[82px] left-[5px] h-[100px] w-[270px]`}
-        >
-          <div className={styles.playerStatsContainer}>
-            <div className="col-start-2">{pace}</div>
-            <div className="col-start-4">
-              {position !== "GK" ? "PAC" : "DIV"}
-            </div>
-            <div className="col-start-6">{dribbling}</div>
-            <div className="col-start-8">
-              {position !== "GK" ? "DRI" : "REF"}
-            </div>
-            <div className="col-start-2">{shooting}</div>
-            <div className="col-start-4">
-              {position !== "GK" ? "SHO" : "HAN"}
-            </div>
-            <div className="col-start-6">{defending}</div>
-            <div className="col-start-8">
-              {position !== "GK" ? "DEF" : "SPE"}
-            </div>
-            <div className="col-start-2">{passing}</div>
-            <div className="col-start-4">
-              {position !== "GK" ? "PAS" : "KIC"}
-            </div>
-            <div className="col-start-6">{physicality}</div>
-            <div className="col-start-8">
-              {position !== "GK" ? "PHY" : "POS"}
-            </div>
-            <div className={styles.statsVerticalLine}>
-              <div className="bg-black h-[78px] w-[1px] mt-[14px]"></div>
-            </div>
-          </div>
+        <div className="mt-4 text-3xl font-din  border-t-[1px] border-black">
+          {displayPrice}
         </div>
       </div>
     </div>

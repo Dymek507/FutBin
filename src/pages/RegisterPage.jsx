@@ -1,15 +1,15 @@
 import React from "react";
 import Layout from "../components/UI/Layout";
-import SignIn from "../components/UI/SignIn";
+import SignUp from "../components/UI/SignUp";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <Layout>
       <div className="bg-white">
-        <SignIn />
+        <SignUp />
       </div>
     </Layout>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
