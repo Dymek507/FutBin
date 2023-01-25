@@ -6,8 +6,11 @@ module.exports = {
       din: ["DIN_Pro", "ui-sans-serif"],
     },
     extend: {
+      colors: {
+        "main-bgc": "#041a03",
+      },
       backgroundImage: {
-        "main-b-stadium": "url('/src/assets/a-stadium.jpg')",
+        "main-b-stadium": "url('/src/assets/b-stadium_1.png')",
         "pack-1": "url('/src/assets/packs/special_pack.png')",
         "opening-c": "url('/src/assets/concrete-bg.jpg')",
       },

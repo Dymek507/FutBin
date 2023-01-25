@@ -1,0 +1,27 @@
+/* @keyframes example {
+  0% {
+    left: 200px;
+    top: 200px;
+  }
+
+  50% {
+    left: 200px;
+    top: 200px;
+    transform: rotateY(90deg);
+  }
+
+  100% {
+    left: 200px;
+    top: 200px;
+  }
+} */
+
+.frame {
+  background-color: red;
+}
+.playerRoundAnimation {
+  transform: scale(0.6);
+  animation-name: example;
+  animation-timing-function: linear;
+  animation-duration: 5s;
+}

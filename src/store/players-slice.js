@@ -9,6 +9,9 @@ const playersDataSlice = createSlice({
   name: "PlayersDatabase",
   initialState,
   reducers: {
+    replaceAllMyPlayers: (state, action) => {
+      state.myPlayers = action.payload;
+    },
     addPlayerToMyPlayers: (state, action) => {
       state.myPlayers.push(action.payload);
     },

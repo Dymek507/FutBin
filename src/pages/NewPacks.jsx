@@ -9,18 +9,14 @@ const NewPacks = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const toggleModal = () => {
-    setShowModal((prev) => !prev);
-  };
-
-  const clickModal = (state) => {
+  const toggleModal = (state) => {
     setShowModal(state);
   };
 
   return (
     <Layout>
-      {showModal && <OpeningModal onOpen={showModal} onClose={clickModal} />}
-      <div className="flex justify-center gap-6 w-[90vw] my-2">
+      {showModal && <OpeningModal onOpen={showModal} onClose={toggleModal} />}
+      <div className="flex justify-center gap-6 m-8">
         {packs.length === 0 && (
           <p className="text-white text-6xl">Brak Paczek Biedaku</p>
         )}
@@ -33,7 +29,7 @@ const NewPacks = () => {
               color={pack.packColor}
               playersNum={pack.playersAmount}
               amount={pack.packAmount}
-              openModal={clickModal}
+              openModal={toggleModal}
             />
           ))}
       </div>

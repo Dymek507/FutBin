@@ -1,43 +1,57 @@
 import { playersActions } from "./players-slice";
 
-export const fetchPlayersData = (person) => {
+export const fetchPlayersData = () => {
   return async (dispatch) => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `https://futdraftbeta-default-rtdb.europe-west1.firebasedatabase.app/${person}/players.json`
-      );
+    const response = await fetch(
+      `https://eu-central-1.aws.data.mongodb-api.com/app/futdraft-orwfy/endpoint/players`
+    );
 
-      if (!response.ok) {
-        throw new Error("Could not fetch players data!");
-      }
-
-      const data = await response.json();
-      console.log(data);
-
-      return data;
-    };
-
-    try {
-      const playersData = await fetchData();
-      console.log(`Gracze z database ${playersData}`);
-      dispatch(
-        playersActions.replacePlayers({
-          playersArray: playersData.playersArray || [],
-        })
-      );
-    } catch (error) {
-      console.log("Błąd" + error);
-    }
+    const data = await response.json();
+    const playersData = data;
+    dispatch(playersActions.replaceAllMyPlayers(playersData || []));
   };
 };
+// export const fetchPlayersData = () => {
+//   console.log("fetch");
+//   return async (dispatch) => {
+//     console.log("fetch2");
+//     const fetchData = async () => {
+//       const response = await fetch(
+//         `https://eu-central-1.aws.data.mongodb-api.com/app/futdraft-orwfy/endpoint/players`
+//       );
 
-export const sendPlayersData = (players, person) => {
+//       if (!response.ok) {
+//         throw new Error("Could not fetch players data!");
+//       }
+
+//       const data = await response.json();
+//       console.log(data);
+
+//       return data;
+//     };
+
+//     try {
+//       const playersData = await fetchData();
+//       console.log(`Gracze z database ${playersData}`);
+//       dispatch(
+//         playersActions.replacePlayers({
+//           playersArray: playersData.playersArray || [],
+//         })
+//       );
+//     } catch (error) {
+//       console.log("Błąd" + error);
+//     }
+//   };
+// };
+
+export const sendPlayersData = (players) => {
   return async (dispatch) => {
     const sendRequest = async () => {
       const response = await fetch(
-        `https://futdraftbeta-default-rtdb.europe-west1.firebasedatabase.app/${person}/players.json`,
+        `https://eu-central-1.aws.data.mongodb-api.com/app/futdraft-orwfy/endpoint/players`,
         {
-          method: "PUT",
+          method: "POST",
+          // body: players, //może być błąd
           body: JSON.stringify(players), //może być błąd
         }
       );

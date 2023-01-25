@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import Card from "../Card";
 import { useDispatch, useSelector } from "react-redux";
 
+import { sendPlayersData } from "../../store/players-actions";
 import { playersActions } from "../../store/players-slice";
 
 import OpeningAnimation from "../OpeningAnimation";
@@ -15,6 +16,8 @@ const OpeningModal = ({ onOpen, onClose }) => {
   const dispatch = useDispatch();
 
   const currentPack = useSelector((state) => state.players.currentPack);
+  const myPlayers = useSelector((state) => state.players.myPlayers);
+  console.log(myPlayers);
 
   const hideAnimation = () => {
     setShowAnimation(false);
@@ -27,6 +30,12 @@ const OpeningModal = ({ onOpen, onClose }) => {
       clearTimeout(openingTimer);
     };
   }, []);
+
+  // Przenieść myPlayers i dispatch do actions
+
+  // useEffect(() => {
+  //   dispatch(sendPlayersData(myPlayers));
+  // }, [myPlayers, dispatch]);
 
   // Makes array with picked players, ready to send to myPlayers
   const pickPlayer = (playerData) => {
@@ -43,6 +52,12 @@ const OpeningModal = ({ onOpen, onClose }) => {
       );
       setPickedPlayers(newPickedPlayers);
     }
+  };
+
+  const sendAllPlayer = () => {
+    currentPack.forEach((player) => {
+      dispatch(playersActions.addPlayerToMyPlayers(player));
+    });
   };
 
   const sendPickedPlayers = () => {
@@ -63,12 +78,14 @@ const OpeningModal = ({ onOpen, onClose }) => {
       onClose={() => onClose(false)}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <div className="relative w-screen h-screen bg-opening-c bg-cover overflow-x-hidden">
+      <div className="relative flex flex-col w-screen h-screen bg-opening-c bg-cover overflow-x-hidden justify-">
         {showAnimation && <OpeningAnimation />}
-        <Button>Wyślij do klubu</Button>
-        <Button onClick={sendPickedPlayers}>Wyślij wybranych</Button>
-        <Button onClick={rejectAllPlayers}>Odrzuć</Button>
-        <div className=" w-full relative flex flex-wrap gap-0.5 justify-center items-center bg-board-opacity overflow-x-hidden">
+        <div>
+          <Button onClick={sendAllPlayer}>Wyślij do klubu</Button>
+          <Button onClick={sendPickedPlayers}>Wyślij wybranych</Button>
+          <Button onClick={rejectAllPlayers}>Odrzuć</Button>
+        </div>
+        <div className=" w-full bg-slate-400 overflow-x-hidden flex flex-wrap gap-0.5 justify-center">
           {currentPack &&
             currentPack.map((player) => (
               <Card

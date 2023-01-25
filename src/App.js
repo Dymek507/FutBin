@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import HomeScreen from "./pages/HomeScreen";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { fetchPlayersData } from "./store/players-actions";
+import { useDispatch } from "react-redux";
 
 import "./index.css";
 import "@fontsource/roboto/300.css";
@@ -10,6 +13,8 @@ import NewPacks from "./pages/NewPacks";
 import MyPlayers from "./pages/MyPlayers";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+
+let firstRun = true;
 
 const router = createBrowserRouter([
   { path: "/", element: <HomeScreen /> },
@@ -31,6 +36,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (firstRun) {
+      dispatch(fetchPlayersData());
+      firstRun = false;
+    }
+  }, []);
+
   return (
     <>
       <RouterProvider router={router} />

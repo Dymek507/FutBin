@@ -49,14 +49,15 @@ const MyPlayers = () => {
               Usuń
             </Button>
             <div className="flex flex-wrap justify-center">
-              <div className="flex flex-row flex-wrap justify-left w-5/6">
-                {playersArray.map((player) => (
-                  <Card
-                    key={player.id}
-                    playerData={player}
-                    sendPlayer={pickPlayer}
-                  />
-                ))}
+              <div className="flex flex-row flex-wrap justify-left w-5/6 gap-3">
+                {playersArray &&
+                  playersArray.map((player) => (
+                    <Card
+                      key={player.id}
+                      playerData={player}
+                      sendPlayer={pickPlayer}
+                    />
+                  ))}
               </div>
             </div>
           </div>

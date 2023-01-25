@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { playersActions } from "./players-slice";
 
-const AuthToken = "9da99810-9712-4bb5-a2a6-73e3df0078c0";
+const AuthToken = "9317d346-9be7-4023-8872-0114c73d26a6";
 
 const axiosGetData = {
   headers: {
