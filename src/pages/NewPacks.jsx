@@ -1,35 +1,53 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
+
+import { packActions } from "../store/packs-slice";
 import Pack from "../components/Pack";
 import Layout from "../components/UI/Layout";
-import OpeningModal from "../components/UI/OpeningModal";
+
+const packsArray = [
+  {
+    id: "p1",
+    packRating: 70,
+    packColor: "teal",
+    playersAmount: 3,
+    packAmount: 1,
+  },
+  {
+    id: "p2",
+    packRating: 60,
+    packColor: "red",
+    playersAmount: 3,
+    packAmount: 2,
+  },
+  {
+    id: "p3",
+    packRating: 50,
+    packColor: "green",
+    playersAmount: 8,
+    packAmount: 5,
+  },
+];
 
 const NewPacks = () => {
-  const packs = useSelector((state) => state.packs.packsArray);
+  const dispatch = useDispatch();
 
-  const [showModal, setShowModal] = useState(false);
-
-  const toggleModal = (state) => {
-    setShowModal(state);
+  const buyPack = () => {
+    dispatch(packActions.addPack());
   };
-
   return (
     <Layout>
-      {showModal && <OpeningModal onOpen={showModal} onClose={toggleModal} />}
       <div className="flex justify-center gap-6 m-8">
-        {packs.length === 0 && (
+        {packsArray.length === 0 && (
           <p className="text-white text-6xl">Brak Paczek Biedaku</p>
         )}
-        {packs &&
-          packs.map((pack) => (
+        {packsArray &&
+          packsArray.map((pack) => (
             <Pack
               key={pack.id}
-              id={pack.id}
-              minRating={pack.packRating}
-              color={pack.packColor}
-              playersNum={pack.playersAmount}
-              amount={pack.packAmount}
-              openModal={toggleModal}
+              packData={pack}
+              openModal={() => {}}
+              onClick={buyPack}
             />
           ))}
       </div>

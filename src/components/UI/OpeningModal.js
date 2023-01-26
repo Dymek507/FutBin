@@ -3,7 +3,8 @@ import Modal from "@mui/material/Modal";
 import Card from "../Card";
 import { useDispatch, useSelector } from "react-redux";
 
-import { sendPlayersData } from "../../store/players-actions";
+import { sendPlayersData, fetchPlayersData } from "../../store/players-actions";
+
 import { playersActions } from "../../store/players-slice";
 
 import OpeningAnimation from "../OpeningAnimation";
@@ -18,6 +19,12 @@ const OpeningModal = ({ onOpen, onClose }) => {
   const currentPack = useSelector((state) => state.players.currentPack);
   const myPlayers = useSelector((state) => state.players.myPlayers);
   console.log(myPlayers);
+
+  useEffect(() => {
+    if (myPlayers && myPlayers.length === 0) {
+      dispatch(fetchPlayersData());
+    }
+  }, [dispatch]);
 
   const hideAnimation = () => {
     setShowAnimation(false);
@@ -58,12 +65,21 @@ const OpeningModal = ({ onOpen, onClose }) => {
     currentPack.forEach((player) => {
       dispatch(playersActions.addPlayerToMyPlayers(player));
     });
+    if (myPlayers.length === 0) {
+      dispatch(fetchPlayersData());
+    }
+    dispatch(sendPlayersData());
+    onClose(false);
   };
 
   const sendPickedPlayers = () => {
     pickedPlayers.forEach((player) =>
       dispatch(playersActions.addPlayerToMyPlayers(player))
     );
+    if (myPlayers.length === 0) {
+      dispatch(fetchPlayersData());
+    }
+    dispatch(sendPlayersData());
     onClose(false);
   };
 
@@ -80,7 +96,7 @@ const OpeningModal = ({ onOpen, onClose }) => {
     >
       <div className="relative flex flex-col w-screen h-screen bg-opening-c bg-cover overflow-x-hidden justify-">
         {showAnimation && <OpeningAnimation />}
-        <div>
+        <div className="mt-20">
           <Button onClick={sendAllPlayer}>Wyślij do klubu</Button>
           <Button onClick={sendPickedPlayers}>Wyślij wybranych</Button>
           <Button onClick={rejectAllPlayers}>Odrzuć</Button>

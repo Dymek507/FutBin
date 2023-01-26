@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { uiActions } from "../../store/ui-slice";
 import { useDispatch, useSelector } from "react-redux";
+import { getAuth, signOut } from "firebase/auth";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -17,42 +18,9 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const menuList = [
-  {
-    id: 1,
-    text: "Home",
-    icon: <HomeIcon />,
-    link: "/",
-  },
-  {
-    id: 2,
-    text: "New Packs",
-    icon: <FiberNewIcon />,
-    link: "/new-packs",
-  },
-  {
-    id: 3,
-    text: "My Players",
-    icon: <BusinessCenterIcon />,
-    link: "/my-players",
-  },
-];
-const subMenuList = [
-  {
-    id: 1,
-    text: "Settings",
-    icon: <SettingsIcon />,
-    link: "/settings",
-  },
-  {
-    id: 2,
-    text: "Logout",
-    icon: <LogoutIcon />,
-    link: "/logout",
-  },
-];
-
 const Menu = () => {
+  const auth = getAuth();
+
   const dispatch = useDispatch();
   const showMenu = useSelector((state) => state.ui.menuIsVisible);
 
@@ -65,6 +33,59 @@ const Menu = () => {
     }
     dispatch(uiActions.toggle());
   };
+
+  const logOut = function () {
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful.");
+      })
+      .catch((error) => {
+        console.log("An error happened.");
+      });
+  };
+
+  const menuList = [
+    {
+      id: 1,
+      text: "Home",
+      icon: <HomeIcon />,
+      link: "/",
+    },
+    {
+      id: 2,
+      text: "New Packs",
+      icon: <FiberNewIcon />,
+      link: "/new-packs",
+    },
+    {
+      id: 3,
+      text: "My Packs",
+      icon: <FiberNewIcon />,
+      link: "/my-packs",
+    },
+    {
+      id: 4,
+      text: "My Players",
+      icon: <BusinessCenterIcon />,
+      link: "/my-players",
+    },
+  ];
+  const subMenuList = [
+    {
+      id: 1,
+      text: "Settings",
+      icon: <SettingsIcon />,
+      link: "/settings",
+      onClick: () => {},
+    },
+    {
+      id: 2,
+      text: "Logout",
+      icon: <LogoutIcon />,
+      link: "/logout",
+      onClick: logOut,
+    },
+  ];
 
   const list = (
     <Box sx={{ width: 250 }} role="presentation">
@@ -123,6 +144,7 @@ const Menu = () => {
                   color: "white",
                 },
               }}
+              onClick={item.onClick}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />

@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { app, database } from "../../firebaseConfig";
+import { collection, addDoc, getDoc, getDocs } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -24,11 +28,10 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="/">
+      {/* <Link color="inherit" href="/">
         FutDraft
-      </Link>{" "}
+      </Link> */}
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
@@ -45,7 +48,11 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
+  const auth = getAuth(app);
+
   const [formValid, setFormValid] = useState(false);
+
+  const collectionRef = collection(database, "users");
 
   const checkboxValidity = (e) => {
     setFormValid(e.target.checked);
@@ -54,12 +61,35 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    createUserWithEmailAndPassword(
+      auth,
+      data.get("email"),
+      data.get("password")
+      // data.get("lastName")
+    )
+      .then((response) => {
+        console.log(response.user);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+
+    // addDoc(collectionRef, {
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    //   playersData: [],
+    // })
+    //   .then(() => {
+    //     alert("Data Added");
+    //   })
+    //   .catch((err) => {
+    //     alert(err.message);
+    //   });
+  };
+
+  const getData = (e) => {
+    e.preventDefault();
+    console.log(auth);
   };
 
   return (
@@ -154,8 +184,9 @@ export default function SignUp() {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to={"/account/login"}>
-                  <MuiLink variant="body2">Masz już konto? Zaloguj się</MuiLink>
+                  {/* <MuiLink variant="body2">Masz już konto? Zaloguj się</MuiLink> */}
                 </Link>
+                <button onClick={getData}>Pobierz dane</button>
               </Grid>
             </Grid>
           </Box>

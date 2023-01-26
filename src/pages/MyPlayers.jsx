@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { playersActions } from "../store/players-slice";
+import { fetchPlayersData } from "../store/players-actions";
 
 import { Button } from "@mui/material";
 import Layout from "../components/UI/Layout";
 import Card from "../components/Card";
 
 const MyPlayers = () => {
-  const [pickedPlayers, setPickedPlayers] = useState([]);
-
+  const dispatch = useDispatch();
   const playersArray = useSelector((state) => state.players.myPlayers);
+  const uId = useSelector((state) => state.ui.uId);
   console.log(playersArray);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (playersArray && playersArray.length === 0) {
+      dispatch(fetchPlayersData());
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchPlayersData());
+  }, [dispatch, uId]);
+
+  const [pickedPlayers, setPickedPlayers] = useState([]);
 
   const pickPlayer = (playerData) => {
     const playerExists = pickedPlayers.find(
@@ -40,10 +51,10 @@ const MyPlayers = () => {
   return (
     <Layout>
       <div className="h-full w-screen mt-1 relative flex grow flex-wrap gap-0.5 justify-center bg-board-opacity overflow-hidden">
-        {playersArray.length === 0 && (
+        {(!playersArray || (playersArray && playersArray.length === 0)) && (
           <p className="text-white text-3xl py-3">Brak zawodników</p>
         )}
-        {playersArray.length !== 0 && (
+        {playersArray && playersArray.length !== 0 && (
           <div className="flex flex-col items-center">
             <Button sx={{ width: "20%" }} onClick={deletePlayers}>
               Usuń

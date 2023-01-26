@@ -1,6 +1,6 @@
 import { playersActions } from "./players-slice";
 
-export const fetchPlayersData = () => {
+export const receivePackData = () => {
   console.log("fetch");
   return async (dispatch, getState) => {
     const uId = getState().ui.uId;
@@ -14,8 +14,6 @@ export const fetchPlayersData = () => {
       if (data === null) {
         data = [];
       }
-      // Transform firebase object with weird id to array
-      // const finalData = data[Object.keys(data)[0]];
 
       return data;
     };
@@ -29,7 +27,7 @@ export const fetchPlayersData = () => {
   };
 };
 
-export const sendPlayersData = (players) => {
+export const sendPackData = (players) => {
   return async (dispatch, getState) => {
     const uId = getState().ui.uId;
     const myPlayers = await getState().players.myPlayers;

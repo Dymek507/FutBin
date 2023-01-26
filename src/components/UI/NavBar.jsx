@@ -55,7 +55,7 @@ const NavBar = () => {
           <Logo>FutDraft</Logo>
         </div>
 
-        <Link to={"/account/register"}>
+        <Link to={"/account/login"}>
           <Button
             color="inherit"
             sx={{

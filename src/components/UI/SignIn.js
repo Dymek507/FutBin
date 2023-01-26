@@ -1,11 +1,14 @@
 import * as React from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { Link as Navlink } from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -34,13 +37,20 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  let auth = getAuth();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    signInWithEmailAndPassword(auth, data.get("email"), data.get("password"))
+      .then((response) => {
+        console.log(response.user);
+        console.log(auth);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   return (
@@ -106,8 +116,8 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link to="/account/register">
+                  "Don't have an account? Sign Up"
                 </Link>
               </Grid>
             </Grid>
