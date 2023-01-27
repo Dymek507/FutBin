@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { packActions } from "../store/packs-slice";
-import { playersActions } from "../store/players-slice";
-import { drawPlayer } from "../store/players-fetch";
-
 const Pack = ({ packData, openModal, onClick }) => {
-  const { id, packRating, packColor, playersAmount, packAmount } = packData;
+  const { packRating, packColor, playersAmount, packAmount } = packData;
 
   return (
     <div

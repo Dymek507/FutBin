@@ -38,12 +38,6 @@ const OpeningModal = ({ onOpen, onClose }) => {
     };
   }, []);
 
-  // Przenieść myPlayers i dispatch do actions
-
-  // useEffect(() => {
-  //   dispatch(sendPlayersData(myPlayers));
-  // }, [myPlayers, dispatch]);
-
   // Makes array with picked players, ready to send to myPlayers
   const pickPlayer = (playerData) => {
     const playerExists = pickedPlayers.find(

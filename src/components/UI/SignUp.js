@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { app, database } from "../../firebaseConfig";
-import { collection, addDoc, getDoc, getDocs } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 import { Link, useNavigate } from "react-router-dom";

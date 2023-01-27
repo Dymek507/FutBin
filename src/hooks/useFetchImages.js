@@ -1,17 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useFetcherSWR } from "./useFetcherSWR";
-import axios from "axios";
-import { apiKey } from "../futDbConfig";
-
-const AuthToken = apiKey;
-
-const axiosFetchBlob = {
-  responseType: "blob",
-  headers: {
-    Accept: "image/png",
-    "X-Auth-Token": AuthToken,
-  },
-};
 
 export const useFetchImages = (playerObject) => {
   const { id, club, nation } = playerObject;
