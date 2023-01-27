@@ -41,12 +41,14 @@ const MyPacks = () => {
   };
 
   return (
-    <Layout>
+    <Layout styles={{ width: "100vw", display: "flex" }}>
       {showModal && <OpeningModal onOpen={showModal} onClose={toggleModal} />}
-      <div className="flex  justify-center gap-8 m-8 flex-col">
+      <div className="flex flex-col items-center gap-8 w-full mt-8">
         {/* <div className="flex bg-slate-400 justify-center gap-6 m-8 flex-col"> */}
         {myPacks.length === 0 && (
-          <p className="text-white text-6xl">Brak Paczek Biedaku</p>
+          <div className="bg-main p-2 rounded-xl">
+            <p className="text-white text-4xl">Brak Paczek Biedaku</p>
+          </div>
         )}
         {myPacks &&
           myPacks.map((pack) => (

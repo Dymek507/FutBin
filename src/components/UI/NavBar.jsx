@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ const Logo = (props) => {
     <Link to={"/"}>
       <Typography
         variant="h5"
-        fontSize="2rem"
+        fontSize="1.5rem"
         sx={{ border: 2, borderColor: "white", borderRadius: 2, px: 0.5 }}
       >
         {props.children}{" "}
@@ -27,6 +27,9 @@ const Logo = (props) => {
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  const logged = useSelector((store) => store.ui.logged);
+  const user = useSelector((store) => store.ui.userData);
+  const [name, domain] = user.split("@");
 
   const toogleMenu = () => {
     dispatch(uiActions.toggle());
@@ -62,7 +65,7 @@ const NavBar = () => {
               },
             }}
           >
-            <Typography fontSize="1.5rem">Login</Typography>
+            <Typography fontSize="1.5rem">{user ? name : "Login"}</Typography>
           </Button>
         </Link>
       </Toolbar>

@@ -4,7 +4,7 @@ import Menu from "./Menu";
 
 const Layout = (props) => {
   return (
-    <div className="flex flex-col w-full min-h-screen bg-main-b-stadium bg-no-repeat bg-main-bgc ">
+    <div className="flex flex-col w-full min-h-screen bg-main-b-stadium [background-position-x:60%] bg-no-repeat  bg-main-bgc ">
       <Menu />
       <NavBar />
 

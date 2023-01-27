@@ -18,7 +18,6 @@ const OpeningModal = ({ onOpen, onClose }) => {
 
   const currentPack = useSelector((state) => state.players.currentPack);
   const myPlayers = useSelector((state) => state.players.myPlayers);
-  console.log(myPlayers);
 
   useEffect(() => {
     if (myPlayers && myPlayers.length === 0) {
@@ -31,7 +30,7 @@ const OpeningModal = ({ onOpen, onClose }) => {
   };
 
   useEffect(() => {
-    const openingTimer = setTimeout(hideAnimation, 2000);
+    const openingTimer = setTimeout(hideAnimation, 3000);
 
     return () => {
       clearTimeout(openingTimer);
@@ -88,9 +87,9 @@ const OpeningModal = ({ onOpen, onClose }) => {
       onClose={() => onClose(false)}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <div className="relative flex flex-col w-screen h-screen bg-opening-c bg-cover overflow-x-hidden justify-center">
+      <div className="relative flex flex-col w-screen h-screen bg-opening-c bg-cover overflow-x-hidden">
         {showAnimation && <OpeningAnimation />}
-        <div className="flex justify-center mt-20 gap-2  ">
+        <div className="flex justify-center mt-12 gap-2 ">
           <Button size="small" variant="contained" onClick={sendAllPlayer}>
             Wyślij do klubu
           </Button>

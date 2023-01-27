@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import Layout from "../components/UI/Layout";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Card from "../components/Card";
 
 import styles from "./HomePage.module.css";
 
@@ -117,9 +114,9 @@ const HomeScreen = () => {
   };
   return (
     <Layout styles={{ backgroundColor: "red", position: "relative" }}>
-      <div className={styles.playerRoundAnimation}>
+      {/* <div className={styles.playerRoundAnimation}>
         <Card playerData={player} sendPlayer={() => {}} />
-      </div>
+      </div> */}
     </Layout>
   );
 };
