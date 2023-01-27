@@ -5,28 +5,12 @@ import { playersActions } from "../store/players-slice";
 import { drawPlayer } from "../store/players-fetch";
 
 const Pack = ({ packData, openModal, onClick }) => {
-  console.log(packData.packRating);
-
   const { id, packRating, packColor, playersAmount, packAmount } = packData;
 
-  const dispatch = useDispatch();
-
-  //Move to MyPacks
-  // const OpenPack = () => {
-  //   dispatch(packActions.removePack(id));
-  //   dispatch(playersActions.deleteCurrentPack());
-
-  //   const pack = [];
-  //   for (let i = 0; i < playersNum; i++) {
-  //     pack.push(minRating);
-  //   }
-  //   pack.forEach((player) => dispatch(drawPlayer(player)));
-  //   openModal(true);
-  // };
   return (
     <div
-      onClick={() => onClick(packData.id)}
-      className="relative flex flex-col justify-center items-center gap-[0.1em] h-[16em] w-[11em] text-white bg-pack-1 bg-cover  text-[1.8em]"
+      onClick={() => onClick(packData)}
+      className="relative flex flex-col justify-center items-center gap-[2em] h-[16em] w-[11em] text-white bg-pack-1 bg-cover text-2xl cursor-pointer"
     >
       {packAmount > 1 && (
         <div className="absolute flex justify-center items-center top-0 right-[1em] w-[1em] h-[3em] border-x-[#ce6979] border-x-[1em] border-b-transparent border-b-[1em] drop-shadow-2xl">

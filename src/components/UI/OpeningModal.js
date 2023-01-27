@@ -94,14 +94,20 @@ const OpeningModal = ({ onOpen, onClose }) => {
       onClose={() => onClose(false)}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <div className="relative flex flex-col w-screen h-screen bg-opening-c bg-cover overflow-x-hidden justify-">
+      <div className="relative flex flex-col w-screen h-screen bg-opening-c bg-cover overflow-x-hidden justify-center">
         {showAnimation && <OpeningAnimation />}
-        <div className="mt-20">
-          <Button onClick={sendAllPlayer}>Wyślij do klubu</Button>
-          <Button onClick={sendPickedPlayers}>Wyślij wybranych</Button>
-          <Button onClick={rejectAllPlayers}>Odrzuć</Button>
+        <div className="flex justify-center mt-20 gap-2  ">
+          <Button size="small" variant="contained" onClick={sendAllPlayer}>
+            Wyślij do klubu
+          </Button>
+          <Button size="small" variant="contained" onClick={sendPickedPlayers}>
+            Wyślij wybranych
+          </Button>
+          <Button size="small" variant="contained" onClick={rejectAllPlayers}>
+            Odrzuć
+          </Button>
         </div>
-        <div className=" w-full bg-slate-400 overflow-x-hidden flex flex-wrap gap-0.5 justify-center">
+        <div className="flex flex-wrap w-full mt-8 overflow-x-hidden gap-1 justify-center">
           {currentPack &&
             currentPack.map((player) => (
               <Card

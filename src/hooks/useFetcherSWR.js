@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import useSWR from "swr";
 import axios from "axios";
 
-const AuthToken = "9317d346-9be7-4023-8872-0114c73d26a6";
+import { apiKey } from "../futDbConfig";
+
+const AuthToken = apiKey;
 
 const axiosFetchBlob = {
   responseType: "blob",
@@ -19,7 +21,6 @@ export const useFetcherSWR = (endPoint) => {
 
   const { data, error, isLoading } = useSWR(
     `https://futdb.app/api/${endPoint}`,
-    // `https://futdb.app/api/players/${id}/image`,
     fetcher
   );
 

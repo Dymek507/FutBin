@@ -116,11 +116,9 @@ const HomeScreen = () => {
     },
   };
   return (
-    <Layout>
-      <div className={styles.frame}>
-        <div className={styles.playerRoundAnimation}>
-          <Card playerData={player} />
-        </div>
+    <Layout styles={{ backgroundColor: "red", position: "relative" }}>
+      <div className={styles.playerRoundAnimation}>
+        <Card playerData={player} sendPlayer={() => {}} />
       </div>
     </Layout>
   );

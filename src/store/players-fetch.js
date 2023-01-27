@@ -1,8 +1,9 @@
 import axios from "axios";
 
 import { playersActions } from "./players-slice";
+import { apiKey } from "../futDbConfig";
 
-const AuthToken = "9317d346-9be7-4023-8872-0114c73d26a6";
+const AuthToken = apiKey;
 
 const axiosGetData = {
   headers: {

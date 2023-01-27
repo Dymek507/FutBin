@@ -14,15 +14,14 @@ import useGeneratePrice from "../hooks/useGeneratePrice";
 import styles from "./Card.module.css";
 
 const Card = ({ playerData, sendPlayer }) => {
-  // console.log("renderowanie karty");
   const [pickPlayer, setPickPlayer] = useState(false);
 
   const images = useFetchImages(playerData);
-  const [price, displayPrice] = useGeneratePrice(playerData);
+  const [playerPrice, displayPrice] = useGeneratePrice(playerData);
 
   const addPlayer = () => {
     setPickPlayer((prevState) => !prevState);
-    sendPlayer({ ...playerData, price });
+    sendPlayer({ ...playerData, playerPrice });
   };
 
   //Dodawanie zdjęc
@@ -105,7 +104,7 @@ const Card = ({ playerData, sendPlayer }) => {
           alt="Player_photo"
         />
       </div>
-      <div className="font-din card-text text-[28px] font-bold truncate uppercase text-center absolute w-[210px] top-[234px] left-[35px] border-b border-black">
+      <div className="font-din text-[28px] font-bold truncate uppercase text-center absolute w-[210px] top-[234px] left-[35px] border-b border-black">
         {commonName}
       </div>
       <div

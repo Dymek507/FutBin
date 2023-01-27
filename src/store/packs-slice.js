@@ -8,8 +8,22 @@ const packsSlice = createSlice({
   name: "PacksOwned",
   initialState,
   reducers: {
+    replaceAllMyPacks: (state, action) => {
+      state.myPacks = action.payload;
+    },
     addPack: (state, action) => {
-      state.myPacks.push(action.payload);
+      const packId = action.payload.id;
+      const updatedPacks = [...state.myPacks];
+      const packArrayIndex = updatedPacks.findIndex(
+        (pack) => pack.id === packId
+      );
+      if (packArrayIndex >= 0) {
+        updatedPacks[packArrayIndex].packAmount++;
+        state.myPacks = updatedPacks;
+      } else {
+        updatedPacks.push(action.payload);
+        state.myPacks = updatedPacks;
+      }
     },
     //Find the pack, if last, delete it from array
     removePack: (state, action) => {
@@ -18,18 +32,16 @@ const packsSlice = createSlice({
       const packArrayIndex = updatedPacks.findIndex(
         (pack) => pack.id === packId
       );
-      console.log(packArrayIndex);
       if (updatedPacks[packArrayIndex].packAmount > 1) {
         updatedPacks[packArrayIndex].packAmount--;
         state.myPacks = updatedPacks;
       } else {
         state.myPacks = updatedPacks.filter((pack) => pack.id !== packId);
       }
-      console.log(updatedPacks);
     },
   },
 });
 
-export const packActions = packsSlice.actions;
+export const packsActions = packsSlice.actions;
 
 export default packsSlice;

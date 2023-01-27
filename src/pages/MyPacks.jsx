@@ -1,36 +1,60 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getDatabase, ref, onValue } from "firebase/database";
-import { database, app } from "../firebaseConfig";
-import { collection, getDoc, getDocs, onSnapshot } from "firebase/firestore";
+import { packsActions } from "../store/packs-slice";
+import { playersActions } from "../store/players-slice";
+import { drawPlayer } from "../store/players-fetch";
+import { receivePackData, sendPackData } from "../store/packs-actions";
 
 import Pack from "../components/Pack";
 import Layout from "../components/UI/Layout";
 import OpeningModal from "../components/UI/OpeningModal";
 
 const MyPacks = () => {
-  const packs = useSelector((state) => state.packs.myPacks);
+  const dispatch = useDispatch();
+
+  const myPacks = useSelector((state) => state.packs.myPacks);
+  const uId = useSelector((state) => state.ui.uId);
+
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    dispatch(receivePackData());
+  }, [dispatch, uId]);
 
   const toggleModal = (state) => {
     setShowModal(state);
   };
 
+  //Move to MyPacks
+  const OpenPack = (packData) => {
+    dispatch(packsActions.removePack(packData.id));
+    dispatch(playersActions.deleteCurrentPack());
+    dispatch(sendPackData());
+
+    const pack = [];
+    for (let i = 0; i < packData.playersAmount; i++) {
+      pack.push(packData.packRating);
+    }
+    pack.forEach((player) => dispatch(drawPlayer(player)));
+    toggleModal(true);
+  };
+
   return (
     <Layout>
       {showModal && <OpeningModal onOpen={showModal} onClose={toggleModal} />}
-      <div className="flex justify-center gap-6 m-8">
-        {packs.length === 0 && (
+      <div className="flex  justify-center gap-8 m-8 flex-col">
+        {/* <div className="flex bg-slate-400 justify-center gap-6 m-8 flex-col"> */}
+        {myPacks.length === 0 && (
           <p className="text-white text-6xl">Brak Paczek Biedaku</p>
         )}
-        {packs &&
-          packs.map((pack) => (
+        {myPacks &&
+          myPacks.map((pack) => (
             <Pack
               key={pack.id}
               packData={pack}
               openModal={toggleModal}
-              onClick={() => {}}
+              onClick={OpenPack}
             />
           ))}
       </div>

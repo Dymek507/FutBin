@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         "main-bgc": "#041a03",
+        main: "rgba(12,52,86,0.85)",
       },
       backgroundImage: {
         "main-b-stadium": "url('/src/assets/b-stadium_1.png')",

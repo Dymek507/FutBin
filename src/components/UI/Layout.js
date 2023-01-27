@@ -9,7 +9,9 @@ const Layout = (props) => {
       <NavBar />
 
       <div className="flex grow justify-center items-center">
-        <div className="overflow-x-hidden">{props.children}</div>
+        <div className="overflow-x-hidden" style={props.styles}>
+          {props.children}
+        </div>
       </div>
     </div>
   );

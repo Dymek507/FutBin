@@ -1,27 +1,31 @@
-/* @keyframes example {
+@keyframes example {
   0% {
-    left: 200px;
-    top: 200px;
+    left: calc((100vw - 280px) / 2);
+    top: -500px;
   }
-
+  25% {
+    left: calc((100vw - 280px) / 2);
+    top: -250px;
+  }
   50% {
-    left: 200px;
-    top: 200px;
-    transform: rotateY(90deg);
+    left: calc((100vw - 280px) / 2);
+    top: 0px;
   }
-
+  75% {
+    left: calc((100vw - 280px) / 2);
+    top: 250px;
+  }
   100% {
-    left: 200px;
-    top: 200px;
+    left: calc((100vw - 280px) / 2);
+    top: 150px;
   }
-} */
-
-.frame {
-  background-color: red;
 }
+
 .playerRoundAnimation {
-  transform: scale(0.6);
+  position: fixed;
+  top: 150px;
+  left: calc((100vw - 280px) / 2);
   animation-name: example;
   animation-timing-function: linear;
-  animation-duration: 5s;
+  animation-duration: 3s;
 }

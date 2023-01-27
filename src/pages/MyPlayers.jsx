@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { playersActions } from "../store/players-slice";
-import { fetchPlayersData } from "../store/players-actions";
+import { fetchPlayersData, deletePlayer } from "../store/players-actions";
 
 import { Button } from "@mui/material";
 import Layout from "../components/UI/Layout";
@@ -12,13 +12,6 @@ const MyPlayers = () => {
   const dispatch = useDispatch();
   const playersArray = useSelector((state) => state.players.myPlayers);
   const uId = useSelector((state) => state.ui.uId);
-  console.log(playersArray);
-
-  useEffect(() => {
-    if (playersArray && playersArray.length === 0) {
-      dispatch(fetchPlayersData());
-    }
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchPlayersData());
@@ -43,9 +36,10 @@ const MyPlayers = () => {
   };
 
   const deletePlayers = () => {
-    pickedPlayers.forEach((player) =>
-      dispatch(playersActions.deleteFromMyPlayers(player.id))
-    );
+    pickedPlayers.forEach((player) => {
+      dispatch(playersActions.deleteFromMyPlayers(player.id));
+      dispatch(deletePlayer(player.id));
+    });
   };
 
   return (
@@ -55,12 +49,19 @@ const MyPlayers = () => {
           <p className="text-white text-3xl py-3">Brak zawodników</p>
         )}
         {playersArray && playersArray.length !== 0 && (
-          <div className="flex flex-col items-center">
-            <Button sx={{ width: "20%" }} onClick={deletePlayers}>
+          <div className="flex flex-col items-center mt-4">
+            <Button
+              size="medium"
+              variant="contained"
+              sx={{ width: "40%" }}
+              onClick={deletePlayers}
+            >
               Usuń
             </Button>
-            <div className="flex flex-wrap justify-center">
-              <div className="flex flex-row flex-wrap justify-left w-5/6 gap-3">
+            <div className="flex flex-wrap justify-center mt-8">
+              {/* Below deleted w-5/6 because single card was wrapping in */}
+              <div className="flex flex-col flex-wrap gap-3">
+                {/* <div className="flex bg-red-500 flex-row flex-wrap justify-left gap-3"> */}
                 {playersArray &&
                   playersArray.map((player) => (
                     <Card

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -18,26 +18,35 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
+    <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        FutDraft
       </Link>{" "}
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  status: {
+    danger: "#e53e3e",
+  },
+  palette: {
+    primary: {
+      main: "rgba(12,52,86,0.85)",
+      darker: "#053e85",
+    },
+    neutral: {
+      main: "#64748B",
+      contrastText: "#fff",
+    },
+  },
+});
 
 export default function SignIn() {
   let auth = getAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,8 +54,7 @@ export default function SignIn() {
 
     signInWithEmailAndPassword(auth, data.get("email"), data.get("password"))
       .then((response) => {
-        console.log(response.user);
-        console.log(auth);
+        navigate("/");
       })
       .catch((err) => {
         alert(err.message);
@@ -65,11 +73,18 @@ export default function SignIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar
+            sx={{
+              m: 1,
+              bgcolor: "primary.main",
+              width: "60px",
+              height: "60px",
+            }}
+          >
+            <LockOutlinedIcon fontSize="large" />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Zaloguj się!
           </Typography>
           <Box
             component="form"
@@ -99,7 +114,7 @@ export default function SignIn() {
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label="Zapamiętaj mnie"
             />
             <Button
               type="submit"
@@ -107,18 +122,16 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              ZALOGUJ
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Zapomniałeś hasła?
                 </Link>
               </Grid>
               <Grid item>
-                <Link to="/account/register">
-                  "Don't have an account? Sign Up"
-                </Link>
+                <Link to="/account/register">Nie masz konta? Zarejestruj!</Link>
               </Grid>
             </Grid>
           </Box>

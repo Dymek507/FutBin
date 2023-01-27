@@ -48,13 +48,12 @@ function App() {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           const uid = user.uid;
-          console.log(uid);
-          console.log(user.email);
+          // console.log(uid);
           dispatch(uiActions.login({ logged: true, uId: uid }));
-          console.log("zalogowano");
+          // console.log("zalogowano");
         } else {
           dispatch(uiActions.login({ logged: false, uId: null }));
-          console.log("wylogowano");
+          // console.log("wylogowano");
         }
       });
       firstRun = false;

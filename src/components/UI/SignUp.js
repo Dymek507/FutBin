@@ -3,7 +3,7 @@ import { app, database } from "../../firebaseConfig";
 import { collection, addDoc, getDoc, getDocs } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -28,9 +28,9 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      {/* <Link color="inherit" href="/">
+      <Link color="inherit" href="/">
         FutDraft
-      </Link> */}
+      </Link>{" "}
       {new Date().getFullYear()}
     </Typography>
   );
@@ -39,7 +39,7 @@ function Copyright(props) {
 const theme = createTheme({
   palette: {
     primary: {
-      main: purple[500],
+      main: "rgba(12,52,86,0.85)",
     },
     secondary: {
       main: green[500],
@@ -49,6 +49,7 @@ const theme = createTheme({
 
 export default function SignUp() {
   const auth = getAuth(app);
+  const navigate = useNavigate();
 
   const [formValid, setFormValid] = useState(false);
 
@@ -65,26 +66,13 @@ export default function SignUp() {
       auth,
       data.get("email"),
       data.get("password")
-      // data.get("lastName")
     )
       .then((response) => {
-        console.log(response.user);
+        navigate("/");
       })
       .catch((err) => {
         alert(err.message);
       });
-
-    // addDoc(collectionRef, {
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    //   playersData: [],
-    // })
-    //   .then(() => {
-    //     alert("Data Added");
-    //   })
-    //   .catch((err) => {
-    //     alert(err.message);
-    //   });
   };
 
   const getData = (e) => {
@@ -98,14 +86,22 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
+            margin: 1,
             paddingTop: 3,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar
+            sx={{
+              m: 1,
+              bgcolor: "primary.main",
+              width: "60px",
+              height: "60px",
+            }}
+          >
+            <LockOutlinedIcon fontSize="large" />
           </Avatar>
           <Typography component="h1" variant="h5">
             Zarejestruj się !
@@ -183,10 +179,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to={"/account/login"}>
-                  {/* <MuiLink variant="body2">Masz już konto? Zaloguj się</MuiLink> */}
-                </Link>
-                <button onClick={getData}>Pobierz dane</button>
+                <Link to={"/account/login"}>Masz już konto? Zaloguj się</Link>
               </Grid>
             </Grid>
           </Box>
