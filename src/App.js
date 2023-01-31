@@ -16,24 +16,32 @@ import MyPlayers from "./pages/MyPlayers";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NewPacks from "./pages/NewPacks";
+import Layout from "./components/UI/Layout";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 let firstRun = true;
 
 const router = createBrowserRouter([
-  { path: "/", element: <HomeScreen /> },
-  { path: "/new-packs", element: <NewPacks /> },
-  { path: "/my-packs", element: <MyPacks /> },
-  { path: "/my-players", element: <MyPlayers /> },
   {
-    path: "/account",
+    path: "/",
+    element: <Layout />,
     children: [
+      { index: true, element: <HomeScreen /> },
+      { path: "new-packs", element: <NewPacks /> },
+      { path: "my-packs", element: <MyPacks /> },
+      { path: "my-players", element: <MyPlayers /> },
       {
-        path: "login",
-        element: <LoginPage />,
-      },
-      {
-        path: "register",
-        element: <RegisterPage />,
+        path: "/account",
+        children: [
+          {
+            path: "login",
+            element: <LoginPage />,
+          },
+          {
+            path: "register",
+            element: <RegisterPage />,
+          },
+        ],
       },
     ],
   },
@@ -44,25 +52,46 @@ function App() {
   const auth = getAuth();
 
   useEffect(() => {
-    if (firstRun) {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          const uid = user.uid;
-          const userData = user.email;
-          dispatch(uiActions.login({ logged: true, uId: uid, userData }));
-          // console.log("zalogowano");
-        } else {
-          dispatch(uiActions.login({ logged: false, uId: null, userData: "" }));
-          // console.log("wylogowano");
-        }
-      });
-      firstRun = false;
-    }
+    // if (firstRun) {
+    const authentication = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        const userData = user.email;
+        dispatch(uiActions.login({ logged: true, uId: uid, userData }));
+        // console.log("zalogowano");
+      } else {
+        dispatch(uiActions.login({ logged: false, uId: null, userData: "" }));
+        // console.log("wylogowano");
+      }
+    });
+    firstRun = false;
+
+    return authentication();
   }, [auth, dispatch]);
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#757ce8",
+        main: "rgba(12,52,86,0.85)",
+        mainDarker: "rgba(12,52,86,0.95)",
+        dark: "#002884",
+        contrastText: "#fff",
+      },
+      secondary: {
+        light: "#ff7961",
+        main: "#f44336",
+        dark: "#ba000d",
+        contrastText: "#000",
+      },
+    },
+  });
 
   return (
     <>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </>
   );
 }

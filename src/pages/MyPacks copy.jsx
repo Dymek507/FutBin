@@ -18,6 +18,10 @@ const MyPacks = () => {
 
   const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    dispatch(receivePackData());
+  }, [dispatch, uId]);
+
   const toggleModal = (state) => {
     setShowModal(state);
   };

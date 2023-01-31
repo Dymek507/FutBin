@@ -4,11 +4,9 @@ import SignIn from "../components/UI/SignIn";
 
 const LoginPage = () => {
   return (
-    <Layout>
-      <div className="bg-white">
-        <SignIn />
-      </div>
-    </Layout>
+    <div className="bg-white">
+      <SignIn />
+    </div>
   );
 };
 

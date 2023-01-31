@@ -19,7 +19,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" to="/">
         FutDraft
       </Link>{" "}
       {new Date().getFullYear()}

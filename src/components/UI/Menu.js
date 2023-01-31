@@ -18,6 +18,8 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
+import NEY from "../../assets/menu-effect-1.png";
+
 const Menu = () => {
   const auth = getAuth();
 
@@ -122,7 +124,12 @@ const Menu = () => {
           </Link>
         ))}
       </List>
-      <Divider />
+      <Divider
+        sx={{
+          backgroundColor: "white",
+          marginX: "20px",
+        }}
+      />
       <List>
         {subMenuList.map((item) => (
           <ListItem
@@ -163,6 +170,15 @@ const Menu = () => {
             sx: {
               backgroundColor: "rgba(12,52,86,1)",
               color: "white",
+              backgroundImage: `url(${NEY})`,
+              backgroundSize: "500px auto",
+              backgroundPosition: "30% 110%",
+              backgroundRepeat: "no-repeat",
+            },
+          }}
+          sx={{
+            display: {
+              "& .MuiDrawer-paper": {},
             },
           }}
           anchor={"left"}
@@ -171,6 +187,7 @@ const Menu = () => {
         >
           {list}
         </Drawer>
+        {/* <img src={NEY} /> */}
       </React.Fragment>
     </div>
   );

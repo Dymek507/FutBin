@@ -1,6 +1,8 @@
 import React from "react";
 import NavBar from "./NavBar";
 import Menu from "./Menu";
+import { Outlet } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const Layout = (props) => {
   return (
@@ -9,9 +11,9 @@ const Layout = (props) => {
       <NavBar />
 
       <div className="flex grow justify-center items-center">
-        <div className="overflow-x-hidden" style={props.styles}>
-          {props.children}
-        </div>
+        {/* <div className="overflow-x-hidden" style={props.styles}> */}
+        <Outlet />
+        {/* </div> */}
       </div>
     </div>
   );

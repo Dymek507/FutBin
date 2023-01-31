@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createTheme, styled } from "@mui/material/styles";
 
 import { playersActions } from "../store/players-slice";
 import { fetchPlayersData, deletePlayer } from "../store/players-actions";
 
-import {
-  Button,
-  CardActions,
-  CardContent,
-  Grid,
-  Paper,
-  ThemeProvider,
-  Typography,
-  Card as MuiCard,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import Card from "../components/Card";
-import { Box } from "@mui/system";
 
 const MyPlayers = () => {
   const dispatch = useDispatch();
@@ -52,33 +41,38 @@ const MyPlayers = () => {
     });
   };
 
-  const CardWrapper = styled(Box)(({ theme }) => ({
-    backgroundColor: "theme.primary.mainDarker",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  }));
-
   return (
-    <Box
-      bgcolor="primary.main"
-      sx={{ minHeight: "86vh", mx: "2rem", mt: "2rem", p: "1rem" }}
-    >
-      <Grid container rowSpacing={2} columnSpacing={2}>
-        {playersArray?.map((player) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-            <CardWrapper>
-              <Card
-                key={player.id}
-                playerData={player}
-                sendPlayer={pickPlayer}
-                fontSize={"14px"}
-              />
-            </CardWrapper>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+    <div className="h-full w-screen mt-1 relative flex grow flex-wrap gap-0.5 justify-center bg-board-opacity overflow-hidden">
+      {(!playersArray || (playersArray && playersArray.length === 0)) && (
+        <p className="text-white text-3xl py-3">Brak zawodników</p>
+      )}
+      {playersArray && playersArray.length !== 0 && (
+        <div className="flex flex-col items-center mt-4">
+          <Button
+            size="medium"
+            variant="contained"
+            sx={{ width: "40%" }}
+            onClick={deletePlayers}
+          >
+            Usuń
+          </Button>
+          <div className="flex flex-wrap justify-center mt-8">
+            {/* Below deleted w-5/6 because single card was wrapping in */}
+            <div className="flex flex-col flex-wrap gap-3">
+              {/* <div className="flex bg-red-500 flex-row flex-wrap justify-left gap-3"> */}
+              {playersArray &&
+                playersArray.map((player) => (
+                  <Card
+                    key={player.id}
+                    playerData={player}
+                    sendPlayer={pickPlayer}
+                  />
+                ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

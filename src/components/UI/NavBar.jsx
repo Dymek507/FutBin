@@ -38,6 +38,7 @@ const NavBar = () => {
     <AppBar
       position="static"
       sx={{
+        height: "4rem",
         background: "rgba(12,52,86,0.85)",
       }}
     >

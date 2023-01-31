@@ -13,7 +13,7 @@ import useGeneratePrice from "../hooks/useGeneratePrice";
 
 import styles from "./Card.module.css";
 
-const Card = ({ playerData, sendPlayer, fontSize }) => {
+const Card = ({ playerData, sendPlayer }) => {
   const [pickPlayer, setPickPlayer] = useState(false);
 
   const images = useFetchImages(playerData);
@@ -83,7 +83,6 @@ const Card = ({ playerData, sendPlayer, fontSize }) => {
       onClick={addPlayer}
       className={styles.playerCard}
       style={{
-        fontSize: fontSize,
         backgroundColor: `${pickPlayer ? "green" : ""}`,
         backgroundImage: `url('${cardBackground}')`,
       }}
@@ -105,11 +104,11 @@ const Card = ({ playerData, sendPlayer, fontSize }) => {
           alt="Player_photo"
         />
       </div>
-      <div className="font-din text-[1.75em] font-bold truncate uppercase text-center absolute w-[7.5em] top-[8.35em] left-[1.25em] tracking-wide border-b border-black">
+      <div className="font-din text-[28px] font-bold truncate uppercase text-center absolute w-[210px] top-[234px] left-[35px] border-b border-black">
         {commonName}
       </div>
       <div
-        className={`flex flex-col justify-center items-center absolute bottom-[3.25em] left-[0.31em] h-[6.25em] w-[16.875em]`}
+        className={`flex flex-col justify-center items-center absolute bottom-[52px] left-[5px] h-[100px] w-[270px]`}
       >
         <div className={styles.playerStatsContainer}>
           <div className="col-start-2">{pace}</div>
@@ -125,10 +124,10 @@ const Card = ({ playerData, sendPlayer, fontSize }) => {
           <div className="col-start-6">{physicality}</div>
           <div className="col-start-8">{position !== "GK" ? "PHY" : "POS"}</div>
           <div className={styles.statsVerticalLine}>
-            <div className="bg-black h-[2.5em] w-[1px] mt-[0.5em]"></div>
+            <div className="bg-black h-[78px] w-[1px] mt-[14px]"></div>
           </div>
         </div>
-        <div className="mt-[0.5em] text-[1.5em] font-din  border-t-[1px] border-black">
+        <div className="mt-4 text-3xl font-din  border-t-[1px] border-black">
           {displayPrice}
         </div>
       </div>

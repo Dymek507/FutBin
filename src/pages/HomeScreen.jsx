@@ -1,9 +1,23 @@
 import React, { useState } from "react";
-import Layout from "../components/UI/Layout";
 
-import styles from "./HomePage.module.css";
+import { Grid, Box, Paper } from "@mui/material";
+
+import { styled } from "@mui/material/styles";
+import Form from "../components/Form";
+import { useGetPokemonByNameQuery } from "../components/rtk/pokemon";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 const HomeScreen = () => {
+  // const { data, error, isLoading } = useGetPokemonByNameQuery("bulbasaur");
+  // console.log(data, error, isLoading);
+
   const player = {
     id: 1283,
     resourceId: 231747,
@@ -113,11 +127,25 @@ const HomeScreen = () => {
     },
   };
   return (
-    <Layout styles={{ backgroundColor: "red", position: "relative" }}>
-      {/* <div className={styles.playerRoundAnimation}>
-        <Card playerData={player} sendPlayer={() => {}} />
-      </div> */}
-    </Layout>
+    <div className="w-screen h-[90vh] bg-main p-4">
+      <Grid container rowSpacing={5} columnSpacing={5}>
+        <Grid item xs={12}>
+          <Item></Item>
+        </Grid>
+        <Grid item xs={4}>
+          <Item></Item>
+        </Grid>
+        <Grid item xs={4}>
+          <Item>xs=4</Item>
+        </Grid>
+        <Grid item xs={4}>
+          <Item>xs=4</Item>
+        </Grid>
+        <Grid item xs={10}>
+          <Item>xs=10</Item>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 

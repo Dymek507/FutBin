@@ -38,23 +38,21 @@ const NewPacks = () => {
     dispatch(sendPackData());
   };
   return (
-    <Layout styles={{ width: "100vw", display: "flex" }}>
-      <div className="flex  w-full flex-col items-center gap-8 p-8">
-        {/* <div className="flex justify-center gap-6 m-8"> */}
-        {packsArray.length === 0 && (
-          <p className="text-white text-6xl">Brak Paczek Biedaku</p>
-        )}
-        {packsArray &&
-          packsArray.map((pack) => (
-            <Pack
-              key={pack.id}
-              packData={pack}
-              openModal={() => {}}
-              onClick={buyPack}
-            />
-          ))}
-      </div>
-    </Layout>
+    // <Layout styles={{ width: "100vw", display: "flex" }}>
+    <div className="flex  w-full flex-col items-center gap-8 p-8">
+      {packsArray.length === 0 && (
+        <p className="text-white text-6xl">Brak Paczek Biedaku</p>
+      )}
+      {packsArray &&
+        packsArray.map((pack) => (
+          <Pack
+            key={pack.id}
+            packData={pack}
+            openModal={() => {}}
+            onClick={buyPack}
+          />
+        ))}
+    </div>
   );
 };
 
