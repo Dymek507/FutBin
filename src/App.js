@@ -18,6 +18,7 @@ import RegisterPage from "./pages/RegisterPage";
 import NewPacks from "./pages/NewPacks";
 import Layout from "./components/UI/Layout";
 import { createTheme, ThemeProvider } from "@mui/material";
+import Squad from "./pages/Squad";
 
 let firstRun = true;
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: "new-packs", element: <NewPacks /> },
       { path: "my-packs", element: <MyPacks /> },
       { path: "my-players", element: <MyPlayers /> },
+      { path: "squad", element: <Squad /> },
       {
         path: "/account",
         children: [

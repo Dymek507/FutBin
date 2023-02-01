@@ -17,6 +17,8 @@ import FiberNewIcon from "@mui/icons-material/FiberNew";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import GroupsIcon from "@mui/icons-material/Groups";
+import InventoryIcon from "@mui/icons-material/Inventory";
 
 import NEY from "../../assets/menu-effect-1.png";
 
@@ -62,7 +64,7 @@ const Menu = () => {
     {
       id: 3,
       text: "My Packs",
-      icon: <FiberNewIcon />,
+      icon: <InventoryIcon />,
       link: "/my-packs",
     },
     {
@@ -70,6 +72,12 @@ const Menu = () => {
       text: "My Players",
       icon: <BusinessCenterIcon />,
       link: "/my-players",
+    },
+    {
+      id: 5,
+      text: "Squad",
+      icon: <GroupsIcon />,
+      link: "/squad",
     },
   ];
   const subMenuList = [
@@ -171,7 +179,7 @@ const Menu = () => {
               backgroundColor: "rgba(12,52,86,1)",
               color: "white",
               backgroundImage: `url(${NEY})`,
-              backgroundSize: "500px auto",
+              backgroundSize: "50vh auto",
               backgroundPosition: "30% 110%",
               backgroundRepeat: "no-repeat",
             },

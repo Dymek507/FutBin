@@ -18,9 +18,10 @@ const fetcher = (url) => axios.get(url, axiosFetchBlob).then((r) => r.data);
 
 export const useFetcherSWR = (endPoint) => {
   const [playerImage, setPlayerImage] = useState("");
+  const [shouldFetch, setShouldFetch] = useState(true);
 
   const { data, error, isLoading } = useSWR(
-    `https://futdb.app/api/${endPoint}`,
+    shouldFetch ? `https://futdb.app/api/${endPoint}` : null,
     fetcher
   );
 
@@ -28,6 +29,7 @@ export const useFetcherSWR = (endPoint) => {
     if (data) {
       const playerPhoto = URL.createObjectURL(data);
       setPlayerImage(playerPhoto);
+      setShouldFetch(false);
     }
   }, [data]);
 

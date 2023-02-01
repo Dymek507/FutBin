@@ -9,11 +9,8 @@ const Layout = (props) => {
     <div className="flex flex-col w-full min-h-screen bg-main-b-stadium [background-position-x:60%] bg-no-repeat  bg-main-bgc ">
       <Menu />
       <NavBar />
-
-      <div className="flex grow justify-center items-center">
-        {/* <div className="overflow-x-hidden" style={props.styles}> */}
+      <div className="flex grow justify-center items-center overflow-x-hidden">
         <Outlet />
-        {/* </div> */}
       </div>
     </div>
   );

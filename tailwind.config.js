@@ -19,6 +19,8 @@ module.exports = {
         "opening-c": "url('/src/assets/concrete-bg.jpg')",
         "opening-1": "url('/src/assets/cz1.png')",
         "opening-2": "url('/src/assets/cz2.png')",
+        "squad-field": "url('/src/assets/football-field-1.jpg')",
+        "blank-card": "url('/src/assets/blank-card.png')",
       },
       animation: {
         slidey: "movey 3s linear 1s",
@@ -35,6 +37,9 @@ module.exports = {
           "50%": { transform: "translate(0px,-600px)" },
           "100%": { transform: "translate(0px,-1000px)" },
         },
+      },
+      screens: {
+        xs: "420px",
       },
     },
   },

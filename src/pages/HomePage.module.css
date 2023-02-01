@@ -29,3 +29,23 @@
   animation-timing-function: linear;
   animation-duration: 3s;
 }
+
+.wrapper {
+  background: rgb(158, 158, 158);
+}
+
+.emboss {
+  color: #fff;
+  background: #636363;
+  text-shadow: 1px 4px 4px #4c4c4c;
+
+  background-clip: text;
+}
+
+.engrave {
+  background: #211f1f;
+  color: transparent;
+  text-shadow: rgba(245, 245, 245, 0.4) 3px 5px 6px;
+
+  background-clip: text;
+}

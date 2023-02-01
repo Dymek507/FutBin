@@ -84,7 +84,7 @@ const Card = ({ playerData, sendPlayer, fontSize }) => {
       className={styles.playerCard}
       style={{
         fontSize: fontSize,
-        backgroundColor: `${pickPlayer ? "green" : ""}`,
+        filter: `${pickPlayer ? "drop-shadow(0px 0px 30px #C7BA30)" : ""}`,
         backgroundImage: `url('${cardBackground}')`,
       }}
     >

@@ -1,12 +1,23 @@
 import React from "react";
-
-import { motion } from "framer-motion";
 import Card from "../components/Card";
-import { Typography } from "@mui/material";
 
-const HomeScreen = () => {
+const formation = [
+  { nr: "1", pos: "GK", x: 0, y: 180 },
+  { nr: "2", pos: "RB", x: 150, y: 360 },
+  { nr: "3", pos: "LB", x: 150, y: 3 },
+  { nr: "4", pos: "CB", x: 120, y: 110 },
+  { nr: "5", pos: "CB", x: 120, y: 250 },
+  { nr: "6", pos: "CM", x: 250, y: 110 },
+  { nr: "7", pos: "RM", x: 380, y: 360 },
+  { nr: "8", pos: "CM", x: 250, y: 250 },
+  { nr: "9", pos: "ST", x: 500, y: 180 },
+  { nr: "10", pos: "CAM", x: 370, y: 180 },
+  { nr: "11", pos: "LM", x: 380, y: 3 },
+];
+
+const Squad = () => {
   const player = {
-    id: 839,
+    id: 1283,
     resourceId: 231747,
     resourceBaseId: 231747,
     futBinId: 26263,
@@ -14,7 +25,7 @@ const HomeScreen = () => {
     firstName: "Kylian",
     lastName: "Mbappé",
     name: "Kylian Mbappé",
-    commonName: "Martínez",
+    commonName: "Mbappé",
     height: 182,
     weight: 73,
     birthDate: "1998-12-20",
@@ -114,39 +125,18 @@ const HomeScreen = () => {
     },
   };
   return (
-    <div className="">
-      <motion.div
-        initial={{ opacity: 0, x: 200, y: 0 }}
-        animate={{ opacity: 1, x: 30, y: 0 }}
-        exit={{ opacity: 0, x: 0, y: 50 }}
-        transition={{ duration: 2 }}
-      >
-        <Typography variant="h2" sx={{ fontWeight: "300" }}>
-          Witamy w FutDraft
-        </Typography>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, x: -200, y: 40 }}
-        animate={{ opacity: 1, x: 160, y: 40 }}
-        exit={{ opacity: 0, x: 80, y: 40 }}
-        transition={{ duration: 2 }}
-      >
-        <Card playerData={player} fontSize={"14px"} />
-      </motion.div>
+    <div className="relative h-[80vh] w-[55vh] bg-squad-field bg-center bg-cover">
+      {formation.map((position) => (
+        <div
+          key={position.nr}
+          className="absolute h-32 w-20 bg-blank-card bg-center bg-contain bg-no-repeat"
+          style={{ bottom: position.x, left: position.y }}
+        >
+          <Card playerData={player} fontSize={"4.5px"} />
+        </div>
+      ))}
     </div>
   );
 };
 
-export default HomeScreen;
-
-{
-  /* <div className="flex h-[90vh] bg-opening-c p-4">
-<div className="flex justify-center items-center w-full h-[800px]  flex-wrap mt-4">
-  <div className={styles.wrapper}>
-    <p className={styles.emboss}>Fut Draft</p>
-    <p className={styles.engrave}>Fut Draft</p>
-  </div>
-</div>
-</div> */
-}
+export default Squad;
