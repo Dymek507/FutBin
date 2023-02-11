@@ -3,7 +3,8 @@ import { playersActions } from "./players-slice";
 export const fetchPlayersData = () => {
   return async (dispatch, getState) => {
     const uId = getState().ui.uId;
-    const fetchData = async () => {
+    // Fetching player from database
+    const getPlayersData = async () => {
       const response = await fetch(
         `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/users/${uId}/players-data.json`
       );
@@ -17,7 +18,7 @@ export const fetchPlayersData = () => {
     };
 
     try {
-      const playersData = await fetchData();
+      const playersData = await getPlayersData();
       dispatch(playersActions.replaceAllMyPlayers(playersData));
     } catch (error) {
       console.log("Błąd" + error);
@@ -32,7 +33,6 @@ export const sendPlayersData = (players) => {
     const sendRequest = async () => {
       const response = await fetch(
         `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/users/${uId}/players-data.json`,
-
         {
           method: "PUT",
           body: JSON.stringify(myPlayers),
@@ -46,9 +46,50 @@ export const sendPlayersData = (players) => {
         throw new Error("Sending players data failed.");
       }
     };
+    // //Send unavailable players to db
+    // const sendUnavailable = async () => {
+    //   const receivedUnavailable = await fetch(
+    //     `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/unavailable-players.json`
+    //   ).then((res) => res.json());
+    //   console.log(receivedUnavailable);
+
+    //   // delete unavailable
+
+    //   const myPlayersId = myPlayers.map((player) => player.id);
+    //   const playersIdWithoutMyOldPlayers = myPlayersId.filter((id) => {
+    //     return receivedUnavailable.indexOf(id) < 0;
+    //   });
+    //   console.log(playersIdWithoutMyOldPlayers);
+    //   const updatesPlayersIdArray = receivedUnavailable;
+
+    //   console.log(myPlayersId);
+    //   //Clean array
+    //   await fetch(
+    //     `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/unavailable-players.json`,
+    //     {
+    //       method: "PUT",
+    //       body: JSON.stringify([]),
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   //Fetch new array
+    //   await fetch(
+    //     `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/unavailable-players.json`,
+    //     {
+    //       method: "PUT",
+    //       body: JSON.stringify(myPlayersId),
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    // };
 
     try {
       await sendRequest();
+      // await sendUnavailable();
     } catch (error) {
       console.log(`Błąd wysyłania ${error}`);
     }

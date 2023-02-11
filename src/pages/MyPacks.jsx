@@ -7,7 +7,6 @@ import { drawPlayer } from "../store/players-fetch";
 import { receivePackData, sendPackData } from "../store/packs-actions";
 
 import Pack from "../components/Pack";
-import Layout from "../components/UI/Layout";
 import OpeningModal from "../components/UI/OpeningModal";
 
 const MyPacks = () => {

@@ -114,7 +114,7 @@ const HomeScreen = () => {
     },
   };
   return (
-    <div className="">
+    <div>
       <motion.div
         initial={{ opacity: 0, x: 200, y: 0 }}
         animate={{ opacity: 1, x: 30, y: 0 }}

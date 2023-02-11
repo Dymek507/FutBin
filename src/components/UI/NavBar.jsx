@@ -29,7 +29,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const logged = useSelector((store) => store.ui.logged);
   const user = useSelector((store) => store.ui.userData);
-  const [name, domain] = user.split("@");
+  const [name] = user.split("@");
 
   const toogleMenu = () => {
     dispatch(uiActions.toggle());

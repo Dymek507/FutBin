@@ -1,21 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
 
 import { playersActions } from "../store/players-slice";
 import { fetchPlayersData, deletePlayer } from "../store/players-actions";
 
-import { Button, ButtonGroup, dialogClasses, Grid } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Grid,
+  IconButton,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import Card from "../components/Card";
 import { Box } from "@mui/system";
 import CardLine from "../components/CardLine";
+import {
+  ArrowDownward,
+  ArrowUpward,
+  ViewList,
+  ViewModule,
+} from "@mui/icons-material";
+import sortPlayers from "../components/functions/sortPlayers";
+
+const sortOptions = [
+  { label: "Overall", type: "ovr" },
+  { label: "Pace", type: "pac" },
+  { label: "Shooting", type: "sho" },
+  { label: "Passing", type: "pas" },
+  { label: "Dribbling", type: "dri" },
+  { label: "Defending", type: "def" },
+  { label: "Physicality", type: "phy" },
+];
 
 const MyPlayers = () => {
   const dispatch = useDispatch();
-  const playersArray = useSelector((state) => state.players.myPlayers);
+  const myPlayers = useSelector((state) => state.players.myPlayers);
   const uId = useSelector((state) => state.ui.uId);
   const [playersGridView, setPlayersGridView] = useState(true);
   const [pickedPlayers, setPickedPlayers] = useState([]);
+  const [sortingAtr, setSortingAtr] = useState("ovr");
+  const [sortingDir, setSortingDir] = useState(true);
+  const playersArray = useMemo(
+    () => sortPlayers(myPlayers, sortingAtr, sortingDir),
+
+    [myPlayers, sortingAtr, sortingDir]
+  );
 
   useEffect(() => {
     dispatch(fetchPlayersData());
@@ -44,12 +75,9 @@ const MyPlayers = () => {
     });
   };
 
-  const CardWrapper = styled(Box)(({ theme }) => ({
-    backgroundColor: "theme.primary.mainDarker",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  }));
+  const sortingHandler = (event) => {
+    setSortingAtr(event.target.value);
+  };
 
   return (
     <Box
@@ -69,17 +97,43 @@ const MyPlayers = () => {
           marginX: "1rem",
         }}
       >
-        <Button variant="contained">Wyślij</Button>
-        <Button
-          variant="contained"
+        <Button variant="contained">Send</Button>
+        {/* Change view style */}
+        <IconButton
           onClick={() => {
             setPlayersGridView((prev) => !prev);
           }}
         >
-          Zmień widok
-        </Button>
+          {playersGridView ? <ViewList /> : <ViewModule />}
+        </IconButton>
+
+        {/* Change sorting direction */}
+        <IconButton
+          onClick={() => {
+            setSortingDir((prev) => !prev);
+          }}
+        >
+          {sortingDir ? <ArrowUpward /> : <ArrowDownward />}
+        </IconButton>
+        {/* Sorting by attribute */}
+        <FormControl>
+          <Select
+            width={"20%"}
+            id="sorting-players"
+            value={sortingAtr}
+            onChange={sortingHandler}
+          >
+            {sortOptions.map((option) => {
+              return (
+                <MenuItem key={option.label} value={option.type}>
+                  {option.label}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
         <Button variant="contained" onClick={deletePlayers}>
-          Usuń kartę
+          Sell
         </Button>
       </Box>
       {/* List view */}
@@ -98,7 +152,6 @@ const MyPlayers = () => {
       )}
       {/* Grid view */}
       {playersGridView && (
-        // <div className="w-full">
         <Grid
           sx={{ p: "1rem", width: "94vw" }}
           container
@@ -128,7 +181,6 @@ const MyPlayers = () => {
             </Grid>
           ))}
         </Grid>
-        // </div>
       )}
     </Box>
   );

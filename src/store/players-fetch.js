@@ -14,6 +14,13 @@ const axiosGetData = {
 
 export const drawPlayer = (playerRating) => {
   return async (dispatch) => {
+    // Fetching unavailable players from db
+    const getUnavailablePlayersId = async () => {
+      const response = await axios.get(
+        `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/unavailable-players.json`
+      );
+      console.log(response);
+    };
     const fetchPlayerData = async () => {
       const playerId = Math.floor(Math.random() * 16000);
       let playerData;
@@ -27,7 +34,9 @@ export const drawPlayer = (playerRating) => {
     };
 
     const rerender = async () => {
+      const unavailable = (await getUnavailablePlayersId()) || [];
       const playerData = await fetchPlayerData();
+
       if (
         playerData &&
         playerData.rating > playerRating &&
