@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { styled } from "@mui/material/styles";
-
-import { playersActions } from "../store/players-slice";
 import { fetchPlayersData, deletePlayer } from "../store/players-actions";
 
 import {
@@ -70,7 +67,6 @@ const MyPlayers = () => {
 
   const deletePlayers = () => {
     pickedPlayers.forEach((player) => {
-      dispatch(playersActions.deleteFromMyPlayers(player.id));
       dispatch(deletePlayer(player.id));
     });
   };

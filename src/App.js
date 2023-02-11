@@ -15,6 +15,7 @@ import MyPacks from "./pages/MyPacks";
 import MyPlayers from "./pages/MyPlayers";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import Admin from "./pages/Admin";
 import NewPacks from "./pages/NewPacks";
 import Layout from "./components/UI/Layout";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: "my-packs", element: <MyPacks /> },
       { path: "my-players", element: <MyPlayers /> },
       { path: "squad", element: <Squad /> },
+      { path: "admin", element: <Admin /> },
       {
         path: "/account",
         children: [
@@ -58,12 +60,13 @@ function App() {
     const authentication = onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        console.log(uid);
         const userData = user.email;
         dispatch(uiActions.login({ logged: true, uId: uid, userData }));
-        // console.log("zalogowano");
+        console.log("zalogowano");
       } else {
         dispatch(uiActions.login({ logged: false, uId: null, userData: "" }));
-        // console.log("wylogowano");
+        console.log("wylogowano");
       }
     });
     firstRun = false;

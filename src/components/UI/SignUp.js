@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { app, database } from "../../firebaseConfig";
-import { collection } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { app, db } from "../../firebaseConfig";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 import { Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
@@ -18,6 +21,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green, purple } from "@mui/material/colors";
+import { doc, setDoc } from "@firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
 
 function Copyright(props) {
   return (
@@ -50,24 +56,57 @@ const theme = createTheme({
 export default function SignUp() {
   const auth = getAuth(app);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const uId = useSelector((state) => state.ui.uId);
+  console.log(uId);
 
   const [formValid, setFormValid] = useState(false);
-
-  const collectionRef = collection(database, "users");
 
   const checkboxValidity = (e) => {
     setFormValid(e.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    //Logout from account
+    // signOut(auth)
+    //   .then(() => {
+    //     console.log("Sign-out successful.");
+    //   })
+    //   .catch((error) => {
+    //     console.log("An error happened.");
+    //   });
+
     const data = new FormData(event.currentTarget);
+    //Create new user with email and password
     createUserWithEmailAndPassword(
       auth,
       data.get("email"),
       data.get("password")
     )
-      .then((response) => {
+      .then((user) => {
+        //Make document for new user
+        const newUser = doc(db, `users/${user.user.uid}`);
+        console.log(user);
+
+        setDoc(newUser, {
+          login: data.get("login"),
+          email: user.user.email,
+          playersData: [],
+          currentPackPlayers: [],
+          money: 0,
+          result: { wins: 0, draws: 0, loses: 0 },
+          goals: { goalsFor: 0, goalsAgainst: 0 },
+        });
+        dispatch(
+          uiActions.login({
+            logged: true,
+            uId: user.user.uid,
+            userData: user.user.email,
+          })
+        );
+      })
+      .then(() => {
         navigate("/");
       })
       .catch((err) => {
@@ -113,25 +152,15 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                  autoComplete="login"
+                  name="login"
                   required
                   fullWidth
-                  id="firstName"
-                  label="Imię"
+                  id="login"
+                  label="Login"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Nazwisko"
-                  name="lastName"
-                  autoComplete="family-name"
                 />
               </Grid>
               <Grid item xs={12}>

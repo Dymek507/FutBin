@@ -2,6 +2,8 @@ import axios from "axios";
 
 import { playersActions } from "./players-slice";
 import { apiKey } from "../futDbConfig";
+import { collection, getDocs } from "@firebase/firestore";
+import { db } from "../firebaseConfig";
 
 const AuthToken = apiKey;
 
@@ -12,15 +14,24 @@ const axiosGetData = {
   },
 };
 
+export const getUnavailablePlayersIds = async () => {
+  const unavailablePlayers = [];
+
+  try {
+    const allUsers = await getDocs(collection(db, "users"));
+    allUsers.forEach((doc) => {
+      //dodac w aktywnych paczkach
+      unavailablePlayers.push(...doc.data().playersData);
+    });
+  } catch (error) {
+    console.log(`Błąd wysyłania ${error}`);
+  }
+  const unavailablePlayersIds = unavailablePlayers.map((player) => player.id);
+  return unavailablePlayersIds;
+};
+
 export const drawPlayer = (playerRating) => {
   return async (dispatch) => {
-    // Fetching unavailable players from db
-    const getUnavailablePlayersId = async () => {
-      const response = await axios.get(
-        `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/unavailable-players.json`
-      );
-      console.log(response);
-    };
     const fetchPlayerData = async () => {
       const playerId = Math.floor(Math.random() * 16000);
       let playerData;
@@ -34,13 +45,15 @@ export const drawPlayer = (playerRating) => {
     };
 
     const rerender = async () => {
-      const unavailable = (await getUnavailablePlayersId()) || [];
       const playerData = await fetchPlayerData();
+      const unavailablePlayersIds = await getUnavailablePlayersIds();
 
       if (
         playerData &&
         playerData.rating > playerRating &&
-        playerData.rarity <= 1
+        playerData.rarity <= 1 &&
+        //Check if player isnt unavailable
+        unavailablePlayersIds.filter((id) => playerData.id === id).length === 0
       ) {
         dispatch(playersActions.addPlayerToPack(playerData));
       } else {

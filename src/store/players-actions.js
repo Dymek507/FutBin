@@ -1,133 +1,66 @@
+import { doc, getDoc, updateDoc } from "@firebase/firestore";
+
 import { playersActions } from "./players-slice";
+import { db } from "../firebaseConfig";
+import { getAuth } from "firebase/auth";
 
 export const fetchPlayersData = () => {
   return async (dispatch, getState) => {
-    const uId = getState().ui.uId;
-    // Fetching player from database
-    const getPlayersData = async () => {
-      const response = await fetch(
-        `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/users/${uId}/players-data.json`
-      );
+    const auth = getAuth();
+    const uId = auth.currentUser.uid;
+    // const uId = getState().ui.uId;
 
-      let data = await response.json();
-      if (data === null) {
-        data = [];
+    const userDocRef = doc(db, `users/${uId} `);
+
+    if (uId !== null) {
+      try {
+        const userDoc = await getDoc(userDocRef);
+        const players = userDoc.data();
+        console.log(players);
+        if (userDoc.data() !== undefined) {
+          console.log("try");
+          const players = userDoc.data().playersData;
+          if (
+            userDoc.data().playersData &&
+            userDoc.data().playersData.length !== 0
+          ) {
+            dispatch(playersActions.replaceAllMyPlayers(players));
+          }
+        }
+      } catch (error) {
+        console.log("Błąd" + error);
       }
-
-      return data;
-    };
-
-    try {
-      const playersData = await getPlayersData();
-      dispatch(playersActions.replaceAllMyPlayers(playersData));
-    } catch (error) {
-      console.log("Błąd" + error);
     }
   };
 };
 
 export const sendPlayersData = (players) => {
   return async (dispatch, getState) => {
-    const uId = getState().ui.uId;
+    // const uId = getState().ui.uId;
+    const auth = getAuth();
+    const uId = auth.currentUser.uid;
     const myPlayers = await getState().players.myPlayers;
-    const sendRequest = async () => {
-      const response = await fetch(
-        `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/users/${uId}/players-data.json`,
-        {
-          method: "PUT",
-          body: JSON.stringify(myPlayers),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Sending players data failed.");
-      }
-    };
-    // //Send unavailable players to db
-    // const sendUnavailable = async () => {
-    //   const receivedUnavailable = await fetch(
-    //     `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/unavailable-players.json`
-    //   ).then((res) => res.json());
-    //   console.log(receivedUnavailable);
-
-    //   // delete unavailable
-
-    //   const myPlayersId = myPlayers.map((player) => player.id);
-    //   const playersIdWithoutMyOldPlayers = myPlayersId.filter((id) => {
-    //     return receivedUnavailable.indexOf(id) < 0;
-    //   });
-    //   console.log(playersIdWithoutMyOldPlayers);
-    //   const updatesPlayersIdArray = receivedUnavailable;
-
-    //   console.log(myPlayersId);
-    //   //Clean array
-    //   await fetch(
-    //     `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/unavailable-players.json`,
-    //     {
-    //       method: "PUT",
-    //       body: JSON.stringify([]),
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    //   //Fetch new array
-    //   await fetch(
-    //     `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/unavailable-players.json`,
-    //     {
-    //       method: "PUT",
-    //       body: JSON.stringify(myPlayersId),
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    // };
-
+    const userDocRef = doc(db, `users/${uId}`);
     try {
-      await sendRequest();
-      // await sendUnavailable();
+      await updateDoc(userDocRef, {
+        playersData: myPlayers,
+      });
     } catch (error) {
       console.log(`Błąd wysyłania ${error}`);
     }
   };
 };
+
 export const deletePlayer = (id) => {
   return async (dispatch, getState) => {
     await dispatch(playersActions.deleteFromMyPlayers(id));
-    const uId = getState().ui.uId;
+    const auth = getAuth();
+    const uId = auth.currentUser.uid;
     const myPlayers = await getState().players.myPlayers;
-    const deleteAllPlayersFromDB = async () => {
-      await fetch(
-        `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/users/${uId}/players-data.json`,
-        {
-          method: "PUT",
-          body: JSON.stringify([]),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    };
-    const sendMyPlayersToDB = async () => {
-      await fetch(
-        `https://futdraft-5f63c-default-rtdb.europe-west1.firebasedatabase.app/users/${uId}/players-data.json`,
-        {
-          method: "PUT",
-          body: JSON.stringify(myPlayers),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    };
+    const userDocRef = doc(db, `users/${uId}`);
 
     try {
-      await deleteAllPlayersFromDB();
-      await sendMyPlayersToDB();
+      await updateDoc(userDocRef, { playersData: myPlayers });
     } catch (error) {
       console.log(`Błąd wysyłania ${error}`);
     }

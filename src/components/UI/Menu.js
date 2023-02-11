@@ -21,6 +21,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import InventoryIcon from "@mui/icons-material/Inventory";
 
 import NEY from "../../assets/menu-effect-1.png";
+import { AdminPanelSettings } from "@mui/icons-material";
 
 const Menu = () => {
   const auth = getAuth();
@@ -41,6 +42,7 @@ const Menu = () => {
   const logOut = function () {
     signOut(auth)
       .then(() => {
+        dispatch(uiActions.login({ logged: false, uId: null, userData: "" }));
         console.log("Sign-out successful.");
       })
       .catch((error) => {
@@ -78,6 +80,12 @@ const Menu = () => {
       text: "Squad",
       icon: <GroupsIcon />,
       link: "/squad",
+    },
+    {
+      id: 6,
+      text: "Admin",
+      icon: <AdminPanelSettings />,
+      link: "/admin",
     },
   ];
   const subMenuList = [
