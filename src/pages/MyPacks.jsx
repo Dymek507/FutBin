@@ -8,6 +8,7 @@ import { receivePackData, sendPackData } from "../store/packs-actions";
 
 import Pack from "../components/Pack";
 import OpeningModal from "../components/UI/OpeningModal";
+import { Button } from "@mui/material";
 
 const MyPacks = () => {
   const dispatch = useDispatch();
@@ -35,26 +36,38 @@ const MyPacks = () => {
     toggleModal(true);
   };
 
+  const openPrevPackHandler = () => {
+    toggleModal(true);
+  };
+
   return (
     <>
-      {/* // <Layout styles={{ width: "100vw", display: "flex" }}> */}
       {showModal && <OpeningModal onOpen={showModal} onClose={toggleModal} />}
-      <div className="flex flex-col items-center gap-8 w-full mt-8">
-        {/* <div className="flex bg-slate-400 justify-center gap-6 m-8 flex-col"> */}
-        {myPacks.length === 0 && (
-          <div className="bg-main p-2 rounded-xl">
-            <p className="text-white text-4xl">Brak Paczek Biedaku</p>
-          </div>
-        )}
-        {myPacks &&
-          myPacks.map((pack) => (
-            <Pack
-              key={pack.id}
-              packData={pack}
-              openModal={toggleModal}
-              onClick={OpenPack}
-            />
-          ))}
+      <div className="flex flex-col w-full h-full">
+        <div className="flex justify-center items-center h-[10%]  ">
+          <Button variant="contained" onClick={openPrevPackHandler}>
+            Open previous pack
+          </Button>
+        </div>
+        <div
+          className="flex justify-center items-center h-[90%] 
+        "
+        >
+          {myPacks.length === 0 && (
+            <div className="bg-main p-2 rounded-xl">
+              <p className="text-white text-4xl">Brak Paczek Biedaku</p>
+            </div>
+          )}
+          {myPacks &&
+            myPacks.map((pack) => (
+              <Pack
+                key={pack.id}
+                packData={pack}
+                openModal={toggleModal}
+                onClick={OpenPack}
+              />
+            ))}
+        </div>
       </div>
     </>
   );

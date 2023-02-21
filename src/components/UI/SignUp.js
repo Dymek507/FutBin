@@ -68,30 +68,31 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //Logout from account
-    // signOut(auth)
-    //   .then(() => {
-    //     console.log("Sign-out successful.");
-    //   })
-    //   .catch((error) => {
-    //     console.log("An error happened.");
-    //   });
+    // Logout from account
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful.");
+      })
+      .catch((error) => {
+        console.log("An error happened.");
+      });
 
     const data = new FormData(event.currentTarget);
+
     //Create new user with email and password
     createUserWithEmailAndPassword(
       auth,
       data.get("email"),
       data.get("password")
     )
-      .then((user) => {
+      .then((userCredential) => {
         //Make document for new user
-        const newUser = doc(db, `users/${user.user.uid}`);
-        console.log(user);
+        const newUser = doc(db, `users/${userCredential.user.uid}`);
+        console.log(userCredential);
 
         setDoc(newUser, {
           login: data.get("login"),
-          email: user.user.email,
+          email: userCredential.user.email,
           playersData: [],
           currentPackPlayers: [],
           money: 0,
@@ -101,8 +102,8 @@ export default function SignUp() {
         dispatch(
           uiActions.login({
             logged: true,
-            uId: user.user.uid,
-            userData: user.user.email,
+            uId: userCredential.user.uid,
+            userData: userCredential.user.email,
           })
         );
       })

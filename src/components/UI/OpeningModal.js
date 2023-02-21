@@ -61,14 +61,16 @@ const OpeningModal = ({ onOpen, onClose }) => {
     if (myPlayers.length === 0) {
       dispatch(fetchPlayersData());
     }
+    dispatch(playersActions.deleteCurrentPack());
     dispatch(sendPlayersData());
     onClose(false);
   };
 
   const sendPickedPlayers = () => {
-    pickedPlayers.forEach((player) =>
-      dispatch(playersActions.addPlayerToMyPlayers(player))
-    );
+    pickedPlayers.forEach((player) => {
+      dispatch(playersActions.addPlayerToMyPlayers(player));
+      dispatch(playersActions.deletePlayerFromCurrentPack(player.id));
+    });
     if (myPlayers.length === 0) {
       dispatch(fetchPlayersData());
     }
@@ -77,7 +79,7 @@ const OpeningModal = ({ onOpen, onClose }) => {
   };
 
   const rejectAllPlayers = () => {
-    dispatch(playersActions.deleteCurrentPack());
+    // dispatch(playersActions.deleteCurrentPack());
     onClose(false);
   };
 
@@ -90,14 +92,14 @@ const OpeningModal = ({ onOpen, onClose }) => {
       <div className="relative flex flex-col w-screen h-screen bg-opening-c bg-cover overflow-x-hidden">
         {showAnimation && <OpeningAnimation />}
         <div className="flex justify-center mt-12 gap-2 ">
-          <Button size="small" variant="contained" onClick={sendAllPlayer}>
-            Wyślij do klubu
+          <Button size="medium" variant="contained" onClick={sendAllPlayer}>
+            Send All
           </Button>
-          <Button size="small" variant="contained" onClick={sendPickedPlayers}>
-            Wyślij wybranych
+          <Button size="medium" variant="contained" onClick={sendPickedPlayers}>
+            Send Chosen
           </Button>
-          <Button size="small" variant="contained" onClick={rejectAllPlayers}>
-            Odrzuć
+          <Button size="medium" variant="contained" onClick={rejectAllPlayers}>
+            Reject
           </Button>
         </div>
         <div className="flex flex-wrap w-full mt-8 overflow-x-hidden gap-1 justify-center">

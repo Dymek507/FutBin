@@ -60,13 +60,12 @@ function App() {
     const authentication = onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log(uid);
         const userData = user.email;
         dispatch(uiActions.login({ logged: true, uId: uid, userData }));
         console.log("zalogowano");
       } else {
         dispatch(uiActions.login({ logged: false, uId: null, userData: "" }));
-        console.log("wylogowano");
+        console.log("niezalogowano");
       }
     });
     firstRun = false;

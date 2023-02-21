@@ -14,6 +14,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
 
 function Copyright(props) {
   return (
@@ -44,6 +46,7 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
+  const dispatch = useDispatch();
   let auth = getAuth();
   const navigate = useNavigate();
 
@@ -52,7 +55,11 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
 
     signInWithEmailAndPassword(auth, data.get("email"), data.get("password"))
-      .then((response) => {
+      .then((userCredential) => {
+        const uid = userCredential.user.uid;
+        const userData = userCredential.user.email;
+        dispatch(uiActions.login({ logged: true, uId: uid, userData }));
+        console.log("zalogowano");
         navigate("/");
       })
       .catch((err) => {

@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { uiActions } from "../../store/ui-slice";
+import { Link, useNavigate } from "react-router-dom";
+import uiSlice, { uiActions } from "../../store/ui-slice";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth, signOut } from "firebase/auth";
+import { logOut } from "../../store/ui-actions";
+import { playersActions } from "../../store/players-slice";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -24,7 +25,7 @@ import NEY from "../../assets/menu-effect-1.png";
 import { AdminPanelSettings } from "@mui/icons-material";
 
 const Menu = () => {
-  const auth = getAuth();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const showMenu = useSelector((state) => state.ui.menuIsVisible);
@@ -39,15 +40,12 @@ const Menu = () => {
     dispatch(uiActions.toggle());
   };
 
-  const logOut = function () {
-    signOut(auth)
-      .then(() => {
-        dispatch(uiActions.login({ logged: false, uId: null, userData: "" }));
-        console.log("Sign-out successful.");
-      })
-      .catch((error) => {
-        console.log("An error happened.");
-      });
+  const logoutHandler = () => {
+    console.log("working in menu");
+    dispatch(logOut());
+    dispatch(playersActions.replaceAllMyPlayers([]));
+    dispatch(uiActions.toggle());
+    navigate("/");
   };
 
   const menuList = [
@@ -101,7 +99,7 @@ const Menu = () => {
       text: "Logout",
       icon: <LogoutIcon />,
       link: "/logout",
-      onClick: logOut,
+      onClick: logoutHandler,
     },
   ];
 
@@ -203,7 +201,6 @@ const Menu = () => {
         >
           {list}
         </Drawer>
-        {/* <img src={NEY} /> */}
       </React.Fragment>
     </div>
   );

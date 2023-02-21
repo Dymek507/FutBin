@@ -14,6 +14,11 @@ const uiSlice = createSlice({
       state.uId = action.payload.uId;
       state.userData = action.payload.userData;
     },
+    logout(state, action) {
+      state.logged = false;
+      state.uId = null;
+      state.userData = "";
+    },
     toggle(state) {
       state.menuIsVisible = !state.menuIsVisible;
     },

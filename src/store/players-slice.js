@@ -26,6 +26,13 @@ const playersDataSlice = createSlice({
     deleteCurrentPack: (state, action) => {
       state.currentPack = [];
     },
+    deletePlayerFromCurrentPack: (state, action) => {
+      const playerId = action.payload;
+      const newCurrentPack = [...state.currentPack];
+      state.currentPack = newCurrentPack.filter(
+        (player) => player.id !== playerId
+      );
+    },
   },
 });
 
