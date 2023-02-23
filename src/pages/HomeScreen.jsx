@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Card from "../components/Card";
 import { Typography } from "@mui/material";
+import Animation from "../components/UI/Animation";
 
 const HomeScreen = () => {
   const player = {
@@ -114,22 +115,23 @@ const HomeScreen = () => {
     },
   };
   return (
-    <div>
+    <div className="w-full flex flex-col justify-center items-center ">
       <motion.div
         initial={{ opacity: 0, x: 200, y: 0 }}
         animate={{ opacity: 1, x: 30, y: 0 }}
-        exit={{ opacity: 0, x: 0, y: 50 }}
+        exit={{ opacity: 0, x: 0, y: 0 }}
         transition={{ duration: 2 }}
       >
         <Typography variant="h2" sx={{ fontWeight: "300" }}>
-          Witamy w FutDraft
+          Witamy w
         </Typography>
       </motion.div>
 
+      <Animation />
       <motion.div
-        initial={{ opacity: 0, x: -200, y: 40 }}
-        animate={{ opacity: 1, x: 160, y: 40 }}
-        exit={{ opacity: 0, x: 80, y: 40 }}
+        initial={{ opacity: 0, x: -200, y: 0 }}
+        animate={{ opacity: 1, x: 100, y: 0 }}
+        exit={{ opacity: 0, x: 80, y: 0 }}
         transition={{ duration: 2 }}
       >
         <Card playerData={player} fontSize={"14px"} />
@@ -139,14 +141,3 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
-
-{
-  /* <div className="flex h-[90vh] bg-opening-c p-4">
-<div className="flex justify-center items-center w-full h-[800px]  flex-wrap mt-4">
-  <div className={styles.wrapper}>
-    <p className={styles.emboss}>Fut Draft</p>
-    <p className={styles.engrave}>Fut Draft</p>
-  </div>
-</div>
-</div> */
-}

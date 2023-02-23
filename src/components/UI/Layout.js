@@ -6,10 +6,11 @@ import { Box } from "@mui/material";
 
 const Layout = (props) => {
   return (
-    <div className="flex flex-col w-full min-h-screen bg-main-b-stadium [background-position-x:60%] bg-no-repeat bg-main-bgc ">
+    <div className="flex flex-col w-full min-h-screen bg-main-b-stadium [background-position-x:60%] bg-no-repeat">
+      {/* <div className="flex flex-col w-full min-h-screen bg-main-b-stadium [background-position-x:60%] bg-no-repeat bg-main-bgc "> */}
       <Menu />
       <NavBar />
-      <div className="flex h-[calc(100vh-4rem)] justify-center items-center overflow-x-hidden">
+      <div className="flex min-h-[calc(100vh-4rem)] justify-center overflow-x-hidden">
         <Outlet />
       </div>
     </div>

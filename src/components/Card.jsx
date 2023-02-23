@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import blankPhoto from "../assets/blankPlayerPic.png";
 import {
   goldN,
@@ -13,18 +13,30 @@ import useGeneratePrice from "../hooks/useGeneratePrice";
 
 import styles from "./Card.module.css";
 
-const Card = ({ playerData, sendPlayer, fontSize }) => {
-  const [pickPlayer, setPickPlayer] = useState(false);
+const Card = ({
+  playerData,
+  sendPlayer = () => {},
+  fontSize,
+  pickedArray = [],
+}) => {
+  const [highlightPlayer, setHighlightPlayer] = useState(false);
 
-  const images = useFetchImages(playerData);
+  useEffect(() => {
+    const ifPicked = pickedArray.filter(
+      (player) => player.id === playerData.id
+    ).length;
+    setHighlightPlayer(ifPicked);
+  }, [pickedArray, playerData]);
+
   const [playerPrice, displayPrice] = useGeneratePrice(playerData);
 
   const addPlayer = () => {
-    setPickPlayer((prevState) => !prevState);
+    // setHighlightPlayer((prevState) => !prevState);
     sendPlayer({ ...playerData, playerPrice });
   };
 
   //Dodawanie zdjęc
+  const images = useFetchImages(playerData);
 
   let { playerPhoto = blankPhoto, playerClub = "", playerNation = "" } = images;
 
@@ -84,7 +96,7 @@ const Card = ({ playerData, sendPlayer, fontSize }) => {
       className={styles.playerCard}
       style={{
         fontSize: fontSize,
-        filter: `${pickPlayer ? "drop-shadow(0px 0px 30px #C7BA30)" : ""}`,
+        filter: `${highlightPlayer ? "drop-shadow(0px 0px 30px #C7BA30)" : ""}`,
         backgroundImage: `url('${cardBackground}')`,
       }}
     >

@@ -1,21 +1,19 @@
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 
 import { playersActions } from "./players-slice";
-import { db, auth } from "../firebaseConfig";
+import { db } from "../firebaseConfig";
 
 export const fetchPlayersData = () => {
   return async (dispatch, getState) => {
-    // const uId = auth.currentUser.uid;
-    const uId = getState().ui.uId;
+    const uId = await getState().ui.userData?.uId;
+    console.log(uId);
 
     if (uId !== null) {
-      const userDocRef = doc(db, `users/${uId} `);
+      const userDocRef = doc(db, `users/${uId}`);
       try {
         const userDoc = await getDoc(userDocRef);
-        const players = userDoc.data() || [];
-        console.log(players);
+
         if (userDoc.data() !== undefined) {
-          console.log("try");
           const players = userDoc.data().playersData;
           if (
             userDoc.data().playersData &&
@@ -34,8 +32,7 @@ export const fetchPlayersData = () => {
 
 export const sendPlayersData = (players) => {
   return async (dispatch, getState) => {
-    const uId = getState().ui.uId;
-    // const uId = auth.currentUser.uid;
+    const uId = await getState().ui.userData.uId;
     const myPlayers = await getState().players.myPlayers;
     if (uId !== null) {
       const userDocRef = doc(db, `users/${uId}`);
@@ -55,7 +52,7 @@ export const sendPlayersData = (players) => {
 export const deletePlayer = (id) => {
   return async (dispatch, getState) => {
     await dispatch(playersActions.deleteFromMyPlayers(id));
-    const uId = auth.currentUser.uid;
+    const uId = await getState().ui.userData.uId;
     const myPlayers = await getState().players.myPlayers;
     const userDocRef = doc(db, `users/${uId}`);
 

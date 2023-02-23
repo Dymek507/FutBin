@@ -7,7 +7,7 @@ export const logOut = () => {
     console.log("working in thunk");
     signOut(auth)
       .then(() => {
-        dispatch(uiActions.login({ logged: false, uId: null, userData: "" }));
+        dispatch(uiActions.login({ logged: false, uId: null, userData: null }));
         console.log("Sign-out successful.");
       })
       .catch((error) => {

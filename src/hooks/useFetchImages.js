@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useFetcherSWR } from "./useFetcherSWR";
 
 export const useFetchImages = (playerObject) => {
-  const { id, club, nation } = playerObject;
+  const { id = 1, club = 1, nation = 1 } = playerObject;
 
   const playerPhoto = useFetcherSWR(`players/${id}/image`);
   const playerNation = useFetcherSWR(`nations/${nation}/image`);

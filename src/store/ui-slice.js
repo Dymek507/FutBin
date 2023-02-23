@@ -6,7 +6,13 @@ const uiSlice = createSlice({
     menuIsVisible: false,
     logged: false,
     uId: null,
-    userData: "",
+    userData: {
+      login: "",
+      uId: null,
+      money: 0,
+      results: {},
+      goals: {},
+    },
   },
   reducers: {
     login(state, action) {

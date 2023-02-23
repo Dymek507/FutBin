@@ -20,6 +20,7 @@ import {
   ViewModule,
 } from "@mui/icons-material";
 import sortPlayers from "../components/functions/sortPlayers";
+import { useTheme } from "@emotion/react";
 
 const sortOptions = [
   { label: "Overall", type: "ovr" },
@@ -33,8 +34,9 @@ const sortOptions = [
 
 const MyPlayers = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const myPlayers = useSelector((state) => state.players.myPlayers);
-  const uId = useSelector((state) => state.ui.uId);
+  const uId = useSelector((state) => state.ui.userData?.uId);
   const [playersGridView, setPlayersGridView] = useState(true);
   const [pickedPlayers, setPickedPlayers] = useState([]);
   const [sortingAtr, setSortingAtr] = useState("ovr");
@@ -93,9 +95,12 @@ const MyPlayers = () => {
           marginX: "1rem",
         }}
       >
-        <Button variant="contained">Send</Button>
+        <Button variant="contained" color="neutral">
+          Send
+        </Button>
         {/* Change view style */}
         <IconButton
+          color="neutral"
           onClick={() => {
             setPlayersGridView((prev) => !prev);
           }}
@@ -105,19 +110,24 @@ const MyPlayers = () => {
 
         {/* Change sorting direction */}
         <IconButton
+          color="neutral"
           onClick={() => {
             setSortingDir((prev) => !prev);
           }}
         >
           {sortingDir ? <ArrowUpward /> : <ArrowDownward />}
         </IconButton>
+
         {/* Sorting by attribute */}
         <FormControl>
           <Select
-            width={"20%"}
+            width={"10%"}
             id="sorting-players"
             value={sortingAtr}
             onChange={sortingHandler}
+            sx={{
+              color: theme.palette.primary.contrastText,
+            }}
           >
             {sortOptions.map((option) => {
               return (
@@ -128,11 +138,12 @@ const MyPlayers = () => {
             })}
           </Select>
         </FormControl>
-        <Button variant="contained" onClick={deletePlayers}>
+        <Button variant="contained" color="neutral" onClick={deletePlayers}>
           Sell
         </Button>
       </Box>
-      {/* List view */}
+
+      {/* >>>>>>>>> List view <<<<<<<<<<<<< */}
       {!playersGridView && (
         <Grid
           sx={{ width: { xs: "100vw", sm: "80vw", md: "60vw" } }}
@@ -141,12 +152,17 @@ const MyPlayers = () => {
         >
           {playersArray?.map((player) => (
             <Grid key={player.id} item xs={12} sm={12} md={12} lg={12} xl={12}>
-              <CardLine playerData={player} />
+              <CardLine
+                playerData={player}
+                sendPlayer={pickPlayer}
+                pickedArray={pickedPlayers}
+              />
             </Grid>
           ))}
         </Grid>
       )}
-      {/* Grid view */}
+
+      {/* >>>>>>>>> Grid view <<<<<<<<<<<<<<< */}
       {playersGridView && (
         <Grid
           sx={{ p: "1rem", width: "94vw" }}
@@ -173,6 +189,7 @@ const MyPlayers = () => {
                 playerData={player}
                 sendPlayer={pickPlayer}
                 fontSize={"14px"}
+                pickedArray={pickedPlayers}
               />
             </Grid>
           ))}

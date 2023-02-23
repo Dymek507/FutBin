@@ -20,8 +20,8 @@ export const getUnavailablePlayersIds = async () => {
   try {
     const allUsers = await getDocs(collection(db, "users"));
     allUsers.forEach((doc) => {
-      //dodac w aktywnych paczkach
       unavailablePlayers.push(...doc.data().playersData);
+      unavailablePlayers.push(...doc.data().currentPackPlayers);
     });
   } catch (error) {
     console.log(`Błąd wysyłania ${error}`);

@@ -15,7 +15,7 @@ const Logo = (props) => {
     <Link to={"/"}>
       <Typography
         variant="h5"
-        fontSize="1.5rem"
+        fontSize="1.3rem"
         sx={{ border: 2, borderColor: "white", borderRadius: 2, px: 0.5 }}
       >
         {props.children}{" "}
@@ -27,8 +27,7 @@ const Logo = (props) => {
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.ui.userData);
-  const [name] = user.split("@");
+  const userData = useSelector((store) => store.ui.userData);
 
   const toogleMenu = () => {
     dispatch(uiActions.toggle());
@@ -55,7 +54,7 @@ const NavBar = () => {
         <div className="flex grow">
           <Logo>FutDraft</Logo>
         </div>
-
+        {/* <Typography>{userData ? userData.money : ""} </Typography> */}
         <Link to={"/account/login"}>
           <Button
             color="inherit"
@@ -65,7 +64,9 @@ const NavBar = () => {
               },
             }}
           >
-            <Typography fontSize="1.5rem">{user ? name : "Login"}</Typography>
+            <Typography fontSize="1.5rem">
+              {userData ? userData.login : "Login"}
+            </Typography>
           </Button>
         </Link>
       </Toolbar>

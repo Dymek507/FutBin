@@ -69,15 +69,16 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Logout from account
-    signOut(auth)
-      .then(() => {
-        console.log("Sign-out successful.");
-      })
-      .catch((error) => {
-        console.log("An error happened.");
-      });
+    // await signOut(auth)
+    //   .then(() => {
+    //     console.log("Sign-out successful.");
+    //   })
+    //   .catch((error) => {
+    //     console.log("An error happened.");
+    //   });
 
     const data = new FormData(event.currentTarget);
+    console.log(data);
 
     //Create new user with email and password
     createUserWithEmailAndPassword(
@@ -88,14 +89,13 @@ export default function SignUp() {
       .then((userCredential) => {
         //Make document for new user
         const newUser = doc(db, `users/${userCredential.user.uid}`);
-        console.log(userCredential);
 
         setDoc(newUser, {
           login: data.get("login"),
           email: userCredential.user.email,
           playersData: [],
           currentPackPlayers: [],
-          money: 0,
+          money: 10000,
           result: { wins: 0, draws: 0, loses: 0 },
           goals: { goalsFor: 0, goalsAgainst: 0 },
         });
@@ -113,11 +113,6 @@ export default function SignUp() {
       .catch((err) => {
         alert(err.message);
       });
-  };
-
-  const getData = (e) => {
-    e.preventDefault();
-    console.log(auth);
   };
 
   return (

@@ -5,6 +5,7 @@ import { fetchPlayersData, sendPlayersData } from "./store/players-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { uiActions } from "./store/ui-slice";
+import { doc, getDoc, updateDoc } from "@firebase/firestore";
 
 import "./index.css";
 import "@fontsource/roboto/300.css";
@@ -20,6 +21,7 @@ import NewPacks from "./pages/NewPacks";
 import Layout from "./components/UI/Layout";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Squad from "./pages/Squad";
+import { db } from "./firebaseConfig";
 
 let firstRun = true;
 
@@ -54,21 +56,46 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch();
   const auth = getAuth();
+  console.log(auth.currentUser?.uid);
+
+  const fetchUserData = async (uId) => {
+    if (uId !== null) {
+      const userDocRef = doc(db, `users/${uId}`);
+      try {
+        const userDoc = await getDoc(userDocRef);
+
+        const userData = userDoc.data();
+
+        dispatch(
+          uiActions.login({
+            logged: true,
+            userData: {
+              login: userData.login,
+              uId: uId,
+              money: userData.money,
+              results: userData.results,
+              goals: userData.goals,
+            },
+          })
+        );
+      } catch (error) {
+        console.log("Błąd" + error);
+      }
+    }
+  };
 
   useEffect(() => {
-    // if (firstRun) {
     const authentication = onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        const userData = user.email;
-        dispatch(uiActions.login({ logged: true, uId: uid, userData }));
-        console.log("zalogowano");
+        const test = async () => {
+          await fetchUserData(uid);
+        };
+        test();
       } else {
-        dispatch(uiActions.login({ logged: false, uId: null, userData: "" }));
-        console.log("niezalogowano");
+        dispatch(uiActions.login({ logged: false, uId: null, userData: null }));
       }
     });
-    firstRun = false;
 
     return authentication();
   }, [auth, dispatch]);
@@ -87,6 +114,10 @@ function App() {
         main: "#f44336",
         dark: "#ba000d",
         contrastText: "#000",
+      },
+      neutral: {
+        main: "#64748B",
+        contrastText: "#fff",
       },
     },
   });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import blankPhoto from "../assets/blankPlayerPic.png";
 import { useFetchImages } from "../hooks/useFetchImages";
 
@@ -10,12 +10,20 @@ import {
   bronzeN,
   bronzeR,
 } from "../assets/CardBackgrounds";
+import useGeneratePrice from "../hooks/useGeneratePrice";
 
-const CardLine = ({ playerData, sendPlayer }) => {
-  const [pickPlayer, setPickPlayer] = useState(false);
+const CardLine = ({ playerData, sendPlayer, pickedArray }) => {
+  const [highlightPlayer, setHighlightPlayer] = useState(false);
+  useEffect(() => {
+    const ifPicked = pickedArray.filter(
+      (player) => player.id === playerData.id
+    ).length;
+    setHighlightPlayer(ifPicked);
+  }, [pickedArray, playerData]);
   const images = useFetchImages(playerData);
 
   let { playerPhoto = blankPhoto, playerClub = "", playerNation = "" } = images;
+  const [playerPrice, displayPrice] = useGeneratePrice(playerData);
 
   // Destrukturyzacja danych zawodnika oraz dane startowe
   let {
@@ -73,12 +81,19 @@ const CardLine = ({ playerData, sendPlayer }) => {
   };
   choseBackground();
 
+  const addPlayer = () => {
+    setHighlightPlayer((prevState) => !prevState);
+    sendPlayer({ ...playerData, playerPrice });
+  };
+
   return (
     //Main bar container
     <div
+      onClick={addPlayer}
       className="flex text-[1.3rem] h-[3.2em] w-full shadow-2xl gap-[0.2em]"
       style={{
         backgroundImage: cardBackground,
+        filter: `${highlightPlayer ? "drop-shadow(0px 0px 20px #C7BA30)" : ""}`,
       }}
     >
       {/*Player nation and photo*/}
