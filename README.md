@@ -1,3 +1,8 @@
+Build from ts firebase
+"build": "npm run lint && tsc"
+
+W tej konfiguracji komenda firebase deploy --only functions buduje kod TypeScript i wdraża go jako funkcje.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

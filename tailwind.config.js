@@ -1,14 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,jsx}"],
+  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
       din: ["DIN_Pro", "ui-sans-serif"],
     },
     extend: {
-      colors: {
-        "main-bgc": "#041a03",
-        main: "rgba(12,52,86,0.85)",
+      animation: {
+        slidey: "movey 3s linear 1s",
+        slideyb: "moveyb 3s linear infinite",
       },
       boxShadow: {
         "3xl": "0 65px 90px -30px rgba(0, 0, 0, 1)",
@@ -26,9 +26,12 @@ module.exports = {
         "squad-field": "url('/src/assets/football-field-1.jpg')",
         "blank-card": "url('/src/assets/blank-card.png')",
       },
-      animation: {
-        slidey: "movey 3s linear 1s",
-        slideyb: "moveyb 3s linear infinite",
+      colors: {
+        "main-bgc": "#041a03",
+        main: "rgba(12,52,86,0.85)",
+      },
+      flex: {
+        2: "2 2 0%",
       },
       keyframes: {
         movey: {
