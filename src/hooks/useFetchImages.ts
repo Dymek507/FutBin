@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Player } from "../modules/modelTypes";
 import { useFetcherSWR } from "./useFetcherSWR";
 
@@ -7,9 +7,19 @@ interface IPlayerImages {
   playerNation: string;
   playerClub: string;
 }
+interface UseFetchImagesProps {
+  id: number;
+  club: number;
+  nation: number;
+}
 
-export const useFetchImages = (playerObject: Player) => {
-  const { id = 1, club = 1, nation = 1 } = playerObject;
+export const useFetchImages = (
+  id: number,
+  club: number,
+  nation: number
+): IPlayerImages => {
+  // export const useFetchImages = ({ playerObject: Player }) => {
+  // const { id = 1, club = 1, nation = 1 } = playerObject;
 
   const playerPhoto = useFetcherSWR(`players/${id}/image`);
   const playerNation = useFetcherSWR(`nations/${nation}/image`);

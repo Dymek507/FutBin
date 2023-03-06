@@ -1,4 +1,4 @@
-import { uiActions } from "../../store/ui-slice";
+import { uiActions } from "../store/ui-slice";
 import React from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../store/app/hooks";
 
 const Logo = () => {
   return (

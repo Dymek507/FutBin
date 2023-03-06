@@ -1,10 +1,10 @@
 import React from "react";
 
 import { motion } from "framer-motion";
-import Card from "../components/Card";
+import Card from "../../components/Card";
 import { Typography } from "@mui/material";
-import Animation from "../components/UI/Animation";
-import dummyPlayer from "../components/dummyPlayer";
+import Animation from "./Animation";
+import dummyPlayer from "../../data/dummyPlayer";
 
 const HomeScreen = () => {
 
@@ -24,7 +24,7 @@ const HomeScreen = () => {
       <Animation />
       <motion.div
         initial={{ opacity: 0, x: -200, y: 0 }}
-        animate={{ opacity: 1, x: 100, y: 0 }}
+        animate={{ opacity: 1, x: 70, y: 0 }}
         exit={{ opacity: 0, x: 80, y: 0 }}
         transition={{ duration: 2 }}
       >

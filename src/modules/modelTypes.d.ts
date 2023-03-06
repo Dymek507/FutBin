@@ -28,6 +28,14 @@ export type Player = {
   };
 };
 
+export interface ISlot {
+  nr: number;
+  pos: string;
+  x: number;
+  y: number;
+  playerId: number | null;
+}
+
 export type PackT = {
   id: number;
   packRating: number;
@@ -42,4 +50,32 @@ export type UserData = {
   money: number;
   result: { wins: number; draws: number; loses: number };
   goals: { goalsFor: number; goalsAgainst: number };
+};
+
+export type UserDataOnDb = {
+  currentPackPlayers: Players[];
+  email: string;
+  goals: {
+    goalsFor: number;
+    goalsAgainst: number;
+  };
+  login: string;
+  money: number;
+  packs: PackT[];
+  playersData: Player[];
+  result: {
+    wins: number;
+    draws: number;
+    loses: number;
+  };
+  squadData: ISlot[];
+};
+
+export type ResultT = {
+  resultId: string;
+  date: string;
+  userOneUid: string;
+  userTwoUid: string;
+  userOneGoals: number;
+  userTwoGoals: number;
 };

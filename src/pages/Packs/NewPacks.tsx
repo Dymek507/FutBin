@@ -1,11 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import { packsActions } from "../store/packs-slice";
-import { sendPackData } from "../store/packs-actions";
-import Pack from "../components/Pack";
-import { useAppDispatch } from "../app/hooks";
-import { PackT } from "../modules/modelTypes";
+import { packsActions } from "../../store/packs-slice";
+import { sendPackData } from "../../store/packs-actions";
+import Pack from "./Pack";
+import { useAppDispatch } from "../../store/app/hooks";
+import { PackT } from "../../modules/modelTypes";
 
 const packsArray = [
   {

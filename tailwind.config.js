@@ -1,4 +1,29 @@
 /** @type {import('tailwindcss').Config} */
+
+const plugin = require("tailwindcss/plugin");
+
+const Myclass = plugin(function ({ addUtilities }) {
+  addUtilities({
+    ".flex-center": {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    ".my-rotate-y-180": {
+      transform: "rotateY(180deg)",
+    },
+    ".preserve-3d": {
+      transformStyle: "preserve-3d",
+    },
+    ".perspective": {
+      perspective: "1000px",
+    },
+    ".backface-hidden": {
+      backfaceVisibility: "hidden",
+    },
+  });
+});
+
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
   theme: {
@@ -28,7 +53,7 @@ module.exports = {
       },
       colors: {
         "main-bgc": "#041a03",
-        main: "rgba(12,52,86,0.85)",
+        main: "#0c3456",
       },
       flex: {
         2: "2 2 0%",
@@ -50,5 +75,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [Myclass],
 };

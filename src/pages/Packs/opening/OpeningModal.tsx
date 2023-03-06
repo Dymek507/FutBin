@@ -4,10 +4,10 @@ import Modal from "@mui/material/Modal";
 import OpeningAnimation from "./OpeningAnimation";
 import WalkoutAnimation from "./WalkoutAnimation";
 import OpeningBoard from "./OpeningBoard";
-import sortPlayers from "../functions/sortPlayers";
-import { PackT, Player } from "../../modules/modelTypes";
-import { useAppSelector } from "../../app/hooks";
-import dummyPlayer from "../dummyPlayer";
+import sortPlayers from "../../../components/utils/sortPlayers";
+import { PackT, Player } from "../../../modules/modelTypes";
+import { useAppSelector } from "../../../store/app/hooks";
+import dummyPlayer from "../../../data/dummyPlayer";
 
 type OpeningModalProps = {
   showModal: boolean;

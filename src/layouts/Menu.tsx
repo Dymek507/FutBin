@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { uiActions } from "../../store/ui-slice";
-import { logOut } from "../../store/ui-actions";
-import { playersActions } from "../../store/players-slice";
+import { uiActions } from "../store/ui-slice";
+import { logOut } from "../store/ui-actions";
+import { playersActions } from "../store/players-slice";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -20,9 +20,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import GroupsIcon from "@mui/icons-material/Groups";
 import InventoryIcon from "@mui/icons-material/Inventory";
 
-import NEY from "../../assets/menu-effect-1.png";
+import NEY from "../assets/menu-effect-1.png";
 import { AdminPanelSettings } from "@mui/icons-material";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../store/app/hooks";
 
 const Menu = () => {
   const navigate = useNavigate();

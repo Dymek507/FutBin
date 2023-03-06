@@ -44,9 +44,11 @@ const Card = ({
   };
 
   //Dodawanie zdjęc
-  const images = useFetchImages(playerData);
+  const images = useFetchImages(playerData.id, playerData.club, playerData.nation);
 
   let { playerPhoto = blankPhoto, playerClub, playerNation } = images
+
+
 
   // Destrukturyzacja danych zawodnika oraz dane startowe
   let {

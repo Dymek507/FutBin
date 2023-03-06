@@ -1,17 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { Player } from "../modules/modelTypes";
+import type { Player, ISlot } from "../modules/modelTypes";
 import type { RootState } from "./store";
+import { formation1 } from "../data/formations";
 
 interface PlayersState {
   myPlayers: Player[];
   currentPack: Player[];
-  // changed: boolean;
+  mySquad: ISlot[];
 }
 
 const initialState: PlayersState = {
   myPlayers: [],
   currentPack: [],
-  // changed: false,
+  mySquad: formation1,
 };
 const playersDataSlice = createSlice({
   name: "PlayersDatabase",
@@ -40,6 +41,22 @@ const playersDataSlice = createSlice({
       state.currentPack = newCurrentPack.filter(
         (player) => player.id !== playerId
       );
+    },
+    updateMySquad: (
+      state,
+      action: PayloadAction<{ nr: number; playerId: number }>
+    ) => {
+      const newMySquad = [...state.mySquad];
+      const positionIndex = newMySquad.findIndex(
+        (pos) => pos.nr === action.payload.nr
+      );
+      if (positionIndex >= 0) {
+        newMySquad[positionIndex].playerId = action.payload.playerId;
+        state.mySquad = newMySquad;
+      }
+    },
+    replaceMySquad: (state, action: PayloadAction<ISlot[]>) => {
+      state.mySquad = action.payload;
     },
   },
 });

@@ -29,7 +29,10 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
     setHighlightPlayer(ifPicked);
   }, [pickedArray, playerData]);
 
-  const { playerPhoto = blankPhoto, playerClub, playerNation } = useFetchImages(playerData);
+  // const { playerPhoto = blankPhoto, playerClub, playerNation } = useFetchImages(playerData);
+  const images = useFetchImages(playerData.id, playerData.club, playerData.nation);
+
+  let { playerPhoto = blankPhoto, playerClub, playerNation } = images
 
   const { playerPrice, displayPrice } = useGeneratePrice(playerData);
 

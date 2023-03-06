@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserData } from "../modules/modelTypes";
+import { ResultT, UserData } from "../modules/modelTypes";
+import { dummyResults } from "../data/dummyResults";
 
 interface UiState {
   menuIsVisible: boolean;
   logged: boolean;
-  // uId: string | null;
   userData: UserData;
+  allPlayerData?: {
+    results: ResultT[];
+  };
 }
 
 const uiSlice = createSlice({
@@ -13,13 +16,15 @@ const uiSlice = createSlice({
   initialState: {
     menuIsVisible: false,
     logged: false,
-    // uId: null,
     userData: {
       login: "",
       uId: null,
       money: 0,
       result: { wins: 0, draws: 0, loses: 0 },
       goals: { goalsFor: 0, goalsAgainst: 0 },
+    },
+    allPlayersData: {
+      results: dummyResults,
     },
   } as UiState,
 

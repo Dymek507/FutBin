@@ -17,13 +17,6 @@ type GetPlayerImage = {
   data: Blob;
 };
 
-// interface AxiosRequestConfig {
-//   responseType: string,
-//   headers: {
-//     Acc
-//   }
-// }
-
 const axiosFetchBlob: AxiosRequestConfig = {
   responseType: "blob",
   headers: {

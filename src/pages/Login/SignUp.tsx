@@ -22,7 +22,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green, purple } from "@mui/material/colors";
 import { doc, setDoc } from "@firebase/firestore";
 import { uiActions } from "../../store/ui-slice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 function Copyright(props: any) {
   return (

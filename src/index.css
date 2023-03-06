@@ -13,12 +13,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .flex-center {
-    @apply flex justify-center items-center;
-  }
-}
-
 body {
   overscroll-behavior: contain;
   -webkit-touch-callout: none;

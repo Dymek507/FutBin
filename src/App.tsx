@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import HomeScreen from "./pages/HomeScreen";
+import HomeScreen from "./pages/Home/HomeScreen";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { uiActions } from "./store/ui-slice";
@@ -10,20 +10,33 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import MyPacks from "./pages/MyPacks";
-import MyPlayers from "./pages/MyPlayers";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import Admin from "./pages/Admin";
-import NewPacks from "./pages/NewPacks";
-import Layout from "./components/UI/Layout";
+import MyPacks from "./pages/Packs/MyPacks";
+import MyPlayers from "./pages/MyPlayers/MyPlayers";
+import LoginPage from "./pages/Login/LoginPage";
+import RegisterPage from "./pages/Login/RegisterPage";
+import Admin from "./pages/Admin/Admin";
+import NewPacks from "./pages/Packs/NewPacks";
+import Layout from "./layouts/Layout";
 import { createTheme, ThemeProvider } from "@mui/material";
-import Squad from "./pages/Squad";
+import SquadPage from "./pages/Squad/SquadPage";
 import { db } from "./firebaseConfig";
 import React from "react";
-import { useAppDispatch } from "./app/hooks";
+import { useAppDispatch } from "./store/app/hooks";
 import { logOut } from "./store/ui-actions";
 
+declare module '@mui/material/styles' {
+  interface Theme {
+    status: {
+      danger: string;
+    };
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+  }
+}
 
 const router = createBrowserRouter([
   {
@@ -34,7 +47,7 @@ const router = createBrowserRouter([
       { path: "new-packs", element: <NewPacks /> },
       { path: "my-packs", element: <MyPacks /> },
       { path: "my-players", element: <MyPlayers /> },
-      { path: "squad", element: <Squad /> },
+      { path: "squad", element: <SquadPage /> },
       { path: "admin", element: <Admin /> },
       {
         path: "/account",
@@ -98,6 +111,8 @@ function App() {
     return authentication();
   }, [auth, dispatch]);
 
+
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -110,7 +125,7 @@ function App() {
         light: "#ff7961",
         main: "#f44336",
         dark: "#ba000d",
-        contrastText: "#000",
+        contrastText: "#f50057",
       },
     },
   });

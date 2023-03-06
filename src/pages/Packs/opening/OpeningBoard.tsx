@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { sendPlayersData, fetchPlayersData } from "../../store/players-actions";
-import { playersActions } from "../../store/players-slice";
+import { sendPlayersData, fetchPlayersData } from "../../../store/players-actions";
+import { playersActions } from "../../../store/players-slice";
 import { Button } from "@mui/material";
 
-import Card from "../Card";
+import Card from "../../../components/Card";
 
-import type { Player } from "../../modules/modelTypes";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import type { Player } from "../../../modules/modelTypes";
+import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 
 type OpeningBoardProps = {
   onClose: (state: boolean) => void

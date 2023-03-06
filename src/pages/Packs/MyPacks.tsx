@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { packsActions } from "../store/packs-slice";
-import { playersActions } from "../store/players-slice";
-import { drawPlayer } from "../store/players-fetch";
-import { sendPackData } from "../store/packs-actions";
+import { packsActions } from "../../store/packs-slice";
+import { playersActions } from "../../store/players-slice";
+import { drawPlayer } from "../../store/players-fetch";
+import { sendPackData } from "../../store/packs-actions";
 
-import Pack from "../components/Pack";
-import OpeningModal from "../components/opening/OpeningModal";
+import Pack from "./Pack";
+import OpeningModal from "./opening/OpeningModal";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { receivePackData } from "../store/packs-actions";
-import OpeningBoard from "../components/opening/OpeningBoard";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { PackT } from "../modules/modelTypes";
+import { receivePackData } from "../../store/packs-actions";
+import OpeningBoard from "./opening/OpeningBoard";
+import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
+import { PackT } from "../../modules/modelTypes";
 
 const MyPacks = () => {
   const uId = useAppSelector((state) => state.ui.userData?.uId);

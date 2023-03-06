@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { fetchPlayersData, deletePlayer } from "../store/players-actions";
+import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
+import { fetchPlayersData, deletePlayer } from "../../store/players-actions";
 
 import {
   Button,
@@ -10,18 +10,18 @@ import {
   MenuItem,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Card from "../components/Card";
+import Card from "../../components/Card";
 import { Box } from "@mui/system";
-import CardLine from "../components/CardLine";
+import CardLine from "../../components/CardLine";
 import {
   ArrowDownward,
   ArrowUpward,
   ViewList,
   ViewModule,
 } from "@mui/icons-material";
-import sortPlayers from "../components/functions/sortPlayers";
+import sortPlayers from "../../components/utils/sortPlayers";
 import { useTheme } from "@emotion/react";
-import { Player } from "../modules/modelTypes";
+import { Player } from "../../modules/modelTypes";
 
 const sortOptions = [
   { label: "Overall", type: "ovr" },

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { PackT } from "../modules/modelTypes";
+import { PackT } from "../../modules/modelTypes";
 
 interface IPack {
   packData: PackT;

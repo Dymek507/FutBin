@@ -1,11 +1,11 @@
 import React from "react";
 import Fireworks from "@fireworks-js/react";
 import { motion } from "framer-motion";
-import { useFetchImages } from "../../hooks/useFetchImages";
+import { useFetchImages } from "../../../hooks/useFetchImages";
 
-import Card from "../Card";
+import Card from "../../../components/Card";
 import { Typography } from "@mui/material";
-import { Player } from "../../modules/modelTypes";
+import { Player } from "../../../modules/modelTypes";
 
 type WalkoutAnimationProps = {
   closeWalkout: () => void;
@@ -13,7 +13,9 @@ type WalkoutAnimationProps = {
 }
 
 const WalkoutAnimation = ({ closeWalkout, player }: WalkoutAnimationProps) => {
-  const images = useFetchImages(player);
+  // const images = useFetchImages(player);
+  const images = useFetchImages(player.id, player.club, player.nation);
+
   let { playerClub = "", playerNation = "" } = images;
 
   //Framer Motion variant
