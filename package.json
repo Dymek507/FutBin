@@ -1,4 +1,5 @@
 {
+  "homepage": "http://dymek507.github.io/FutDraft",
   "name": "futdraft",
   "version": "0.1.0",
   "private": true,
@@ -18,6 +19,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "axios": "^1.2.2",
+    "dotenv": "^16.0.3",
     "firebase": "^9.16.0",
     "formik": "^2.2.9",
     "framer-motion": "^8.5.5",
@@ -29,13 +31,16 @@
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
     "react-ui-cards": "^3.0.2",
+    "swiper": "^9.1.0",
     "swr": "^2.0.1",
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "webpack",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -61,6 +66,7 @@
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.53.0",
+    "gh-pages": "^5.0.0",
     "tailwindcss": "^3.2.4",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",

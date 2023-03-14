@@ -39,9 +39,9 @@ const Squad = () => {
     setCurrentPosition(nr)
   }
   return (
-    <div className="flex justify-center items-center w-full ">
+    <div className="flex justify-center items-center w-full">
       {showModal ? <ChoseOnPositionModal open={showModal} onClose={() => setShowModal(false)} avaiablePlayer={avaiablePlayer} addOnPositionHandler={addOnPositionHandler} currentPosition={currentPosition} /> : null}
-      <div className="relative h-full w-full sm:max-w-[1000px] bg-squad-field bg-center bg-no-repeat bg-[length:100%_100%]">
+      <div className="relative h-full w-full text-[22px] sm:max-w-[1000px] bg-squad-field bg-center bg-no-repeat bg-[length:100%_100%]">
         {mySquad.map((item) => (
           <Slot key={item.nr} nr={item.nr} pos={item.pos} x={item.x} y={item.y} playerId={item.playerId} openModal={openModalHandler} />
         ))}

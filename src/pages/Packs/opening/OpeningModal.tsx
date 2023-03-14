@@ -18,7 +18,9 @@ type OpeningModalProps = {
 const OpeningModal = ({ showModal, onClose, packData }: OpeningModalProps) => {
   const currentPack = useAppSelector((state) => state.players.currentPack);
   const [showAnimation, setShowAnimation] = useState(true);
+  console.log(showAnimation)
   const [playersReady, setPlayersReady] = useState(false);
+  const [playersLoaded, setPlayersLoaded] = useState(0);
   const [showWalkout, setShowWalkout] = useState(false);
   const [walkoutPlayer, setWalkoutPlayer] = useState<Player>(dummyPlayer);
 
@@ -28,9 +30,12 @@ const OpeningModal = ({ showModal, onClose, packData }: OpeningModalProps) => {
   );
 
   useEffect(() => {
-    // @ts-ignore
-    if (currentPack.length === packData.playersAmount) {
-      setPlayersReady(true);
+    if (packData !== null) {
+      setPlayersLoaded(currentPack.length / packData.playersAmount * 100)
+      console.log((currentPack.length / packData.playersAmount) * 100)
+      if (currentPack.length === packData.playersAmount) {
+        setPlayersReady(true);
+      }
     }
   }, [currentPack, packData]);
 
@@ -38,18 +43,20 @@ const OpeningModal = ({ showModal, onClose, packData }: OpeningModalProps) => {
     let animationTimer: ReturnType<typeof setTimeout>
     if (playersReady) {
       const bestPlayerInPack = playersArray[0];
-      if (bestPlayerInPack?.rating > 72) {
+      if (bestPlayerInPack?.rating > 71) {
         setWalkoutPlayer(bestPlayerInPack);
         setShowWalkout(true);
       }
       animationTimer = setTimeout(() => {
         setShowAnimation(false);
-      }, 2000);
+        console.log('timeron')
+      }, 3000);
     }
     return () => {
       clearTimeout(animationTimer);
+      console.log('timerooff')
     };
-  }, [playersReady]);
+  }, [playersReady, playersArray]);
 
   const closeWalkoutHandler = () => {
     setShowWalkout(false);
@@ -66,7 +73,7 @@ const OpeningModal = ({ showModal, onClose, packData }: OpeningModalProps) => {
       }}
     >
       <>
-        {showAnimation ? <OpeningAnimation isVisible={!playersReady} /> : null}
+        {showAnimation ? <OpeningAnimation isVisible={!playersReady} progress={playersLoaded} /> : null}
         {showWalkout ? (
           <WalkoutAnimation
             player={walkoutPlayer}

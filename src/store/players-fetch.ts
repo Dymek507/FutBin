@@ -1,14 +1,13 @@
 import axios from "axios";
 
 import { playersActions } from "./players-slice";
-import { apiKey } from "../futDbConfig";
 import { collection, getDocs } from "@firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Player } from "../modules/modelTypes";
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
-const AuthToken = apiKey;
+const AuthToken = process.env.REACT_APP_FUT_DB_KEY;
 
 const axiosGetData = {
   headers: {

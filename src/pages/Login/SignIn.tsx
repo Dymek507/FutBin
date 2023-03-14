@@ -29,22 +29,6 @@ function Copyright(props: any) {
   );
 }
 
-const theme = createTheme({
-  // status: {
-  //   danger: "#e53e3e",
-  // },
-  palette: {
-    primary: {
-      main: "rgba(12,52,86,0.85)",
-      dark: "#053e85",
-    },
-    // neutral: {
-    //   main: "#64748B",
-    //   contrastText: "#fff",
-    // },
-  },
-});
-
 export default function SignIn() {
   const dispatch = useAppDispatch();
   let auth = getAuth();
@@ -68,83 +52,83 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
+
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          paddingTop: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar
           sx={{
-            paddingTop: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            m: 1,
+            bgcolor: "primary.main",
+            width: "60px",
+            height: "60px",
           }}
         >
-          <Avatar
-            sx={{
-              m: 1,
-              bgcolor: "primary.main",
-              width: "60px",
-              height: "60px",
-            }}
+          <LockOutlinedIcon fontSize="large" />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Zaloguj się!
+        </Typography>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{ mt: 1 }}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            type="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Zapamiętaj mnie"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
           >
-            <LockOutlinedIcon fontSize="large" />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Zaloguj się!
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              type="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Zapamiętaj mnie"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              ZALOGUJ
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Typography>
-                  Zapomniałeś hasła?
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Link to="/account/register">Nie masz konta? Zarejestruj!</Link>
-              </Grid>
+            ZALOGUJ
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Typography>
+                Zapomniałeś hasła?
+              </Typography>
             </Grid>
-          </Box>
+            <Grid item>
+              <Link to="/account/register">Nie masz konta? Zarejestruj!</Link>
+            </Grid>
+          </Grid>
         </Box>
-        <Copyright sx={{ mt: 8, pb: 4 }} />
-      </Container>
-    </ThemeProvider>
+      </Box>
+      <Copyright sx={{ mt: 8, pb: 4 }} />
+    </Container>
+
   );
 }

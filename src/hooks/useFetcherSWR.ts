@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import useSWR from "swr";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-import { apiKey } from "../futDbConfig";
 import { Blob } from "buffer";
 
-const AuthToken = apiKey;
+const AuthToken = process.env.REACT_APP_FUT_DB_KEY;
 
 type User = {
   id: number;

@@ -41,17 +41,6 @@ function Copyright(props: any) {
   );
 }
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "rgba(12,52,86,0.85)",
-    },
-    secondary: {
-      main: green[500],
-    },
-  },
-});
-
 export default function SignUp() {
   const auth = getAuth(app);
   const navigate = useNavigate();
@@ -123,101 +112,100 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
+
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          margin: 1,
+          paddingTop: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar
           sx={{
-            margin: 1,
-            paddingTop: 3,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            m: 1,
+            bgcolor: "primary.main",
+            width: "60px",
+            height: "60px",
           }}
         >
-          <Avatar
-            sx={{
-              m: 1,
-              bgcolor: "primary.main",
-              width: "60px",
-              height: "60px",
-            }}
-          >
-            <LockOutlinedIcon fontSize="large" />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Zarejestruj się !
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="login"
-                  name="login"
-                  required
-                  fullWidth
-                  id="login"
-                  label="Login"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Hasło"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      onChange={checkboxValidity}
-                      value="newPassword"
-                      color="primary"
-                    />
-                  }
-                  label="Użyłem hasła nie używanego na innych witrynach. Połączenie niezabezpieczone."
-                />
-              </Grid>
+          <LockOutlinedIcon fontSize="large" />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Zarejestruj się !
+        </Typography>
+        <Box
+          component="form"
+          noValidate
+          onSubmit={handleSubmit}
+          sx={{ mt: 3 }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="login"
+                name="login"
+                required
+                fullWidth
+                id="login"
+                label="Login"
+                autoFocus
+              />
             </Grid>
-            <Button
-              disabled={!formValid}
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Zarejestruj !
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to={"/account/login"}>Masz już konto? Zaloguj się</Link>
-              </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
+              />
             </Grid>
-          </Box>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="password"
+                label="Hasło"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={checkboxValidity}
+                    value="newPassword"
+                    color="primary"
+                  />
+                }
+                label="Użyłem hasła nie używanego na innych witrynach. Połączenie niezabezpieczone."
+              />
+            </Grid>
+          </Grid>
+          <Button
+            disabled={!formValid}
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Zarejestruj !
+          </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link to={"/account/login"}>Masz już konto? Zaloguj się</Link>
+            </Grid>
+          </Grid>
         </Box>
-        <Copyright sx={{ mt: 5, pb: 2 }} />
-      </Container>
-    </ThemeProvider>
+      </Box>
+      <Copyright sx={{ mt: 5, pb: 2 }} />
+    </Container>
   );
 }

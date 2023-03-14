@@ -6,6 +6,7 @@ import { useFetchImages } from "../../../hooks/useFetchImages";
 import Card from "../../../components/Card";
 import { Typography } from "@mui/material";
 import { Player } from "../../../modules/modelTypes";
+import firework from '../../../assets/firework.png'
 
 type WalkoutAnimationProps = {
   closeWalkout: () => void;
@@ -51,6 +52,7 @@ const WalkoutAnimation = ({ closeWalkout, player }: WalkoutAnimationProps) => {
           backgroundSize: "cover",
         }}
       ></Fireworks> */}
+
       <div className="absolute inset-0 h-full w-full flex flex-col gap-8 justify-between items-center text-sm sm:text-3xl bg-black bg-walkout-bg-2 bg-cover bg-center">
         <div className="absolute left-[2%] sm:left-[10%] bottom-[10%] h-[16em] w-[10em] bg-walkout-fr-l bg-contain bg-no-repeat">
           <motion.div

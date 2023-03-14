@@ -6,6 +6,8 @@ import { sendPackData } from "../../store/packs-actions";
 import Pack from "./Pack";
 import { useAppDispatch } from "../../store/app/hooks";
 import { PackT } from "../../modules/modelTypes";
+import SwapPacks from "./SwapPacks";
+import { Box } from "@mui/material";
 
 const packsArray = [
   {
@@ -39,28 +41,32 @@ const NewPacks = () => {
     dispatch(sendPackData());
   };
   return (
-    <div className="flex  w-full flex-col items-center gap-8 p-8">
-      {packsArray.length === 0 && (
-        <p className="text-white text-6xl">Brak Paczek Biedaku</p>
-      )}
+    <Box
+      bgcolor="primary.main"
+      className="flex-center w-full sm:max-w-[600px] h-[60vh] gap-8 p-8 mx-[6rem] mt-[8rem] text-white "
+    >
+
       {packsArray &&
+        <SwapPacks packs={packsArray} buyPack={buyPack} />
+      }
+      {/* {packsArray &&
         packsArray.map((pack) => (
           <motion.div
-            key={pack.id}
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 0 }}
-            transition={{ duration: 1 }}
+          key={pack.id}
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 0 }}
+          transition={{ duration: 1 }}
           >
-            <Pack
-              key={pack.id}
-              packData={pack}
-              openModal={() => { }}
-              onClick={buyPack}
-            />
+          <Pack
+          key={pack.id}
+          packData={pack}
+          openModal={() => { }}
+          onClick={buyPack}
+          />
           </motion.div>
-        ))}
-    </div>
+        ))} */}
+    </Box>
   );
 };
 

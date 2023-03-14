@@ -27,15 +27,26 @@ import { logOut } from "./store/ui-actions";
 declare module '@mui/material/styles' {
   interface Theme {
     status: {
-      danger: string;
+      danger: React.CSSProperties['color'];
     };
   }
-  // allow configuration using `createTheme`
-  interface ThemeOptions {
-    status?: {
-      danger?: string;
-    };
+
+  interface Palette {
+    neutral: Palette['primary'];
   }
+
+  interface PaletteOptions {
+    neutral: PaletteOptions['primary'];
+  }
+
+  interface PaletteColor {
+    darker?: string;
+  }
+
+  interface SimplePaletteColorOptions {
+    darker?: string;
+  }
+
 }
 
 const router = createBrowserRouter([
@@ -69,6 +80,7 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useAppDispatch();
   const auth = getAuth();
+
 
   const fetchUserData = async (uId: string) => {
     if (uId !== null) {
@@ -123,9 +135,13 @@ function App() {
       },
       secondary: {
         light: "#ff7961",
-        main: "#f44336",
-        dark: "#ba000d",
-        contrastText: "#f50057",
+        main: "#f50057",
+        dark: "#ad0340",
+        contrastText: "#fff",
+      },
+      neutral: {
+        main: '#64748B',
+        contrastText: '#fff',
       },
     },
   });

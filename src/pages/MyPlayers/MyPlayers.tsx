@@ -22,6 +22,7 @@ import {
 import sortPlayers from "../../components/utils/sortPlayers";
 import { useTheme } from "@emotion/react";
 import { Player } from "../../modules/modelTypes";
+import { styled } from "@mui/material";
 
 const sortOptions = [
   { label: "Overall", type: "ovr" },
@@ -74,9 +75,44 @@ const MyPlayers = () => {
     });
   };
 
-  const sortingHandler = (event: SelectChangeEvent) => {
-    setSortingAtr(event.target.value);
+  const sortingHandler = (event: SelectChangeEvent<unknown>) => {
+    setSortingAtr(event.target.value as string);
   };
+
+  const CustomSelect = styled(Select)(({ theme }) => ({
+    width: 200,
+    color: theme.palette.secondary.main,
+    '& .MuiSvgIcon-root': {
+      color: theme.palette.secondary.main
+    },
+    "&.MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: theme.palette.secondary.main
+      },
+      "&:hover fieldset": {
+        borderColor: theme.palette.secondary.dark
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.secondary.dark
+      }
+    }
+  }));
+  // const CustomSelect = styled(Select)(({ theme }) => ({
+  //   '& .MuiSvgIcon-root': {
+  //     color: theme.palette.primary.contrastText
+  //   },
+  //   color: "white",
+  //   '.MuiOutlinedInput-notchedOutline': {
+  //     borderColor: 'white',
+  //   },
+  //   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+  //     borderColor: 'white',
+  //   },
+  //   '&:hover .MuiOutlinedInput-notchedOutline': {
+  //     color: "white",
+  //     borderColor: 'white',
+  //   },
+  // }));
 
   return (
     <Box
@@ -96,12 +132,12 @@ const MyPlayers = () => {
           marginX: "1rem",
         }}
       >
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="secondary">
           Send
         </Button>
         {/* Change view style */}
         <IconButton
-          color="primary"
+          color="secondary"
           onClick={() => {
             setPlayersGridView((prev) => !prev);
           }}
@@ -111,7 +147,7 @@ const MyPlayers = () => {
 
         {/* Change sorting direction */}
         <IconButton
-          color="primary"
+          color="secondary"
           onClick={() => {
             setSortingDir((prev) => !prev);
           }}
@@ -120,8 +156,9 @@ const MyPlayers = () => {
         </IconButton>
 
         {/* Sorting by attribute */}
-        <FormControl>
-          <Select
+        <FormControl
+        >
+          <CustomSelect
             id="sorting-players"
             value={sortingAtr}
             onChange={sortingHandler}
@@ -133,9 +170,9 @@ const MyPlayers = () => {
                 </MenuItem>
               );
             })}
-          </Select>
+          </CustomSelect>
         </FormControl>
-        <Button variant="contained" color="primary" onClick={deletePlayers}>
+        <Button variant="contained" color="secondary" onClick={deletePlayers}>
           Sell
         </Button>
       </Box>

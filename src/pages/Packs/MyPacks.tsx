@@ -8,12 +8,14 @@ import { sendPackData } from "../../store/packs-actions";
 
 import Pack from "./Pack";
 import OpeningModal from "./opening/OpeningModal";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { receivePackData } from "../../store/packs-actions";
 import OpeningBoard from "./opening/OpeningBoard";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { PackT } from "../../modules/modelTypes";
+import SwapPacks from "./SwapPacks";
+import { SliderData } from "./sliderData";
 
 const MyPacks = () => {
   const uId = useAppSelector((state) => state.ui.userData?.uId);
@@ -58,6 +60,7 @@ const MyPacks = () => {
 
   return (
     <>
+
       {showModal && (
         <OpeningModal
           showModal={showModal}
@@ -85,15 +88,13 @@ const MyPacks = () => {
                 <p className="text-white text-4xl">No Packs</p>
               </div>
             )}
-            {myPacks &&
-              myPacks.map((pack) => (
-                <Pack
-                  key={pack.id}
-                  packData={pack}
-                  openModal={toggleModal}
-                  onClick={OpenPack}
-                />
-              ))}
+            <Box
+              bgcolor="primary.main"
+              className="flex-center w-full sm:max-w-[600px] h-[60vh] gap-8 p-8 mx-[6rem] mt-[2rem] text-white "
+            >
+              {myPacks &&
+                <SwapPacks packs={myPacks} buyPack={OpenPack} />
+              }</Box>
           </div>
         </div>
       )}

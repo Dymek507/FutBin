@@ -126,7 +126,6 @@ const AddResultModal = ({ open,
       <Box component="form"
         onSubmit={handleSubmit} noValidate
         autoComplete="off" className='w-full h-full bg-main sm:max-w-[800px]'>
-        {/* <ThemeProvider theme={textFieldTheme}> */}
         <Box
           sx={{
             '& .MuiTextField-root': { m: 1, width: '25ch', color: 'white' },
@@ -173,7 +172,7 @@ const AddResultModal = ({ open,
           </div>
         </Box>
         <ButtonGroup className='w-full mt-10 flex-center gap-2'>
-          <Button variant="contained" size='large' color='primary' type="submit">Confirm</Button>
+          <Button variant="contained" size='large' color='secondary' type="submit">Confirm</Button>
         </ButtonGroup>
         {/* </ThemeProvider> */}
       </Box >
