@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import HomeScreen from "./pages/Home/HomeScreen";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, createHashRouter } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { uiActions } from "./store/ui-slice";
 import { doc, getDoc } from "@firebase/firestore";
@@ -49,7 +49,7 @@ declare module '@mui/material/styles' {
 
 }
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Layout />,
