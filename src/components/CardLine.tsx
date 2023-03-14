@@ -27,9 +27,9 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
       (player) => player.id === playerData.id
     ).length > 0;
     setHighlightPlayer(ifPicked);
+
   }, [pickedArray, playerData]);
 
-  // const { playerPhoto = blankPhoto, playerClub, playerNation } = useFetchImages(playerData);
   const images = useFetchImages(playerData.id, playerData.club, playerData.nation);
 
   let { playerPhoto = blankPhoto, playerClub, playerNation } = images
@@ -63,7 +63,7 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
   }
 
   let cardBackground;
-  const choseBackground = () => {
+  function choseBackground() {
     if (rarity === 0) {
       if (color === "bronze") {
         cardBackground =
@@ -88,7 +88,7 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
       }
     }
   };
-  choseBackground();
+  choseBackground()
 
   const addPlayer = () => {
     setHighlightPlayer((prevState) => !prevState);

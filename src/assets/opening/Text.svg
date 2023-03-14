@@ -1,0 +1,38 @@
+<svg width="350" height="75" viewBox="0 0 350 75">
+<title>Complex Glow</title>
+<rect x="0" y="0" width="350" height="75" style="fill: #000"/>
+<g style="overflow:hidden; text-anchor: middle; font-size:48; font-family: 'Trebuchet MS', sans-serif">
+<defs>
+<filter id="glow1" x="-30%" y="-30%" width="160%" height="160%">
+<feGaussianBlur stdDeviation="10 10" result="glow"/>
+<feMerge>
+<feMergeNode in="glow"/>
+<feMergeNode in="glow"/>
+<feMergeNode in="glow"/>
+</feMerge>
+</filter>
+<filter id="glow2" x="-30%" y="-30%" width="160%" height="160%">
+<feGaussianBlur stdDeviation="5 5" result="glow"/>
+<feMerge>
+<feMergeNode in="glow"/>
+<feMergeNode in="glow"/>
+</feMerge>
+</filter>
+<filter id="glow3" x="-30%" y="-30%" width="160%" height="160%">
+<feGaussianBlur stdDeviation="1 1" result="glow"/>
+</filter>
+<mask id="textMask">
+<text style="fill:white;" x="175" y="55"> Complex Glow </text>
+</mask>
+</defs>
+<text style="filter: url(#glow1); fill: #0f9" x="175" y="55"> Complex Glow </text>
+<text style="filter: url(#glow2); fill: #03f" x="175" y="55"> Complex Glow </text>
+<text x="175" y="55" style="fill: white"> Complex Glow </text>
+<g mask="url(#textMask)">
+<g style="filter: url(#glow3);">
+<rect x="0" y="0" width="350" height="75" style="fill:#f33"/>
+<text style="fill: white" x="175" y="55"> Complex Glow </text>
+</g>
+</g>
+</g>
+</svg>

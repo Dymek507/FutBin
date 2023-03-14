@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 
 import { packsActions } from "../../store/packs-slice";
 import { sendPackData } from "../../store/packs-actions";
-import Pack from "./Pack";
 import { useAppDispatch } from "../../store/app/hooks";
 import { PackT } from "../../modules/modelTypes";
 import SwapPacks from "./SwapPacks";
@@ -11,23 +10,30 @@ import { Box } from "@mui/material";
 
 const packsArray = [
   {
+    id: 0,
+    packRating: 80,
+    packColor: "special",
+    playersAmount: 8,
+    packAmount: 1,
+  },
+  {
     id: 1,
     packRating: 70,
-    packColor: "teal",
+    packColor: "gold",
     playersAmount: 8,
     packAmount: 1,
   },
   {
     id: 2,
     packRating: 60,
-    packColor: "red",
+    packColor: "silver",
     playersAmount: 8,
     packAmount: 1,
   },
   {
     id: 3,
     packRating: 50,
-    packColor: "green",
+    packColor: "brown",
     playersAmount: 8,
     packAmount: 1,
   },
@@ -41,14 +47,9 @@ const NewPacks = () => {
     dispatch(sendPackData());
   };
   return (
-    <Box
-      bgcolor="primary.main"
-      className="flex-center w-full sm:max-w-[600px] h-[60vh] gap-8 p-8 mx-[6rem] mt-[8rem] text-white "
-    >
+    <div>
+      <SwapPacks packs={packsArray} buyPack={buyPack} />
 
-      {packsArray &&
-        <SwapPacks packs={packsArray} buyPack={buyPack} />
-      }
       {/* {packsArray &&
         packsArray.map((pack) => (
           <motion.div
@@ -66,7 +67,8 @@ const NewPacks = () => {
           />
           </motion.div>
         ))} */}
-    </Box>
+
+    </div>
   );
 };
 

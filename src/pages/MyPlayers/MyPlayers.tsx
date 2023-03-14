@@ -23,6 +23,7 @@ import sortPlayers from "../../components/utils/sortPlayers";
 import { useTheme } from "@emotion/react";
 import { Player } from "../../modules/modelTypes";
 import { styled } from "@mui/material";
+import InfoScreen from "../../components/InfoScreen";
 
 const sortOptions = [
   { label: "Overall", type: "ovr" },
@@ -36,7 +37,6 @@ const sortOptions = [
 
 const MyPlayers = () => {
   const dispatch = useAppDispatch();
-  const theme = useTheme();
   const myPlayers = useAppSelector((state) => state.players.myPlayers);
   const uId = useAppSelector((state) => state.ui.userData?.uId);
   const [playersGridView, setPlayersGridView] = useState<boolean>(true);
@@ -97,139 +97,125 @@ const MyPlayers = () => {
       }
     }
   }));
-  // const CustomSelect = styled(Select)(({ theme }) => ({
-  //   '& .MuiSvgIcon-root': {
-  //     color: theme.palette.primary.contrastText
-  //   },
-  //   color: "white",
-  //   '.MuiOutlinedInput-notchedOutline': {
-  //     borderColor: 'white',
-  //   },
-  //   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-  //     borderColor: 'white',
-  //   },
-  //   '&:hover .MuiOutlinedInput-notchedOutline': {
-  //     color: "white",
-  //     borderColor: 'white',
-  //   },
-  // }));
 
   return (
-    <Box
-      bgcolor="primary.main"
-      sx={{
-        mx: "6rem",
-        mt: "2rem",
-      }}
-    >
-      {/* Buttons with wrapper */}
-      <Box
+    <>
+      {myPlayers.length !== 0 ? <Box
+        bgcolor="primary.main"
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: "4rem",
-          marginX: "1rem",
+          mx: "6rem",
+          mt: "2rem",
         }}
       >
-        <Button variant="contained" color="secondary">
-          Send
-        </Button>
-        {/* Change view style */}
-        <IconButton
-          color="secondary"
-          onClick={() => {
-            setPlayersGridView((prev) => !prev);
+        {/* Buttons with wrapper */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "5rem",
+            marginX: "1rem",
           }}
         >
-          {playersGridView ? <ViewList /> : <ViewModule />}
-        </IconButton>
-
-        {/* Change sorting direction */}
-        <IconButton
-          color="secondary"
-          onClick={() => {
-            setSortingDir((prev) => !prev);
-          }}
-        >
-          {sortingDir ? <ArrowUpward /> : <ArrowDownward />}
-        </IconButton>
-
-        {/* Sorting by attribute */}
-        <FormControl
-        >
-          <CustomSelect
-            id="sorting-players"
-            value={sortingAtr}
-            onChange={sortingHandler}
+          <Button variant="contained" color="secondary">
+            Send
+          </Button>
+          {/* Change view style */}
+          <IconButton
+            color="secondary"
+            onClick={() => {
+              setPlayersGridView((prev) => !prev);
+            }}
           >
-            {sortOptions.map((option) => {
-              return (
-                <MenuItem key={option.label} value={option.type}>
-                  {option.label}
-                </MenuItem>
-              );
-            })}
-          </CustomSelect>
-        </FormControl>
-        <Button variant="contained" color="secondary" onClick={deletePlayers}>
-          Sell
-        </Button>
-      </Box>
+            {playersGridView ? <ViewList /> : <ViewModule />}
+          </IconButton>
 
-      {/* >>>>>>>>> List view <<<<<<<<<<<<< */}
-      {!playersGridView && (
-        <Grid
-          sx={{ width: { xs: "100vw", sm: "80vw", md: "60vw" } }}
-          container
-          rowSpacing={1}
-        >
-          {playersArray?.map((player) => (
-            <Grid key={player.id} item xs={12} sm={12} md={12} lg={12} xl={12}>
-              <CardLine
-                playerData={player}
-                sendPlayer={pickPlayer}
-                pickedArray={pickedPlayers}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      )}
+          {/* Change sorting direction */}
+          <IconButton
+            color="secondary"
+            onClick={() => {
+              setSortingDir((prev) => !prev);
+            }}
+          >
+            {sortingDir ? <ArrowUpward /> : <ArrowDownward />}
+          </IconButton>
 
-      {/* >>>>>>>>> Grid view <<<<<<<<<<<<<<< */}
-      {playersGridView && (
-        <Grid
-          sx={{ p: "1rem", width: "94vw" }}
-          container
-          rowSpacing={0}
-          columnSpacing={0}
-        >
-          {playersArray?.map((player) => (
-            <Grid
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              key={player.id}
-              item
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              xl={2}
+          {/* Sorting by attribute */}
+          <FormControl
+          >
+            <CustomSelect
+              id="sorting-players"
+              value={sortingAtr}
+              onChange={sortingHandler}
             >
-              <Card
-                playerData={player}
-                sendPlayer={pickPlayer}
-                fontSize={"14px"}
-                pickedArray={pickedPlayers}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      )}
-    </Box>
+              {sortOptions.map((option) => {
+                return (
+                  <MenuItem key={option.label} value={option.type}>
+                    {option.label}
+                  </MenuItem>
+                );
+              })}
+            </CustomSelect>
+          </FormControl>
+          <Button variant="contained" color="secondary" onClick={deletePlayers}>
+            Sell
+          </Button>
+        </Box>
+
+        {/* >>>>>>>>> List view <<<<<<<<<<<<< */}
+        {!playersGridView && (
+          <Grid
+            sx={{ width: { xs: "100vw", sm: "80vw", md: "60vw" } }}
+            container
+            rowSpacing={1}
+          >
+            {playersArray?.map((player) => (
+              <Grid key={player.id} item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <CardLine
+                  playerData={player}
+                  sendPlayer={pickPlayer}
+                  pickedArray={pickedPlayers}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+
+        {/* >>>>>>>>> Grid view <<<<<<<<<<<<<<< */}
+        {playersGridView && (
+          <Grid
+            sx={{ p: "1rem", width: "94vw" }}
+            container
+            rowSpacing={0}
+            columnSpacing={0}
+          >
+            {playersArray?.map((player) => (
+              <Grid
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                key={player.id}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                xl={2}
+              >
+                <Card
+                  playerData={player}
+                  sendPlayer={pickPlayer}
+                  fontSize={"14px"}
+                  pickedArray={pickedPlayers}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Box> : <div className="w-full"><InfoScreen text1="No Players" text2="Open packs" /></div>}
+    </>
   );
 };
 

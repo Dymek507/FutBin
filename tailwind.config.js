@@ -40,7 +40,6 @@ module.exports = {
       },
       backgroundImage: {
         "main-b-stadium": "url('/src/assets/b-stadium_1.png')",
-        "pack-1": "url('/src/assets/packs/special_pack.png')",
         "opening-c": "url('/src/assets/concrete-bg.jpg')",
         "walkout-fr-l": "url('/src/assets/opening/walkout_frame_left.png')",
         "walkout-fr-r": "url('/src/assets/opening/walkout_frame_right.png')",
@@ -52,7 +51,7 @@ module.exports = {
         "blank-card": "url('/src/assets/blank-card.png')",
       },
       colors: {
-        "main-bgc": "#041a03",
+        "primary-main": "rgba(12,52,86,0.85)",
         main: "#0c3456",
       },
       flex: {
@@ -72,6 +71,10 @@ module.exports = {
       },
       screens: {
         xs: "420px",
+        sm: "640px",
+        md: "900px",
+        lg: "1200px",
+        xl: "1536px",
       },
     },
   },

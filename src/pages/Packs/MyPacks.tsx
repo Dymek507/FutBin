@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 
 import { packsActions } from "../../store/packs-slice";
 import { playersActions } from "../../store/players-slice";
 import { drawPlayer } from "../../store/players-fetch";
 import { sendPackData } from "../../store/packs-actions";
 
-import Pack from "./Pack";
 import OpeningModal from "./opening/OpeningModal";
 import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -15,10 +14,11 @@ import OpeningBoard from "./opening/OpeningBoard";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { PackT } from "../../modules/modelTypes";
 import SwapPacks from "./SwapPacks";
-import { SliderData } from "./sliderData";
+import InfoScreen from "../../components/InfoScreen";
 
 const MyPacks = () => {
   const uId = useAppSelector((state) => state.ui.userData?.uId);
+  const myPacks = useAppSelector((state) => state.packs.myPacks);
   const dispatch = useAppDispatch();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showPrevPlayers, setShowPrevPlayers] = useState<boolean>(false);
@@ -28,13 +28,11 @@ const MyPacks = () => {
     dispatch(receivePackData());
   }, [dispatch, uId]);
 
-  const myPacks = useAppSelector((state) => state.packs.myPacks);
 
   const toggleModal = (state: boolean) => {
     setShowModal(state);
   };
 
-  //Move to MyPacks
   const OpenPack = (packData: PackT) => {
     dispatch(packsActions.removePack(packData.id));
     dispatch(playersActions.deleteCurrentPack());
@@ -69,6 +67,7 @@ const MyPacks = () => {
         />
       )}
       {showPrevPlayers && <OpeningBoard onClose={closePrevPackHandler} />}
+      {/* <OpeningAnimation isVisible={true} progress={100} /> */}
       {!showPrevPlayers && !showModal && (
         <div className=" flex flex-col w-full min-h-[calc(100vh-4rem)]">
           <div className="flex justify-center items-center h-[10%] gap-4">
@@ -84,20 +83,16 @@ const MyPacks = () => {
         "
           >
             {myPacks.length === 0 && (
-              <div className="bg-main p-2 rounded-xl">
-                <p className="text-white text-4xl">No Packs</p>
-              </div>
+              <InfoScreen text1="No Packs" text2="Buy some!" />
             )}
-            <Box
-              bgcolor="primary.main"
-              className="flex-center w-full sm:max-w-[600px] h-[60vh] gap-8 p-8 mx-[6rem] mt-[2rem] text-white "
-            >
-              {myPacks &&
-                <SwapPacks packs={myPacks} buyPack={OpenPack} />
-              }</Box>
+            {myPacks.length !== 0 && (
+              <SwapPacks packs={myPacks} buyPack={OpenPack} />
+            )
+            }
           </div>
         </div>
-      )}
+      )
+      }
     </>
   );
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import cutImg from "../../assets/opening/cut_effect.png";
 import { LinearProgress } from "@mui/material";
 
 type OpeningAnimationProps = {
@@ -22,8 +21,8 @@ const OpeningAnimation = ({ isVisible, progress }: OpeningAnimationProps) => {
               exit={{ opacity: 1, x: 0, y: "-70vh" }}
               transition={{ duration: 2 }}
             >
-              <div className="flex justify-center items-end bg-black bg-opening-1 bg-no-repeat bg-cover bg-bottom h-[50vh]">
-                <div className="text-8xl mb-2 text-white">Fut</div>
+              <div className="flex justify-center items-end bg-[url('/src/assets/opening/MetalPattern.svg')] bg-black bg-no-repeat bg-cover bg-bottom h-[50vh]">
+                <div className="text-[6em] lg:text-[16em] mb-1 font-effect-neon">Fut</div>
               </div>
 
 
@@ -36,8 +35,8 @@ const OpeningAnimation = ({ isVisible, progress }: OpeningAnimationProps) => {
               exit={{ opacity: 1, x: 0, y: "70vh" }}
               transition={{ duration: 2 }}
             >
-              <div className="flex justify-center items-start bg-black bg-opening-2 bg-no-repeat bg-cover bg-top h-[50vh] ">
-                <div className="text-8xl mb-2 text-white">Draft</div>
+              <div className="flex justify-center items-start  bg-[url('/src/assets/opening/MetalPattern.svg')] bg-black bg-no-repeat bg-cover bg-top h-[50vh] ">
+                <div className="text-[6em] lg:text-[16em] mb-1 font-effect-neon">Draft</div>
               </div>
             </motion.div>
           </>

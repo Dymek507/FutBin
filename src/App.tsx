@@ -47,6 +47,8 @@ declare module '@mui/material/styles' {
     darker?: string;
   }
 
+
+
 }
 
 const router = createHashRouter([
@@ -142,6 +144,15 @@ function App() {
       neutral: {
         main: '#64748B',
         contrastText: '#fff',
+      },
+    },
+    breakpoints: {
+      values: {
+        xs: 420,
+        sm: 640,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
       },
     },
   });
