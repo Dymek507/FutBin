@@ -69,18 +69,17 @@ const MyPacks = () => {
       {showPrevPlayers && <OpeningBoard onClose={closePrevPackHandler} />}
       {/* <OpeningAnimation isVisible={true} progress={100} /> */}
       {!showPrevPlayers && !showModal && (
-        <div className=" flex flex-col w-full min-h-[calc(100vh-4rem)]">
+        <div className=" w-full">
           <div className="flex justify-center items-center h-[10%] gap-4">
-            <Button variant="contained" onClick={openPrevPackHandler}>
+            <Button variant="contained" size="large" color="secondary" onClick={openPrevPackHandler}>
               Open previous pack
             </Button>
             <Link to="/new-packs">
-              <Button variant="contained">Buy Pack</Button>
+              <Button variant="contained" color="secondary" size="large">Buy Pack</Button>
             </Link>
           </div>
           <div
-            className="flex flex-col justify-center items-center h-[90%] gap-8
-        "
+            className="flex flex-col justify-center items-center h-[90%] gap-8"
           >
             {myPacks.length === 0 && (
               <InfoScreen text1="No Packs" text2="Buy some!" />

@@ -5,13 +5,15 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Pack from './Pack';
 import { PackT } from '../../modules/modelTypes';
+import { Typography } from '@mui/material';
 
 interface SwapPacksProps {
   packs: PackT[],
-  buyPack: (packData: PackT) => void
+  buyPack: (packData: PackT) => void,
+  showPrice?: boolean
 }
 
-const SwapPacks = ({ packs, buyPack }: SwapPacksProps) => {
+const SwapPacks = ({ packs, buyPack, showPrice }: SwapPacksProps) => {
 
   const [current, setCurrent] = useState(0);
   const length = packs.length;
@@ -50,6 +52,7 @@ const SwapPacks = ({ packs, buyPack }: SwapPacksProps) => {
                     packData={pack}
                     openModal={() => { }}
                     onClick={buyPack}
+                    showPrice={showPrice}
                   />
                 )}
               </div>
@@ -65,7 +68,10 @@ const SwapPacks = ({ packs, buyPack }: SwapPacksProps) => {
           {packs.map(pack => <Pack key={pack.id}
             packData={pack}
             openModal={() => { }}
-            onClick={buyPack} />)}
+            onClick={buyPack}
+            showPrice={showPrice}
+          />)}
+
         </section>
       }
     </div>

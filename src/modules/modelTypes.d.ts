@@ -38,6 +38,7 @@ export interface ISlot {
 
 export type PackT = {
   id: number;
+  packPrice: number;
   packRating: number;
   packColor: string;
   playersAmount: number;

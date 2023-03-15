@@ -3,6 +3,7 @@ import { useState } from "react";
 import { PackT } from "../../modules/modelTypes";
 import { PackImages } from "../../assets/packs"
 import packImages from "../../assets/packs"
+import { Typography } from "@mui/material";
 
 
 
@@ -10,10 +11,11 @@ interface IPack {
   packData: PackT;
   openModal: (state: boolean) => void;
   onClick: (data: PackT) => void;
+  showPrice?: boolean
 }
 
-const Pack = ({ packData, openModal, onClick }: IPack) => {
-  const { id, packRating, packColor, playersAmount, packAmount } = packData;
+const Pack = ({ packData, openModal, onClick, showPrice }: IPack) => {
+  const { id, packPrice, packRating, packColor, playersAmount, packAmount } = packData;
 
   const [clicked, setClicked] = useState<boolean>(false);
 
@@ -28,7 +30,7 @@ const Pack = ({ packData, openModal, onClick }: IPack) => {
   return (
     <div
       onClick={() => clickHandler(packData)}
-      className={`relative flex flex-col justify-center items-center gap-[2em] h-[16em] w-[11em] text-white bg-cover cursor-pointer ${clicked ? 'animate-ping' : ""}`}
+      className={`relative h-[16em] w-[11em] text-white bg-cover cursor-pointer ${clicked ? 'animate-ping' : ""}`}
       style={{ backgroundImage: `url('${packImages[packColor as keyof PackImages]}')` }}
     >
       {packAmount > 1 && (
@@ -38,6 +40,13 @@ const Pack = ({ packData, openModal, onClick }: IPack) => {
           </p>
         </div>
       )}
+      {showPrice &&
+        <div className={`absolute bottom-[1em] left-[50%] bg-primary-main  border-4 rounded-xl p-1 -translate-x-[50%]`}>
+          <Typography variant='h4' >
+            {packPrice}
+          </Typography>
+        </div>
+      }
     </div>
   );
 };

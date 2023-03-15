@@ -31,6 +31,10 @@ declare module '@mui/material/styles' {
     };
   }
 
+  interface BreakpointOverrides {
+    xxs: true;
+  }
+
   interface Palette {
     neutral: Palette['primary'];
   }
@@ -148,6 +152,7 @@ function App() {
     },
     breakpoints: {
       values: {
+        xxs: 0,
         xs: 420,
         sm: 640,
         md: 900,

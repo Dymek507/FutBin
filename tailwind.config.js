@@ -52,6 +52,7 @@ module.exports = {
       },
       colors: {
         "primary-main": "rgba(12,52,86,0.85)",
+        "secondary-main": "#f50057",
         main: "#0c3456",
       },
       flex: {

@@ -10,7 +10,6 @@ import {
   MenuItem,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Card from "../../components/Card";
 import { Box } from "@mui/system";
 import CardLine from "../../components/CardLine";
 import {
@@ -24,6 +23,7 @@ import { useTheme } from "@emotion/react";
 import { Player } from "../../modules/modelTypes";
 import { styled } from "@mui/material";
 import InfoScreen from "../../components/InfoScreen";
+import GridView from "../../components/GridView";
 
 const sortOptions = [
   { label: "Overall", type: "ovr" },
@@ -80,20 +80,22 @@ const MyPlayers = () => {
   };
 
   const CustomSelect = styled(Select)(({ theme }) => ({
-    width: 200,
-    color: theme.palette.secondary.main,
+    width: '20vw',
+    maxWidth: '200px',
+    height: '3rem',
+    color: theme.palette.primary.contrastText,
     '& .MuiSvgIcon-root': {
-      color: theme.palette.secondary.main
+      color: theme.palette.primary.contrastText
     },
     "&.MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: theme.palette.secondary.main
+        borderColor: theme.palette.primary.contrastText
       },
       "&:hover fieldset": {
-        borderColor: theme.palette.secondary.dark
+        borderColor: theme.palette.primary.contrastText
       },
       "&.Mui-focused fieldset": {
-        borderColor: theme.palette.secondary.dark
+        borderColor: theme.palette.primary.contrastText
       }
     }
   }));
@@ -115,49 +117,53 @@ const MyPlayers = () => {
             alignItems: "center",
             height: "5rem",
             marginX: "1rem",
+            color: 'white',
           }}
         >
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" size="large">
             Send
           </Button>
           {/* Change view style */}
-          <IconButton
-            color="secondary"
-            onClick={() => {
-              setPlayersGridView((prev) => !prev);
-            }}
-          >
-            {playersGridView ? <ViewList /> : <ViewModule />}
-          </IconButton>
+          <div>
 
-          {/* Change sorting direction */}
-          <IconButton
-            color="secondary"
-            onClick={() => {
-              setSortingDir((prev) => !prev);
-            }}
-          >
-            {sortingDir ? <ArrowUpward /> : <ArrowDownward />}
-          </IconButton>
-
-          {/* Sorting by attribute */}
-          <FormControl
-          >
-            <CustomSelect
-              id="sorting-players"
-              value={sortingAtr}
-              onChange={sortingHandler}
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                setPlayersGridView((prev) => !prev);
+              }}
             >
-              {sortOptions.map((option) => {
-                return (
-                  <MenuItem key={option.label} value={option.type}>
-                    {option.label}
-                  </MenuItem>
-                );
-              })}
-            </CustomSelect>
-          </FormControl>
-          <Button variant="contained" color="secondary" onClick={deletePlayers}>
+              {playersGridView ? <ViewList /> : <ViewModule />}
+            </IconButton>
+
+            {/* Change sorting direction */}
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                setSortingDir((prev) => !prev);
+              }}
+            >
+              {sortingDir ? <ArrowUpward /> : <ArrowDownward />}
+            </IconButton>
+
+            {/* Sorting by attribute */}
+            <FormControl
+            >
+              <CustomSelect
+                id="sorting-players"
+                value={sortingAtr}
+                onChange={sortingHandler}
+              >
+                {sortOptions.map((option) => {
+                  return (
+                    <MenuItem key={option.label} value={option.type}>
+                      {option.label}
+                    </MenuItem>
+                  );
+                })}
+              </CustomSelect>
+            </FormControl>
+          </div>
+          <Button variant="contained" color="secondary" size="large" onClick={deletePlayers}>
             Sell
           </Button>
         </Box>
@@ -180,39 +186,15 @@ const MyPlayers = () => {
             ))}
           </Grid>
         )}
-
         {/* >>>>>>>>> Grid view <<<<<<<<<<<<<<< */}
         {playersGridView && (
-          <Grid
-            sx={{ p: "1rem", width: "94vw" }}
-            container
-            rowSpacing={0}
-            columnSpacing={0}
-          >
-            {playersArray?.map((player) => (
-              <Grid
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                key={player.id}
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                xl={2}
-              >
-                <Card
-                  playerData={player}
-                  sendPlayer={pickPlayer}
-                  fontSize={"14px"}
-                  pickedArray={pickedPlayers}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          <GridView playersArray={playersArray} pickPlayer={pickPlayer} cardSize="14px" pickedPlayers={pickedPlayers} xxs={12}
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            xl={2} />
+
         )}
       </Box> : <div className="w-full"><InfoScreen text1="No Players" text2="Open packs" /></div>}
     </>

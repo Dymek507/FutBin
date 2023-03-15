@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import { useAppDispatch, useAppSelector } from "../store/app/hooks";
+import AccountMenu from "./AccountMenu";
 
 const Logo = () => {
   return (
@@ -27,7 +28,7 @@ const Logo = () => {
 
 const NavBar = () => {
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((store) => store.ui.userData);
+  const userUiData = useAppSelector((store) => store.ui);
 
   const toogleMenu = () => {
     dispatch(uiActions.toggle());
@@ -55,20 +56,24 @@ const NavBar = () => {
           <Logo />
         </div>
         {/* <Typography>{userData ? userData.money : ""} </Typography> */}
-        <Link to={"/account/login"}>
-          <Button
-            color="inherit"
-            sx={{
-              "& .MuiTypography-root": {
-                textTransform: "none",
-              },
-            }}
-          >
-            <Typography fontSize="1.5rem">
-              {userData.login ? userData.login : "Login"}
-            </Typography>
-          </Button>
-        </Link>
+        {!userUiData.logged ?
+          <Link to={"/account/login"}>
+            <Button
+              color="inherit"
+              sx={{
+                "& .MuiTypography-root": {
+                  textTransform: "none",
+                },
+              }}
+            >
+              <Typography fontSize="1.5rem">
+                Login
+              </Typography>
+            </Button>
+          </Link>
+          : <div className="flex gap-12">
+            <AccountMenu userData={userUiData.userData} />
+          </div>}
       </Toolbar>
     </AppBar>
   );

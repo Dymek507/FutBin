@@ -6,7 +6,7 @@ import AddResultModal from './AddResultModal'
 import { useAppSelector } from '../../store/app/hooks'
 import InfoModal from '../../components/InfoModal'
 
-
+// Make styled button
 
 const Results = () => {
   const [showModal, setShowModal] = useState(false)
@@ -15,11 +15,11 @@ const Results = () => {
     <>
       <AddResultModal open={showModal} onClose={() => setShowModal(false)} />
       <div className="flex justify-center items-center h-[10%] gap-4">
-        <Button variant="contained" onClick={() => setShowModal(true)}>
+        <Button variant="contained" color='secondary' size="large" onClick={() => setShowModal(true)}>
           Add Result
         </Button>
         <Link to="/new-packs">
-          <Button variant="contained">Buy Pack</Button>
+          <Button variant="contained" color='secondary' size="large">Buy Pack</Button>
         </Link>
       </div>
       <div className='flex flex-col items-center gap-3 mt-2 '>

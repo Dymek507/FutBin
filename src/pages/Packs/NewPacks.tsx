@@ -6,38 +6,8 @@ import { sendPackData } from "../../store/packs-actions";
 import { useAppDispatch } from "../../store/app/hooks";
 import { PackT } from "../../modules/modelTypes";
 import SwapPacks from "./SwapPacks";
-import { Box } from "@mui/material";
+import { packsData } from "../../data/packsData";
 
-const packsArray = [
-  {
-    id: 0,
-    packRating: 80,
-    packColor: "special",
-    playersAmount: 8,
-    packAmount: 1,
-  },
-  {
-    id: 1,
-    packRating: 70,
-    packColor: "gold",
-    playersAmount: 8,
-    packAmount: 1,
-  },
-  {
-    id: 2,
-    packRating: 60,
-    packColor: "silver",
-    playersAmount: 8,
-    packAmount: 1,
-  },
-  {
-    id: 3,
-    packRating: 50,
-    packColor: "brown",
-    playersAmount: 8,
-    packAmount: 1,
-  },
-];
 
 const NewPacks = () => {
   const dispatch = useAppDispatch();
@@ -48,7 +18,7 @@ const NewPacks = () => {
   };
   return (
     <div>
-      <SwapPacks packs={packsArray} buyPack={buyPack} />
+      <SwapPacks packs={packsData} buyPack={buyPack} showPrice={true} />
 
       {/* {packsArray &&
         packsArray.map((pack) => (

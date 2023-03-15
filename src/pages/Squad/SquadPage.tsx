@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { shallowEqual } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
-import Card from "../../components/Card";
-import dummyPlayer from "../../data/dummyPlayer";
 import ChoseOnPositionModal from "./ChoseOnPositionModal";
 import Slot from "./Slot";
 import { Player } from "../../modules/modelTypes";

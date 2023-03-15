@@ -1,20 +1,8 @@
 import { useState, useEffect } from "react";
 import useSWR from "swr";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-
-import { Blob } from "buffer";
+import axios, { AxiosRequestConfig } from "axios";
 
 const AuthToken = process.env.REACT_APP_FUT_DB_KEY;
-
-type User = {
-  id: number;
-  email: string;
-  first_name: string;
-};
-
-type GetPlayerImage = {
-  data: Blob;
-};
 
 const axiosFetchBlob: AxiosRequestConfig = {
   responseType: "blob",
@@ -28,7 +16,7 @@ const fetcher = (url: string) =>
   axios.get(url, axiosFetchBlob).then((r) => r.data);
 
 export const useFetcherSWR = (endPoint: string) => {
-  const [playerImage, setPlayerImage] = useState<string>("");
+  const [image, setImage] = useState<string>("");
   const [shouldFetch, setShouldFetch] = useState<boolean>(true);
 
   const { data, error, isLoading } = useSWR(
@@ -38,11 +26,11 @@ export const useFetcherSWR = (endPoint: string) => {
 
   useEffect(() => {
     if (data) {
-      const playerPhoto = URL.createObjectURL(data);
-      setPlayerImage(playerPhoto);
+      const playerImage = URL.createObjectURL(data);
+      setImage(playerImage);
       setShouldFetch(false);
     }
   }, [data]);
 
-  return playerImage;
+  return { image, error, isLoading };
 };

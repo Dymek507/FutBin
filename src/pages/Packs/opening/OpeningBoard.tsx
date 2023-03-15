@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { sendPlayersData, fetchPlayersData } from "../../../store/players-actions";
 import { playersActions } from "../../../store/players-slice";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 
 import Card from "../../../components/Card";
 
 import type { Player } from "../../../modules/modelTypes";
 import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
+import GridView from "../../../components/GridView";
 
 type OpeningBoardProps = {
   onClose: (state: boolean) => void
@@ -76,28 +77,26 @@ const OpeningBoard = ({ onClose }: OpeningBoardProps) => {
 
   return (
     <div className="relative flex flex-col w-screen h-screen bg-opening-c bg-cover overflow-x-hidden">
-      <div className="flex justify-center mt-12 ">
-        <Button size="medium" variant="contained" onClick={sendAllPlayer}>
+      <div className="flex justify-center mt-12 mb-4 gap-2">
+        <Button size="large" color="secondary" variant="contained" onClick={sendAllPlayer}>
           Send All
         </Button>
-        <Button size="medium" variant="contained" onClick={sendPickedPlayers}>
+        <Button size="large" color="secondary" variant="contained" onClick={sendPickedPlayers}>
           Send Chosen
         </Button>
-        <Button size="medium" variant="contained" onClick={rejectAllPlayers}>
+        <Button size="large" color="secondary" variant="contained" onClick={rejectAllPlayers}>
           Reject
         </Button>
       </div>
-      <div className="flex flex-wrap w-full p-10 overflow-x-hidden gap-1 justify-center">
+      <div className="flex w-full overflow-x-hidden justify-center">
         {currentPack &&
-          currentPack.map((player) => (
-            <Card
-              key={player.id}
-              playerData={player}
-              sendPlayer={pickPlayer}
-              fontSize={"0.9rem"}
-              pickedArray={pickedPlayers}
-            />
-          ))}
+          <GridView playersArray={currentPack} pickPlayer={pickPlayer} cardSize="14px" pickedPlayers={pickedPlayers} xxs={12}
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            xl={2} />
+        }
       </div>
     </div>
   );

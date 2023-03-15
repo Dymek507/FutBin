@@ -3,6 +3,7 @@ import React from 'react'
 import { useAppSelector } from '../../store/app/hooks'
 import { Player } from '../../modules/modelTypes';
 import Card from '../../components/Card'
+import GridView from '../../components/GridView';
 
 interface ChoseOnPositionModalProps {
   open: boolean;
@@ -18,41 +19,8 @@ const ChoseOnPositionModal = ({ open, onClose, avaiablePlayer, addOnPositionHand
   return (
     <Modal open={open}
       onClose={onClose}
-      sx={{ overflowY: 'scroll', display: 'flex', justifyContent: 'center' }}>
-      <div className='flex justify-start items-center flex-col h-full w-[90%]'>
-
-        <Grid
-          container
-          rowSpacing={0}
-          columnSpacing={0}
-          className='mt-4 bg-main'
-        >
-          {avaiablePlayer?.map((player) => (
-            <Grid
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              key={player.id}
-              item
-              xs={6}
-              sm={4}
-              md={2}
-              lg={2}
-              xl={2}
-            >
-              <Card
-                playerData={player}
-                sendPlayer={clickHandler}
-                fontSize={"8px"}
-              // pickedArray={pickedPlayers}
-              />
-            </Grid>
-          ))}
-        </Grid>
-        {/* </div> */}
-      </div>
+      sx={{ display: 'flex', justifyContent: 'center' }}>
+      <GridView playersArray={avaiablePlayer} pickPlayer={clickHandler} cardSize="10px" />
     </Modal >
   )
 }

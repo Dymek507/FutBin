@@ -39,7 +39,6 @@ const Card = ({
   const { playerPrice, displayPrice } = useGeneratePrice(playerData);
 
   const addPlayer = () => {
-    // setHighlightPlayer((prevState) => !prevState);
     sendPlayer({ ...playerData, playerPrice });
   };
 
