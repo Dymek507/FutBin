@@ -14,6 +14,7 @@ export const useFetchImages = (
   nation: number
 ): IPlayerImages => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
+
   const {
     image: playerPhoto,
     error: errorPhoto,
@@ -29,7 +30,7 @@ export const useFetchImages = (
     error: errorClub,
     isLoading: isLoadingClub,
   } = useFetcherSWR(`clubs/${club}/image`);
-
+  //Check if every image is loaded
   useEffect(() => {
     if (isLoadingClub && isLoadingNation && isLoadingPhoto) {
       setImagesLoaded(true);
