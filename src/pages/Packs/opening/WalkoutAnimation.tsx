@@ -6,7 +6,6 @@ import { useFetchImages } from "../../../hooks/useFetchImages";
 import Card from "../../../components/Card";
 import { Typography } from "@mui/material";
 import { Player } from "../../../modules/modelTypes";
-import firework from '../../../assets/firework.png'
 
 type WalkoutAnimationProps = {
   closeWalkout: () => void;

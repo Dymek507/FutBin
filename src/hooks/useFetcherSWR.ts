@@ -21,7 +21,8 @@ export const useFetcherSWR = (endPoint: string) => {
 
   const { data, error, isLoading } = useSWR(
     shouldFetch ? `https://futdb.app/api/${endPoint}` : null,
-    fetcher
+    fetcher,
+    { suspense: true }
   );
 
   useEffect(() => {

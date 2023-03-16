@@ -11,10 +11,12 @@ const Admin = () => {
 
 
 
+
+
+
   return (
     <div className="w-full">
       <ResultsList />
-
     </div>
   );
 };

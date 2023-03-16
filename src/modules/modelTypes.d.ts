@@ -80,3 +80,8 @@ export type ResultT = {
   userOneGoals: number;
   userTwoGoals: number;
 };
+
+export type SnackT = {
+  variant: "default" | "error" | "success" | "warning" | "info";
+  text: string;
+};

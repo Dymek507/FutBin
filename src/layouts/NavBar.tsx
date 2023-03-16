@@ -10,25 +10,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import { useAppDispatch, useAppSelector } from "../store/app/hooks";
 import AccountMenu from "./AccountMenu";
-
-const Logo = () => {
-  return (
-    <Link to={"/"}>
-      <Typography
-        variant="h5"
-        fontSize="1.3rem"
-        sx={{ border: 2, borderColor: "white", borderRadius: 2, px: 0.5 }}
-      >
-        FutDraft
-        <SportsSoccerIcon fontSize="medium" sx={{ paddingBottom: 0.5 }} />
-      </Typography>
-    </Link>
-  );
-};
+import { useMediaQuery } from "react-responsive";
 
 const NavBar = () => {
   const dispatch = useAppDispatch();
   const userUiData = useAppSelector((store) => store.ui);
+
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   const toogleMenu = () => {
     dispatch(uiActions.toggle());
@@ -53,9 +41,18 @@ const NavBar = () => {
           <MenuIcon sx={{ fontSize: "2.5rem" }} />
         </IconButton>
         <div className="flex grow">
-          <Logo />
+          <Link to={"/"}>
+            <Typography
+              variant="h5"
+              fontSize="1.3rem"
+              sx={{ border: 2, borderColor: "white", borderRadius: 2, px: 0.5 }}
+            >
+              {isMobile ? "FD" : "FutDraft"}
+              <SportsSoccerIcon fontSize="medium" sx={{ paddingBottom: 0.5 }} />
+            </Typography>
+
+          </Link>
         </div>
-        {/* <Typography>{userData ? userData.money : ""} </Typography> */}
         {!userUiData.logged ?
           <Link to={"/account/login"}>
             <Button

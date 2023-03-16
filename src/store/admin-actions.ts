@@ -36,3 +36,37 @@ export const getResults =
       console.log("Błąd" + error);
     }
   };
+export const addResultAction = (
+  result: ResultT
+): ThunkAction<void, RootState, unknown, AnyAction> => {
+  return async (dispatch, getState) => {
+    dispatch(adminActions.addResult(result));
+    const results = getState().admin.results;
+    const userDocRef = doc(db, `admin/admin-board`);
+
+    try {
+      await updateDoc(userDocRef, {
+        results: results,
+      });
+    } catch (error) {
+      console.log(`Błąd wysyłania ${error}`);
+    }
+  };
+};
+export const deleteResultAction = (
+  id: string
+): ThunkAction<void, RootState, unknown, AnyAction> => {
+  return async (dispatch, getState) => {
+    dispatch(adminActions.deleteResult(id));
+    const results = getState().admin.results;
+    const userDocRef = doc(db, `admin/admin-board`);
+
+    try {
+      await updateDoc(userDocRef, {
+        results: results,
+      });
+    } catch (error) {
+      console.log(`Błąd wysyłania ${error}`);
+    }
+  };
+};

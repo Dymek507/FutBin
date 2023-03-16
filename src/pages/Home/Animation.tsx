@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import React from "react";
-import classes from "./Animation.module.css";
 
 const icon = {
   hidden: {
@@ -32,7 +31,7 @@ const Animation = () => {
           animate="visible"
           transition={{
             default: { duration: 8, ease: "easeInOut" },
-            fill: { duration: 2, ease: [1, 0, 0.8, 1] },
+            fill: { duration: 2, ease: [1, 0, 0.5, 1] },
           }}
         />
       </motion.svg>

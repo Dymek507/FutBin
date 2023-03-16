@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { Player } from '../modules/modelTypes'
-import Card from './Card';
+// import Card from './Card';
 
 interface GridViewProps {
   playersArray: Player[] | null;
@@ -15,6 +15,8 @@ interface GridViewProps {
   lg?: number;
   xl?: number;
 }
+
+const Card = lazy(() => import('./Card'))
 
 const GridView = ({ playersArray, pickPlayer, pickedPlayers, cardSize = '12px', xxs = 12, xs = 6, sm = 4, md = 3, lg = 2, xl = 1.5, }: GridViewProps) => {
   return (
@@ -41,12 +43,15 @@ const GridView = ({ playersArray, pickPlayer, pickedPlayers, cardSize = '12px', 
               lg={lg}
               xl={xl}
             >
+
+
               <Card
                 playerData={player}
                 sendPlayer={pickPlayer}
                 fontSize={cardSize}
                 pickedArray={pickedPlayers}
               />
+
             </Grid>
           ))}
         </Grid>

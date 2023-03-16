@@ -2,10 +2,9 @@ import { Button, ButtonGroup, MenuItem, Modal, Box, TextField, InputLabel, Selec
 import React, { useState } from 'react'
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { useAppDispatch } from '../../store/app/hooks';
-import { adminActions } from '../../store/admin-slice';
 import { v4 as uuidv4 } from 'uuid';
 import { ResultT } from '../../modules/modelTypes';
-import { sendResults } from '../../store/admin-actions';
+import { addResultAction } from '../../store/admin-actions';
 
 type AddResultModalProps = {
   open: boolean;
@@ -14,12 +13,20 @@ type AddResultModalProps = {
 
 const users = [
   {
-    value: 'GOBwLmtYkgZItkBzqKBSBV1n6yX2',
-    label: 'Damian',
+    value: '1mZUXLATajP3b8LFiOpPOvjilZR2',
+    label: 'Michał',
   },
   {
-    value: 'b7y5qRW2tGXHClRDTaiABksxjx52',
-    label: 'Michał',
+    value: '6zCLcdUg6ng394sIAkrULMBcifr2',
+    label: 'Michał Ś.',
+  },
+  {
+    value: 'GOBwLmtYkgZItkBzqKBSBV1n6yX2',
+    label: 'Mateusz',
+  },
+  {
+    value: 'WnE3BocTFBULtk7JAFLUMpQWai82',
+    label: 'Damian',
   },
 
 ];
@@ -64,6 +71,7 @@ const AddResultModal = ({ open,
   const dispatch = useAppDispatch()
 
   const CustomSelect = styled(Select)(({ theme }) => ({
+    maxWidth: '200px',
     '& .MuiSvgIcon-root': {
       color: theme.palette.primary.contrastText
     },
@@ -86,7 +94,6 @@ const AddResultModal = ({ open,
     if (userOneUid && userTwoUid) {
       const id = uuidv4().split('-')[0];
       const date = new Date().toLocaleString()
-      console.log(date)
 
       const result: ResultT = {
         resultId: id,
@@ -96,9 +103,7 @@ const AddResultModal = ({ open,
         userOneGoals,
         userTwoGoals,
       };
-      console.log(result)
-      dispatch(adminActions.addResult(result));
-      dispatch(sendResults());
+      dispatch(addResultAction(result));
       onClose()
     }
 

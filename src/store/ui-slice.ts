@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ResultT, UserData } from "../modules/modelTypes";
+import { ResultT, SnackT, UserData } from "../modules/modelTypes";
 import { dummyResults } from "../data/dummyResults";
 
 interface UiState {
@@ -34,12 +34,10 @@ const uiSlice = createSlice({
       action: PayloadAction<{ logged: boolean; userData: UserData }>
     ) {
       state.logged = action.payload.logged;
-      // state.uId = action.payload.uId;
       state.userData = action.payload.userData;
     },
     logout(state) {
       state.logged = false;
-      // state.uId = null;
       state.userData = {
         login: "",
         uId: null,
@@ -54,6 +52,12 @@ const uiSlice = createSlice({
     hideMenu(state) {
       state.menuIsVisible = false;
     },
+    // setSnack(state, action: PayloadAction<SnackT>) {
+    //   state.snackbar = {
+    //     variant: action.payload.variant,
+    //     text: action.payload.text,
+    //   };
+    // },
   },
 });
 

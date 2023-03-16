@@ -19,6 +19,7 @@ interface CardProps {
   sendPlayer?: (playerData: Player, playerPrice?: number) => void;
   fontSize: string;
   pickedArray?: Player[]
+  cardLoaded?: (loaded: boolean) => void
 }
 
 const Card = ({
@@ -26,7 +27,9 @@ const Card = ({
   sendPlayer = () => { },
   fontSize,
   pickedArray = [],
+  cardLoaded = () => { }
 }: CardProps) => {
+
   const [highlightPlayer, setHighlightPlayer] = useState(false);
 
   useEffect(() => {
@@ -42,12 +45,15 @@ const Card = ({
     sendPlayer({ ...playerData, playerPrice });
   };
 
-  //Dodawanie zdjęc
-  const images = useFetchImages(playerData.id, playerData.club, playerData.nation);
+  //Adding photos to Card
+  const { playerPhoto = blankPhoto, playerClub, playerNation, imagesLoaded } = useFetchImages(playerData.id, playerData.club, playerData.nation);
 
-  let { playerPhoto = blankPhoto, playerClub, playerNation } = images
+  //Checking if images are loaded
 
-
+  // useEffect(() => {
+  //   console.log(imagesLoaded)
+  //   if (imagesLoaded === true) cardLoaded(true)
+  // }, [imagesLoaded, cardLoaded])
 
   // Destrukturyzacja danych zawodnika oraz dane startowe
   let {

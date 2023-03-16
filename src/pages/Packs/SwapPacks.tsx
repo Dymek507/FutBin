@@ -5,7 +5,6 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Pack from './Pack';
 import { PackT } from '../../modules/modelTypes';
-import { Typography } from '@mui/material';
 
 interface SwapPacksProps {
   packs: PackT[],

@@ -1,3 +1,4 @@
+import { useSnackbar } from "notistack";
 import { useState, useEffect } from "react";
 import { useFetcherSWR } from "./useFetcherSWR";
 
@@ -8,12 +9,15 @@ interface IPlayerImages {
   imagesLoaded: boolean;
 }
 
+let startLoading = true;
+
 export const useFetchImages = (
   id: number,
   club: number,
   nation: number
 ): IPlayerImages => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const {
     image: playerPhoto,
@@ -30,12 +34,20 @@ export const useFetchImages = (
     error: errorClub,
     isLoading: isLoadingClub,
   } = useFetcherSWR(`clubs/${club}/image`);
+
   //Check if every image is loaded
-  useEffect(() => {
-    if (isLoadingClub && isLoadingNation && isLoadingPhoto) {
-      setImagesLoaded(true);
-    }
-  }, [isLoadingClub, isLoadingNation, isLoadingPhoto]);
+  // useEffect(() => {
+  //   if (isLoadingClub && isLoadingNation && isLoadingPhoto && startLoading) {
+  //     const variant = "info";
+  //     enqueueSnackbar("Loading", { variant });
+  //     startLoading = false;
+  //   }
+  //   if (!isLoadingClub && !isLoadingNation && !isLoadingPhoto) {
+  //     setImagesLoaded(true);
+  //     const variant = "success";
+  //     enqueueSnackbar("Loaded", { variant });
+  //   }
+  // }, [isLoadingClub, isLoadingNation, isLoadingPhoto, enqueueSnackbar]);
 
   return { playerPhoto, playerNation, playerClub, imagesLoaded };
 };

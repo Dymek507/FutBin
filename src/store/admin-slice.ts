@@ -19,6 +19,14 @@ const adminSlice = createSlice({
       newResults.push(result);
       state.results = newResults;
     },
+    deleteResult(state, action: PayloadAction<string>) {
+      const resultId = action.payload;
+      const newResults = [...state.results];
+      const updatedResult = newResults.filter(
+        (result) => result.resultId !== resultId
+      );
+      state.results = updatedResult;
+    },
     replaceAllResults(state, action: PayloadAction<ResultT[]>) {
       state.results = action.payload;
     },

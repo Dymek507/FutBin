@@ -6,11 +6,15 @@ import AddResultModal from './AddResultModal'
 import { useAppSelector } from '../../store/app/hooks'
 import InfoModal from '../../components/InfoModal'
 
+
 // Make styled button
 
 const Results = () => {
   const [showModal, setShowModal] = useState(false)
   const results = useAppSelector(state => state.admin.results)
+
+
+
   return (
     <>
       <AddResultModal open={showModal} onClose={() => setShowModal(false)} />

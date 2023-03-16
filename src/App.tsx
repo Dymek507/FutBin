@@ -1,28 +1,29 @@
-import { useEffect } from "react";
-import HomeScreen from "./pages/Home/HomeScreen";
+import React, { useEffect, lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider, createHashRouter } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { uiActions } from "./store/ui-slice";
 import { doc, getDoc } from "@firebase/firestore";
+import loadable from '@loadable/component'
+import { createTheme, LinearProgress, ThemeProvider } from "@mui/material";
+import { db } from "./firebaseConfig";
+import { useAppDispatch } from "./store/app/hooks";
+import { logOut } from "./store/ui-actions";
 
 import "./index.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+
+// import HomeScreen from "./pages/Home/HomeScreen";
+import NewPacks from "./pages/Packs/NewPacks";
 import MyPacks from "./pages/Packs/MyPacks";
-import MyPlayers from "./pages/MyPlayers/MyPlayers";
+// import MyPlayers from "./pages/MyPlayers/MyPlayers";
+import SquadPage from "./pages/Squad/SquadPage";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Login/RegisterPage";
-import Admin from "./pages/Admin/Admin";
-import NewPacks from "./pages/Packs/NewPacks";
+// import Admin from "./pages/Admin/Admin";
 import Layout from "./layouts/Layout";
-import { createTheme, ThemeProvider } from "@mui/material";
-import SquadPage from "./pages/Squad/SquadPage";
-import { db } from "./firebaseConfig";
-import React from "react";
-import { useAppDispatch } from "./store/app/hooks";
-import { logOut } from "./store/ui-actions";
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -54,6 +55,10 @@ declare module '@mui/material/styles' {
 
 
 }
+
+const HomeScreen = loadable(() => import('./pages/Home/HomeScreen'))
+const MyPlayers = loadable(() => import('./pages/MyPlayers/MyPlayers'))
+const Admin = loadable(() => import('./pages/Admin/Admin'))
 
 const router = createHashRouter([
   {
@@ -165,7 +170,11 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
+        <Suspense fallback={<div className="w-screen">
+          <LinearProgress />
+        </div>}>
+          <RouterProvider router={router} />
+        </Suspense>
       </ThemeProvider>
     </>
   );

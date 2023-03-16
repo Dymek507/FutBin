@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import ChoseOnPositionModal from "./ChoseOnPositionModal";
 import Slot from "./Slot";
 import { Player } from "../../modules/modelTypes";
 import { addPlayerOnPosition, fetchPlayersData, fetchSquadData } from "../../store/players-actions";
+import { LinearProgress } from "@mui/material";
 
 
 const Squad = () => {
@@ -36,12 +37,19 @@ const Squad = () => {
     setCurrentPosition(nr)
   }
   return (
+
     <div className="flex justify-center items-center w-full">
-      {showModal ? <ChoseOnPositionModal open={showModal} onClose={() => setShowModal(false)} avaiablePlayer={avaiablePlayer} addOnPositionHandler={addOnPositionHandler} currentPosition={currentPosition} /> : null}
+      {showModal ?
+        <ChoseOnPositionModal open={showModal} onClose={() => setShowModal(false)} avaiablePlayer={avaiablePlayer} addOnPositionHandler={addOnPositionHandler} currentPosition={currentPosition} />
+        : null}
       <div className="relative h-full w-full text-[22px] sm:max-w-[1000px] bg-squad-field bg-center bg-no-repeat bg-[length:100%_100%]">
-        {mySquad.map((item) => (
-          <Slot key={item.nr} nr={item.nr} pos={item.pos} x={item.x} y={item.y} playerId={item.playerId} openModal={openModalHandler} />
-        ))}
+        <Suspense fallback={<div className="w-screen">
+          <LinearProgress />
+        </div>}>
+          {mySquad.map((item) => (
+            <Slot key={item.nr} nr={item.nr} pos={item.pos} x={item.x} y={item.y} playerId={item.playerId} openModal={openModalHandler} />
+          ))}
+        </Suspense>
       </div>
     </div>
   );

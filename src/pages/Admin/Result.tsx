@@ -1,19 +1,30 @@
-import { Typography } from '@mui/material'
+import { IconButton, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import InfoModal from '../../components/InfoModal'
 import useGetUserData from '../../hooks/useGetUserData'
 import { ResultT } from '../../modules/modelTypes'
 import { resultMoney } from '../../data/money'
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useAppDispatch } from '../../store/app/hooks'
+import { deleteResultAction } from '../../store/admin-actions'
 
 type ResultProps = {
   resultData: ResultT
 }
 
 const Result = ({ resultData }: ResultProps) => {
+  const dispatch = useAppDispatch()
   const { resultId, date, userOneUid, userTwoUid, userOneGoals, userTwoGoals } = resultData
   const [showInfoModal, setShowInfoModal] = useState(false)
+
+
   const userOneData = useGetUserData(userOneUid)
+  console.log(userOneUid)
   const userTwoData = useGetUserData(userTwoUid)
+
+  const deleteHandler = () => {
+    dispatch(deleteResultAction(resultId))
+  }
 
   const resultHandler = (scoredGoals: number, concededGoals: number) => {
     if (scoredGoals > concededGoals) {
@@ -27,7 +38,10 @@ const Result = ({ resultData }: ResultProps) => {
   return (
     <>
       <InfoModal open={showInfoModal} onClose={() => setShowInfoModal(false)} >
-        <div className='h-full flex flex-col items-center gap-6 mt-8 text-white'>
+        <div className='relative h-full flex flex-col items-center gap-6 mt-8 text-white'>
+          <IconButton onClick={deleteHandler}>
+            <DeleteIcon />
+          </IconButton>
           <Typography variant='h2'>Match Result</Typography>
           <Typography variant='h5'>{date}</Typography>
           <div className='flex w-full gap-4 px-4'>

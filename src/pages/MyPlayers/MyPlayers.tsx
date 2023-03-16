@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { fetchPlayersData, deletePlayer } from "../../store/players-actions";
 
@@ -7,6 +7,7 @@ import {
   FormControl,
   Grid,
   IconButton,
+  LinearProgress,
   MenuItem,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -117,7 +118,9 @@ const MyPlayers = () => {
             alignItems: "center",
             height: "5rem",
             marginX: "1rem",
+            marginBottom: '1rem',
             color: 'white',
+            borderBottom: '2px solid white'
           }}
         >
           <Button variant="contained" color="secondary" size="large">
@@ -169,33 +172,37 @@ const MyPlayers = () => {
         </Box>
 
         {/* >>>>>>>>> List view <<<<<<<<<<<<< */}
-        {!playersGridView && (
-          <Grid
-            sx={{ width: { xs: "100vw", sm: "80vw", md: "60vw" } }}
-            container
-            rowSpacing={1}
-          >
-            {playersArray?.map((player) => (
-              <Grid key={player.id} item xs={12} sm={12} md={12} lg={12} xl={12}>
-                <CardLine
-                  playerData={player}
-                  sendPlayer={pickPlayer}
-                  pickedArray={pickedPlayers}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        )}
-        {/* >>>>>>>>> Grid view <<<<<<<<<<<<<<< */}
-        {playersGridView && (
-          <GridView playersArray={playersArray} pickPlayer={pickPlayer} cardSize="14px" pickedPlayers={pickedPlayers} xxs={12}
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            xl={2} />
+        <Suspense fallback={<div className="w-[80vw] min-w-[640px] bg-sky-500">
+          <LinearProgress />
+        </div>}>
+          {!playersGridView && (
+            <Grid
+              sx={{ width: { xxs: "100vw", sm: "80vw", md: "60vw" } }}
+              container
+              rowSpacing={1}
+            >
+              {playersArray?.map((player) => (
+                <Grid key={player.id} item xxs={12} xs={12} sm={12} md={12} lg={12} xl={12}>
+                  <CardLine
+                    playerData={player}
+                    sendPlayer={pickPlayer}
+                    pickedArray={pickedPlayers}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+          {/* >>>>>>>>> Grid view <<<<<<<<<<<<<<< */}
+          {playersGridView && (
+            <GridView playersArray={playersArray} pickPlayer={pickPlayer} cardSize="14px" pickedPlayers={pickedPlayers} xxs={12}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              xl={2} />
 
-        )}
+          )}
+        </Suspense>
       </Box> : <div className="w-full"><InfoScreen text1="No Players" text2="Open packs" /></div>}
     </>
   );

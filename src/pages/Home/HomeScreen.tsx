@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Card from "../../components/Card";
 import { Typography } from "@mui/material";
 import Animation from "./Animation";
 import dummyPlayer from "../../data/dummyPlayer";
 
 const HomeScreen = () => {
+
 
   return (
     <div className="w-full flex flex-col justify-center items-center ">
@@ -20,7 +21,6 @@ const HomeScreen = () => {
           Witamy w
         </Typography>
       </motion.div>
-
       <Animation />
       <motion.div
         initial={{ opacity: 0, x: -200, y: 0 }}
@@ -30,7 +30,9 @@ const HomeScreen = () => {
       >
         <Card playerData={dummyPlayer} fontSize={"14px"} />
       </motion.div>
+
     </div>
+
   );
 };
 
