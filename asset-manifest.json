@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/FutDraft/static/css/main.c931a9c4.css",
-    "main.js": "/FutDraft/static/js/main.a4d988cf.js",
+    "main.css": "/FutDraft/static/css/main.cf6b750a.css",
+    "main.js": "/FutDraft/static/js/main.6a9ad9d3.js",
+    "static/js/662.24cb19ec.chunk.js": "/FutDraft/static/js/662.24cb19ec.chunk.js",
+    "static/js/199.b86861b9.chunk.js": "/FutDraft/static/js/199.b86861b9.chunk.js",
+    "static/js/322.8322e2ec.chunk.js": "/FutDraft/static/js/322.8322e2ec.chunk.js",
     "static/media/walkout-bg-2.png": "/FutDraft/static/media/walkout-bg-2.40c7a03f3adb6f816d7e.png",
     "static/media/b-stadium_1.png": "/FutDraft/static/media/b-stadium_1.0c84c64f9682ef4b48ed.png",
     "static/media/concrete-bg.jpg": "/FutDraft/static/media/concrete-bg.a46a30c8b6c9f272f34d.jpg",
-    "static/media/cz1.png": "/FutDraft/static/media/cz1.b1a0458b1bf801be2083.png",
-    "static/media/cz2.png": "/FutDraft/static/media/cz2.d777fc32774638cb46ac.png",
     "static/media/football-field-1.jpg": "/FutDraft/static/media/football-field-1.c728c00fc1d68ca95c06.jpg",
     "static/media/0_silver.png": "/FutDraft/static/media/0_silver.475a138e73ce48a134fd.png",
     "static/media/0_bronze.png": "/FutDraft/static/media/0_bronze.944d1cae4163745e496a.png",
@@ -19,13 +20,17 @@
     "static/media/walkout_frame_left.png": "/FutDraft/static/media/walkout_frame_left.b9c1a70d16a703523f55.png",
     "static/media/walkout_frame_right.png": "/FutDraft/static/media/walkout_frame_right.91b0e2ca0a334f9ee204.png",
     "static/media/DIN_Pro_thin.otf": "/FutDraft/static/media/DIN_Pro_thin.493747ceacb55eb095f5.otf",
+    "static/media/brown_pack.png": "/FutDraft/static/media/brown_pack.41ef9487d5c8d46158fc.png",
+    "static/media/gold_pack.png": "/FutDraft/static/media/gold_pack.0d54da22b6fe5f07d75c.png",
+    "static/media/silver_pack.png": "/FutDraft/static/media/silver_pack.214470a9eeac9dd6904d.png",
+    "static/media/special_pack.png": "/FutDraft/static/media/special_pack.4b874979e9f1fd58fccc.png",
     "static/media/roboto-all-500-normal.woff": "/FutDraft/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/FutDraft/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
     "static/media/roboto-all-400-normal.woff": "/FutDraft/static/media/roboto-all-400-normal.c5d001fa922fa66a147f.woff",
     "static/media/roboto-all-300-normal.woff": "/FutDraft/static/media/roboto-all-300-normal.168d6383e73339293ac3.woff",
     "static/media/blank-card.png": "/FutDraft/static/media/blank-card.069d9c56cded420fb47c.png",
-    "static/media/special_pack.png": "/FutDraft/static/media/special_pack.893d9ee8f8c53a88fc46.png",
     "static/media/blankPlayerPic.png": "/FutDraft/static/media/blankPlayerPic.58abc2f29ac7f67366af.png",
+    "static/media/MetalPattern.svg": "/FutDraft/static/media/MetalPattern.b0f4c0ac8ef275cd9d6e.svg",
     "static/media/roboto-latin-500-normal.woff2": "/FutDraft/static/media/roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2",
     "static/media/roboto-latin-700-normal.woff2": "/FutDraft/static/media/roboto-latin-700-normal.227c93190fe7f82de3f8.woff2",
     "static/media/roboto-latin-400-normal.woff2": "/FutDraft/static/media/roboto-latin-400-normal.b009a76ad6afe4ebd301.woff2",
@@ -55,11 +60,14 @@
     "static/media/roboto-greek-ext-300-normal.woff2": "/FutDraft/static/media/roboto-greek-ext-300-normal.35b9d6be04b95f0f0530.woff2",
     "static/media/roboto-greek-ext-700-normal.woff2": "/FutDraft/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/FutDraft/index.html",
-    "main.c931a9c4.css.map": "/FutDraft/static/css/main.c931a9c4.css.map",
-    "main.a4d988cf.js.map": "/FutDraft/static/js/main.a4d988cf.js.map"
+    "main.cf6b750a.css.map": "/FutDraft/static/css/main.cf6b750a.css.map",
+    "main.6a9ad9d3.js.map": "/FutDraft/static/js/main.6a9ad9d3.js.map",
+    "662.24cb19ec.chunk.js.map": "/FutDraft/static/js/662.24cb19ec.chunk.js.map",
+    "199.b86861b9.chunk.js.map": "/FutDraft/static/js/199.b86861b9.chunk.js.map",
+    "322.8322e2ec.chunk.js.map": "/FutDraft/static/js/322.8322e2ec.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c931a9c4.css",
-    "static/js/main.a4d988cf.js"
+    "static/css/main.cf6b750a.css",
+    "static/js/main.6a9ad9d3.js"
   ]
 }
