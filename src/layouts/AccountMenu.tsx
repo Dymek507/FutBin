@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -12,25 +12,54 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { UserData } from "../modules/modelTypes";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/app/hooks";
+import { logOut } from "../store/ui-actions";
+import { doc, onSnapshot } from "@firebase/firestore";
+import { db } from "../firebaseConfig";
+import { uiActions } from "../store/ui-slice";
+
+
 
 interface AccountMenuProps {
   userData: UserData
 }
 
 export default function AccountMenu({ userData }: AccountMenuProps) {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate();
+  const uId = userData.uId
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  //Real time actualization and dispatch money to store
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, `users/${uId}`), (doc) => {
+      if (doc.exists()) {
+        dispatch(uiActions.addMoney(doc.data().money))
+      }
+    });
+
+    return () => {
+      unsub()
+    }
+  }, [uId])
+
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () => {
+    dispatch(logOut())
+    setAnchorEl(null)
+    navigate('/')
+  }
   return (
     <>
-
-      {/* <Typography fontSize="1.5rem">{userData.userData.money}</Typography>
-            <Typography fontSize="1.5rem">{userData.userData.login}</Typography> */}
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Typography fontSize='1.5em' sx={{ pr: 2 }}>{userData.money}</Typography>
         <Typography fontSize='1.5em' sx={{}}>{userData.login}</Typography>
@@ -101,7 +130,7 @@ export default function AccountMenu({ userData }: AccountMenuProps) {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

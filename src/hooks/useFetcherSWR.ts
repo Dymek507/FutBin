@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import useSWR from "swr";
 import axios, { AxiosRequestConfig } from "axios";
 
@@ -16,8 +16,10 @@ const fetcher = (url: string) =>
   axios.get(url, axiosFetchBlob).then((r) => r.data);
 
 export const useFetcherSWR = (endPoint: string) => {
+  const [endPointSave, setEndPointSave] = useState("");
   const [image, setImage] = useState<string>("");
   const [shouldFetch, setShouldFetch] = useState<boolean>(true);
+  // console.log(shouldFetch);
 
   const { data, error, isLoading } = useSWR(
     shouldFetch ? `https://futdb.app/api/${endPoint}` : null,
@@ -32,6 +34,10 @@ export const useFetcherSWR = (endPoint: string) => {
       setShouldFetch(false);
     }
   }, [data]);
+
+  useEffect(() => {
+    setShouldFetch(true);
+  }, [endPoint]);
 
   return { image, error, isLoading };
 };

@@ -52,12 +52,9 @@ const uiSlice = createSlice({
     hideMenu(state) {
       state.menuIsVisible = false;
     },
-    // setSnack(state, action: PayloadAction<SnackT>) {
-    //   state.snackbar = {
-    //     variant: action.payload.variant,
-    //     text: action.payload.text,
-    //   };
-    // },
+    addMoney(state, action: PayloadAction<number>) {
+      state.userData.money = action.payload;
+    },
   },
 });
 

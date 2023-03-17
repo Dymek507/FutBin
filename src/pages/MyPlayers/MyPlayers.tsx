@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, Suspense } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { fetchPlayersData, deletePlayer } from "../../store/players-actions";
+import manageMoney from "../../store/app/manageMoney"
 
 import {
   Button,
@@ -72,7 +73,10 @@ const MyPlayers = () => {
 
   const deletePlayers = () => {
     pickedPlayers.forEach((player) => {
-      dispatch(deletePlayer(player.id));
+      if (uId !== null && player.playerPrice !== undefined) {
+        manageMoney(uId, player.playerPrice);
+        dispatch(deletePlayer(player.id));
+      }
     });
   };
 
@@ -172,7 +176,7 @@ const MyPlayers = () => {
         </Box>
 
         {/* >>>>>>>>> List view <<<<<<<<<<<<< */}
-        <Suspense fallback={<div className="w-[80vw] min-w-[640px] bg-sky-500">
+        <Suspense fallback={<div className="w-[100vw] sm:w-[80vw] ">
           <LinearProgress />
         </div>}>
           {!playersGridView && (

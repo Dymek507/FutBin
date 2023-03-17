@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from "react";
-import blankPhoto from "../assets/blankPlayerPic.png";
-import { useFetchImages } from "../hooks/useFetchImages";
-
-import {
-  goldN,
-  goldR,
-  silverN,
-  silverR,
-  bronzeN,
-  bronzeR,
-} from "../assets/CardBackgrounds";
-import useGeneratePrice from "../hooks/useGeneratePrice";
+import useGenerateStats from "../hooks/useGenerateStats";
 import { Player } from "../modules/modelTypes";
 
 interface CardLineProps {
@@ -30,65 +19,23 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
 
   }, [pickedArray, playerData]);
 
-  const images = useFetchImages(playerData.id, playerData.club, playerData.nation);
+  const { cardBackground,
+    playerPhoto,
+    playerClub,
+    playerNation,
+    commonName,
+    rating,
+    position,
+    defending,
+    pace,
+    dribbling,
+    shooting,
+    passing,
+    physicality,
+    playerPrice,
+  } = useGenerateStats(playerData, 'line')
 
-  let { playerPhoto = blankPhoto, playerClub, playerNation } = images
 
-  const { playerPrice, displayPrice } = useGeneratePrice(playerData);
-
-  // Destrukturyzacja danych zawodnika oraz dane startowe
-  let {
-    color,
-    commonName = "????",
-    defending = "??",
-    dribbling = "??",
-    pace = "??",
-    passing = "??",
-    physicality = "??",
-    position = "??",
-    rarity,
-    rating = "??",
-    shooting = "??",
-  } = playerData;
-  //Zmiana wartości umiejętności dla bramkarzy
-  if (position === "GK") {
-    const { diving, handling, kicking, positioning, reflexes, speed } =
-      playerData.goalkeeperAttributes;
-    defending = speed?.toString() ?? "0";
-    pace = diving?.toString() ?? "0";
-    dribbling = reflexes?.toString() ?? "0";
-    shooting = handling?.toString() ?? "0";
-    passing = kicking?.toString() ?? "0";
-    physicality = positioning?.toString() ?? "0";
-  }
-
-  let cardBackground;
-  function choseBackground() {
-    if (rarity === 0) {
-      if (color === "bronze") {
-        cardBackground =
-          "linear-gradient(90deg, rgba(79,38,1,1) 0%, rgba(101,49,0,1) 39%, rgba(130,63,0,1) 100%)";
-      } else if (color === "silver") {
-        cardBackground =
-          "linear-gradient(90deg, rgba(80,80,80,1) 0%, rgba(96,96,96,1) 39%, rgba(112,112,112,1) 100%)";
-      } else if (color === "gold") {
-        cardBackground =
-          "linear-gradient(90deg, rgba(171,154,0,1) 0%, rgba(185,167,0,1) 39%, rgba(210,190,0,1) 100%)";
-      }
-    } else if (rarity === 1) {
-      if (color === "bronze") {
-        cardBackground =
-          "linear-gradient(90deg, rgba(79,38,1,1) 0%, rgba(101,49,0,1) 39%, rgba(130,63,0,1) 100%)";
-      } else if (color === "silver") {
-        cardBackground =
-          "linear-gradient(to right, rgb(100, 116, 139), rgb(254, 249, 195))";
-      } else if (color === "gold") {
-        cardBackground =
-          "linear-gradient(to left, rgb(254, 240, 138), rgb(253, 224, 71), rgb(250, 204, 21))";
-      }
-    }
-  };
-  choseBackground()
 
   const addPlayer = () => {
     setHighlightPlayer((prevState) => !prevState);
@@ -102,7 +49,6 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
       className="flex text-[1.3rem] h-[3.2em] w-full shadow-2xl gap-[0.2em]"
       style={{
         background: cardBackground,
-        // border: `${highlightPlayer ? "3px solid red" : ""}`,
         filter: `${highlightPlayer ? 'brightness(40%)' : ""}`,
       }}
     >

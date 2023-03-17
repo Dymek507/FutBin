@@ -39,7 +39,7 @@ module.exports = {
         "3xl": "0 65px 90px -30px rgba(0, 0, 0, 1)",
       },
       backgroundImage: {
-        "main-b-stadium": "url('/src/assets/b-stadium_1.png')",
+        "main-b-stadium": "url('/src/assets/b-stadium_1.webp')",
         "opening-c": "url('/src/assets/concrete-bg.jpg')",
         "walkout-fr-l": "url('/src/assets/opening/walkout_frame_left.png')",
         "walkout-fr-r": "url('/src/assets/opening/walkout_frame_right.png')",
@@ -47,8 +47,8 @@ module.exports = {
         "walkout-bg-2": "url('/src/assets/opening/walkout-bg-2.png')",
         "opening-1": "url('/src/assets/cz1.png')",
         "opening-2": "url('/src/assets/cz2.png')",
-        "squad-field": "url('/src/assets/football-field-1.jpg')",
-        "blank-card": "url('/src/assets/blank-card.png')",
+        "squad-field": "url('/src/assets/field-1.svg')",
+        "blank-card": "url('/src/assets/blank-card.webp')",
       },
       colors: {
         "primary-main": "rgba(12,52,86,0.85)",

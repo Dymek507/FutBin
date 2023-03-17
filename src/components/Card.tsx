@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import blankPhoto from "../assets/blankPlayerPic.png";
+import blankPhoto from "../assets/blankPlayerPic.svg";
 import {
   goldN,
   goldR,
@@ -9,7 +9,8 @@ import {
   bronzeR,
 } from "../assets/CardBackgrounds";
 import { useFetchImages } from "../hooks/useFetchImages";
-import useGeneratePrice from "../hooks/useGeneratePrice";
+import useGeneratePrice from "../hooks/generatePrice";
+import useGenerateStats from "../hooks/useGenerateStats";
 import { Player } from "../modules/modelTypes";
 
 import styles from "./Card.module.css";
@@ -39,70 +40,25 @@ const Card = ({
     setHighlightPlayer(ifPicked);
   }, [pickedArray, playerData]);
 
-  const { playerPrice, displayPrice } = useGeneratePrice(playerData);
+  const { cardBackground,
+    playerPhoto,
+    playerClub,
+    playerNation,
+    commonName,
+    rating,
+    position,
+    defending,
+    pace,
+    dribbling,
+    shooting,
+    passing,
+    physicality,
+    playerPrice,
+    displayPrice } = useGenerateStats(playerData, "card")
 
   const addPlayer = () => {
     sendPlayer({ ...playerData, playerPrice });
   };
-
-  //Adding photos to Card
-  const { playerPhoto = blankPhoto, playerClub, playerNation, imagesLoaded } = useFetchImages(playerData.id, playerData.club, playerData.nation);
-
-  //Checking if images are loaded
-
-  // useEffect(() => {
-  //   console.log(imagesLoaded)
-  //   if (imagesLoaded === true) cardLoaded(true)
-  // }, [imagesLoaded, cardLoaded])
-
-  // Destrukturyzacja danych zawodnika oraz dane startowe
-  let {
-    color,
-    commonName = "????",
-    defending = "??",
-    dribbling = "??",
-    pace = "??",
-    passing = "??",
-    physicality = "??",
-    position = "??",
-    rarity,
-    rating = "??",
-    shooting = "??",
-  } = playerData;
-  //Zmiana wartości umiejętności dla bramkarzy
-  if (position === "GK") {
-    const { diving, handling, kicking, positioning, reflexes, speed } =
-      playerData.goalkeeperAttributes;
-    defending = speed?.toString() ?? "0";
-    pace = diving?.toString() ?? "0";
-    dribbling = reflexes?.toString() ?? "0";
-    shooting = handling?.toString() ?? "0";
-    passing = kicking?.toString() ?? "0";
-    physicality = positioning?.toString() ?? "0";
-  }
-  //Wybieranie tła dla zawodnika
-  //Add TS and rebuild function
-  let cardBackground
-  const choseBackground = () => {
-    if (rarity === 0) {
-      if (color === "bronze") {
-        cardBackground = bronzeN;
-      } else if (color === "silver") {
-        cardBackground = silverN;
-      } else if (color === "gold") {
-        cardBackground = goldN;
-      }
-    } else if (rarity === 1) {
-      if (color === "bronze") {
-        cardBackground = bronzeR;
-      } else if (color === "silver") {
-        cardBackground = silverR;
-      } else if (color === "gold") {
-        cardBackground = goldR;
-      }
-    }
-  };
-  choseBackground();
 
   return (
     <div

@@ -170,7 +170,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Suspense fallback={<div className="w-screen">
+        <Suspense fallback={<div className="w-screen h-screen ">
           <LinearProgress />
         </div>}>
           <RouterProvider router={router} />

@@ -10,6 +10,9 @@ import Card from "../../../components/Card";
 import type { Player } from "../../../modules/modelTypes";
 import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 import GridView from "../../../components/GridView";
+import manageMoney from "../../../store/app/manageMoney";
+import useGeneratePrice from "../../../hooks/generatePrice";
+import generatePrice from "../../../hooks/generatePrice";
 
 type OpeningBoardProps = {
   onClose: (state: boolean) => void
@@ -23,6 +26,7 @@ const OpeningBoard = ({ onClose }: OpeningBoardProps) => {
 
   const currentPack = useAppSelector((state) => state.players.currentPack);
   const myPlayers = useAppSelector((state) => state.players.myPlayers);
+  const uId = useAppSelector(state => state.ui.userData.uId)
 
   useEffect(() => {
     if (myPlayers && myPlayers.length === 0) {
@@ -60,18 +64,42 @@ const OpeningBoard = ({ onClose }: OpeningBoardProps) => {
   };
 
   const sendPickedPlayers = () => {
+    //Send players from pack to my players
     pickedPlayers.forEach((player) => {
       dispatch(playersActions.addPlayerToMyPlayers(player));
       dispatch(playersActions.deletePlayerFromCurrentPack(player.id));
     });
+    //Prevent case if somehow my players havent fetched and my players on server could be replaced with empty array.
     if (myPlayers.length === 0) {
       dispatch(fetchPlayersData());
     }
+    //This is a glitch, user can sell player and next open prev pack -- 
+    // >>to fix later<<
+    currentPack.forEach((player) => {
+      if (uId !== null && player.playerPrice !== undefined) {
+        manageMoney(uId, player.playerPrice);
+        // dispatch(deletePlayer(player.id));
+      }
+    });
     dispatch(sendPlayersData());
     onClose(false);
   };
 
   const rejectAllPlayers = () => {
+    console.log('reject')
+    console.log(currentPack)
+    currentPack.forEach((player) => {
+      if (uId !== null) {
+        if (player.playerPrice !== undefined) {
+          console.log(player.playerPrice)
+          manageMoney(uId, player.playerPrice);
+        } else {
+          const { playerPrice } = generatePrice(player)
+          manageMoney(uId, playerPrice)
+        }
+        // dispatch(deletePlayer(player.id));
+      }
+    });
     onClose(false);
   };
 

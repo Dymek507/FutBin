@@ -133,7 +133,7 @@ const AddResultModal = ({ open,
         autoComplete="off" className='w-full h-full bg-main sm:max-w-[800px]'>
         <Box
           sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch', color: 'white' },
+            '& .MuiTextField-root': { m: 1, color: 'white' },
           }}
           className='mt-8'
         >
@@ -165,13 +165,13 @@ const AddResultModal = ({ open,
               ))}
             </CustomSelect>
           </div>
-          <div className='flex'>
+          <div className='flex text-[1.2em] xs:text-[1.5em] sm:text-[2em]'>
             <div className='flex flex-col items-center w-24 grow gap-2'>
-              {goalButtons.map(({ id }) => <div key={id} onClick={() => setUserOneGoals(id)} className='flex-center text-3xl text-white w-16 h-16 border-2 border-white rounded-md' style={{ backgroundColor: `${id === userOneGoals ? 'white' : 'transparent'}`, color: `${id === userOneGoals ? 'black' : 'white'}` }}>{id}</div>)
+              {goalButtons.map(({ id }) => <div key={id} onClick={() => setUserOneGoals(id)} className='flex-center text-[1em] text-white w-[2em] h-[2em] border-2 border-white rounded-md' style={{ backgroundColor: `${id === userOneGoals ? 'white' : 'transparent'}`, color: `${id === userOneGoals ? 'black' : 'white'}` }}>{id}</div>)
               }
             </div>
             <div className='flex flex-col items-center w-24 grow gap-2'>
-              {goalButtons.map(({ id }) => <div key={id} onClick={() => setUserTwoGoals(id)} className='flex-center text-3xl text-white w-16 h-16 border-2 border-white rounded-md' style={{ backgroundColor: `${id === userTwoGoals ? 'white' : 'transparent'}`, color: `${id === userTwoGoals ? 'black' : 'white'}` }}>{id}</div>)
+              {goalButtons.map(({ id }) => <div key={id} onClick={() => setUserTwoGoals(id)} className='flex-center text-[1em] text-white w-[2em] h-[2em]  border-2 border-white rounded-md' style={{ backgroundColor: `${id === userTwoGoals ? 'white' : 'transparent'}`, color: `${id === userTwoGoals ? 'black' : 'white'}` }}>{id}</div>)
               }
             </div>
           </div>

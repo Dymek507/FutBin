@@ -1,8 +1,6 @@
-import { Grid, LinearProgress, Modal } from '@mui/material'
+import { LinearProgress, Modal } from '@mui/material'
 import React, { Suspense } from 'react'
-import { useAppSelector } from '../../store/app/hooks'
 import { Player } from '../../modules/modelTypes';
-import Card from '../../components/Card'
 import GridView from '../../components/GridView';
 
 interface ChoseOnPositionModalProps {
@@ -20,12 +18,11 @@ const ChoseOnPositionModal = ({ open, onClose, avaiablePlayer, addOnPositionHand
 
     <Modal open={open}
       onClose={onClose}
-      sx={{ display: 'flex', justifyContent: 'center' }}>
+      sx={{ display: 'flex', justifyContent: 'center', overflowY: 'scroll', overflowX: 'hidden' }}>
       <Suspense fallback={<div className="w-screen">
         <LinearProgress />
       </div>}>
-        <div className='bg-primary-main overflow-y-scroll mx-4'>
-
+        <div className='bg-primary-main h-min my-8 mx-8'>
           <GridView playersArray={avaiablePlayer} pickPlayer={clickHandler} cardSize="10px" />
         </div>
       </Suspense>

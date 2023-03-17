@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useAppSelector } from '../../store/app/hooks';
 import { Player, ISlot } from '../../modules/modelTypes'
-import Card from '../../components/Card';
+import MicroCard from './MicroCard';
 
-import blankSlot from '../../assets/blank-card.png'
+import blankSlot from '../../assets/blank-card-micro.png'
 
 interface ISlotWithFunction extends ISlot {
 
@@ -29,10 +29,10 @@ const Slot = ({ nr, pos, x, y, playerId, openModal }: ISlotWithFunction) => {
     <div
       key={nr}
       onClick={() => openModal(nr)}
-      className="absolute flex-center w-[5em] origin-center translate-x-[-50%] cursor-pointer"
+      className="absolute flex-center w-[4.5em] origin-center translate-x-[-50%] cursor-pointer"
       style={{ bottom: `${x}%`, left: `${y}%` }}
     >
-      {player ? <Card playerData={player} fontSize={'0.28em'}></Card> : <img className='' src={blankSlot} alt="blank_slot" />}
+      {player ? <MicroCard playerData={player} fontSize={'0.3em'} /> : <img className='w-[4.5em]' src={blankSlot} alt="blank_slot" />}
     </div>
   )
 }

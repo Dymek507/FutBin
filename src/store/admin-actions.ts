@@ -4,6 +4,8 @@ import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { ResultT } from "../modules/modelTypes";
 import { adminActions } from "./admin-slice";
 import { RootState } from "./store";
+import resultHandler from "./app/resultHandler";
+import manageMoney from "./app/manageMoney";
 
 export const sendResults =
   (): ThunkAction<void, RootState, unknown, AnyAction> =>
@@ -41,6 +43,14 @@ export const addResultAction = (
 ): ThunkAction<void, RootState, unknown, AnyAction> => {
   return async (dispatch, getState) => {
     dispatch(adminActions.addResult(result));
+    manageMoney(
+      result.userOneUid,
+      resultHandler(result.userOneGoals, result.userTwoGoals)
+    );
+    manageMoney(
+      result.userTwoUid,
+      resultHandler(result.userTwoGoals, result.userOneGoals)
+    );
     const results = getState().admin.results;
     const userDocRef = doc(db, `admin/admin-board`);
 

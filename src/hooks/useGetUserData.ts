@@ -6,7 +6,6 @@ import { dummyUserDbData } from "../data/dummyUser";
 
 const useGetUserData = (uid: string | null): UserDataOnDb => {
   const [userData, setUserData] = useState<UserDataOnDb>(dummyUserDbData);
-  console.log(userData);
 
   useEffect(() => {
     const getData = async () => {

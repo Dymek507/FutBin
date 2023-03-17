@@ -6,7 +6,6 @@ interface IPlayerImages {
   playerPhoto: string;
   playerNation: string;
   playerClub: string;
-  imagesLoaded: boolean;
 }
 
 let startLoading = true;
@@ -35,19 +34,15 @@ export const useFetchImages = (
     isLoading: isLoadingClub,
   } = useFetcherSWR(`clubs/${club}/image`);
 
-  //Check if every image is loaded
-  // useEffect(() => {
-  //   if (isLoadingClub && isLoadingNation && isLoadingPhoto && startLoading) {
-  //     const variant = "info";
-  //     enqueueSnackbar("Loading", { variant });
-  //     startLoading = false;
-  //   }
-  //   if (!isLoadingClub && !isLoadingNation && !isLoadingPhoto) {
-  //     setImagesLoaded(true);
-  //     const variant = "success";
-  //     enqueueSnackbar("Loaded", { variant });
-  //   }
-  // }, [isLoadingClub, isLoadingNation, isLoadingPhoto, enqueueSnackbar]);
+  // Check if every image is loaded
+  useEffect(() => {
+    if (isLoadingClub && isLoadingNation && isLoadingPhoto && startLoading) {
+      startLoading = false;
+    }
+    if (!isLoadingClub && !isLoadingNation && !isLoadingPhoto) {
+      setImagesLoaded(true);
+    }
+  }, [isLoadingClub, isLoadingNation, isLoadingPhoto]);
 
-  return { playerPhoto, playerNation, playerClub, imagesLoaded };
+  return { playerPhoto, playerNation, playerClub };
 };

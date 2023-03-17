@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import InfoModal from '../../components/InfoModal'
 import useGetUserData from '../../hooks/useGetUserData'
 import { ResultT } from '../../modules/modelTypes'
-import { resultMoney } from '../../data/money'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch } from '../../store/app/hooks'
 import { deleteResultAction } from '../../store/admin-actions'
+import resultHandler from '../../store/app/resultHandler'
 
 type ResultProps = {
   resultData: ResultT
@@ -19,22 +19,12 @@ const Result = ({ resultData }: ResultProps) => {
 
 
   const userOneData = useGetUserData(userOneUid)
-  console.log(userOneUid)
   const userTwoData = useGetUserData(userTwoUid)
 
   const deleteHandler = () => {
     dispatch(deleteResultAction(resultId))
   }
 
-  const resultHandler = (scoredGoals: number, concededGoals: number) => {
-    if (scoredGoals > concededGoals) {
-      return resultMoney.win
-    } else if (scoredGoals < concededGoals) {
-      return resultMoney.lose
-    } else {
-      return resultMoney.draw
-    }
-  }
   return (
     <>
       <InfoModal open={showInfoModal} onClose={() => setShowInfoModal(false)} >

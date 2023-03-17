@@ -20,7 +20,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import GroupsIcon from "@mui/icons-material/Groups";
 import InventoryIcon from "@mui/icons-material/Inventory";
 
-import NEY from "../assets/menu-effect-1.png";
+import NEY from "../assets/menu-effect-1.webp";
 import { AdminPanelSettings } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../store/app/hooks";
 

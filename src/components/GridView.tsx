@@ -20,7 +20,7 @@ const Card = lazy(() => import('./Card'))
 
 const GridView = ({ playersArray, pickPlayer, pickedPlayers, cardSize = '12px', xxs = 12, xs = 6, sm = 4, md = 3, lg = 2, xl = 1.5, }: GridViewProps) => {
   return (
-    <div className="h-fit mt-8">
+    <div className="mt-8">
       {playersArray &&
         <Grid
           sx={{ p: "1rem", width: "94vw" }}

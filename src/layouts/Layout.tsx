@@ -5,7 +5,6 @@ import { Outlet } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 
 const Layout = () => {
-  console.log('layout')
   return (
     <SnackbarProvider maxSnack={4}>
       <div className="flex flex-col w-full min-h-screen bg-main-b-stadium [background-position-x:60%] bg-no-repeat">
