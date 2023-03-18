@@ -1,15 +1,4 @@
 import React, { useEffect, useState } from "react";
-import blankPhoto from "../assets/blankPlayerPic.svg";
-import {
-  goldN,
-  goldR,
-  silverN,
-  silverR,
-  bronzeN,
-  bronzeR,
-} from "../assets/CardBackgrounds";
-import { useFetchImages } from "../hooks/useFetchImages";
-import useGeneratePrice from "../hooks/generatePrice";
 import useGenerateStats from "../hooks/useGenerateStats";
 import { Player } from "../modules/modelTypes";
 
@@ -19,28 +8,27 @@ interface CardProps {
   playerData: Player;
   sendPlayer?: (playerData: Player, playerPrice?: number) => void;
   fontSize: string;
-  pickedArray?: Player[]
-  cardLoaded?: (loaded: boolean) => void
+  pickedArray?: Player[];
+  cardLoaded?: (loaded: boolean) => void;
 }
 
 const Card = ({
   playerData,
-  sendPlayer = () => { },
+  sendPlayer = () => {},
   fontSize,
   pickedArray = [],
-  cardLoaded = () => { }
+  cardLoaded = () => {},
 }: CardProps) => {
-
   const [highlightPlayer, setHighlightPlayer] = useState(false);
 
   useEffect(() => {
-    const ifPicked = pickedArray.filter(
-      (player) => player.id === playerData.id
-    ).length > 0;
+    const ifPicked =
+      pickedArray.filter((player) => player.id === playerData.id).length > 0;
     setHighlightPlayer(ifPicked);
   }, [pickedArray, playerData]);
 
-  const { cardBackground,
+  const {
+    cardBackground,
     playerPhoto,
     playerClub,
     playerNation,
@@ -54,7 +42,8 @@ const Card = ({
     passing,
     physicality,
     playerPrice,
-    displayPrice } = useGenerateStats(playerData, "card")
+    displayPrice,
+  } = useGenerateStats(playerData, "card");
 
   const addPlayer = () => {
     sendPlayer({ ...playerData, playerPrice });

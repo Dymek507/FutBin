@@ -42,6 +42,7 @@ function Copyright(props: any) {
 }
 
 export default function SignUp() {
+  const history = useHistory();
   const auth = getAuth(app);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -49,6 +50,12 @@ export default function SignUp() {
   console.log(uId);
 
   const [formValid, setFormValid] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push("/");
+    }
+  }, []);
 
   const checkboxValidity = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValid(e.target.checked);
@@ -69,12 +76,12 @@ export default function SignUp() {
     console.log(data);
 
     //Create new user with email and password
-    if (data.get('email') && data.get('password') === null) return
+    if (data.get("email") && data.get("password") === null) return;
 
     createUserWithEmailAndPassword(
       auth,
       data.get("email")!.toString(),
-      data.get("password")!.toString(),
+      data.get("password")!.toString()
     )
       .then((userCredential) => {
         //Make document for new user
@@ -99,8 +106,7 @@ export default function SignUp() {
               result: { wins: 0, draws: 0, loses: 0 },
               goals: { goalsFor: 0, goalsAgainst: 0 },
             },
-          }
-          )
+          })
         );
       })
       .then(() => {
@@ -112,7 +118,6 @@ export default function SignUp() {
   };
 
   return (
-
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
@@ -137,12 +142,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Zarejestruj się !
         </Typography>
-        <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit}
-          sx={{ mt: 3 }}
-        >
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField

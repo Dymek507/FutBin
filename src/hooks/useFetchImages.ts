@@ -36,7 +36,12 @@ export const useFetchImages = (
 
   // Check if every image is loaded
   useEffect(() => {
-    if (isLoadingClub && isLoadingNation && isLoadingPhoto && startLoading) {
+    //! Move to variable for better readability
+    const isLoading =
+      isLoadingClub && isLoadingNation && isLoadingPhoto && startLoading;
+    const isEveryLoaded = !isLoadingClub && !isLoadingNation && !isLoadingPhoto;
+
+    if (isLoading) {
       startLoading = false;
     }
     if (!isLoadingClub && !isLoadingNation && !isLoadingPhoto) {

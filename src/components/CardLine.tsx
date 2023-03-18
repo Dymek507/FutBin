@@ -5,21 +5,20 @@ import { Player } from "../modules/modelTypes";
 interface CardLineProps {
   playerData: Player;
   sendPlayer: (playerData: Player, playerPrice?: number) => void;
-  pickedArray: Player[]
+  pickedArray: Player[];
 }
 
 const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
   const [highlightPlayer, setHighlightPlayer] = useState(false);
 
   useEffect(() => {
-    const ifPicked = pickedArray.filter(
-      (player) => player.id === playerData.id
-    ).length > 0;
+    const ifPicked =
+      pickedArray.filter((player) => player.id === playerData.id).length > 0;
     setHighlightPlayer(ifPicked);
-
   }, [pickedArray, playerData]);
 
-  const { cardBackground,
+  const {
+    cardBackground,
     playerPhoto,
     playerClub,
     playerNation,
@@ -33,15 +32,20 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
     passing,
     physicality,
     playerPrice,
-  } = useGenerateStats(playerData, 'line')
-
-
+  } = useGenerateStats(playerData, "line");
 
   const addPlayer = () => {
     setHighlightPlayer((prevState) => !prevState);
     sendPlayer({ ...playerData, playerPrice });
   };
 
+  const rendrerPlayerNation = () => {
+    if (playerNation === "England") {
+      return <div>England</div>;
+    } else if (playerNation === "Spain") {
+      return "https://www.countryflags.io/es/flat/64.png";
+    }
+  };
   return (
     //Main bar container
     <div
@@ -49,11 +53,12 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
       className="flex text-[1.3rem] h-[3.2em] w-full shadow-2xl gap-[0.2em]"
       style={{
         background: cardBackground,
-        filter: `${highlightPlayer ? 'brightness(40%)' : ""}`,
+        filter: `${highlightPlayer ? "brightness(40%)" : ""}`,
       }}
     >
+      {rendrerPlayerNation()}
       {/*Player nation and photo*/}
-      < div
+      <div
         style={{
           backgroundImage: `url(${playerNation})`,
         }}
@@ -64,15 +69,15 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
           alt="Player_photo"
           style={{ filter: "drop-shadow(0px 0px 0.5em #000)" }}
         />
-      </div >
+      </div>
       {/*Player rating*/}
-      < div className="flex justify-center items-center mr-1" >
+      <div className="flex justify-center items-center mr-1">
         <p className="text-[1.5em] px-[0.2em] border-r border-black">
           {rating}
         </p>
-      </div >
+      </div>
       {/*Player info*/}
-      < div className=" flex flex-col items-start w-[6em] truncate" >
+      <div className=" flex flex-col items-start w-[6em] truncate">
         <div className="flex items-center gap-2 h-[1.6em] mt-1">
           <div className="items-center">
             <img src={playerClub} className="w-[1.7em]" alt="ClubLogo"></img>
@@ -82,23 +87,21 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
         <div className="flex items-center h-[1.6em] truncate">
           <p className="text-[1em]">{commonName}</p>
         </div>
-      </div >
+      </div>
       {/*Statistics in detail*/}
-      < div className="ml-auto flex w-[3.6em] xs:w-min mr-1 items-center gap-0.5 flex-wrap xs:flex-nowrap  " >
-        {
-          [pace, shooting, passing, dribbling, defending, physicality].map(
-            (stat, index) => (
-              <p
-                key={index}
-                className=" text-[0.8em] xs:text-[1em] h-[1.6em] border border-black px-[0.1em] "
-              >
-                {stat}
-              </p>
-            )
+      <div className="ml-auto flex w-[3.6em] xs:w-min mr-1 items-center gap-0.5 flex-wrap xs:flex-nowrap  ">
+        {[pace, shooting, passing, dribbling, defending, physicality].map(
+          (stat, index) => (
+            <p
+              key={index}
+              className=" text-[0.8em] xs:text-[1em] h-[1.6em] border border-black px-[0.1em] "
+            >
+              {stat}
+            </p>
           )
-        }
-      </div >
-    </div >
+        )}
+      </div>
+    </div>
   );
 };
 

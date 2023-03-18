@@ -1,5 +1,16 @@
 import type { Player } from "../../modules/modelTypes";
 
+const getVariant = (variant: unknown) => {
+  const map = {
+    ovr: "rating",
+    pac: "pace",
+    sho: "shooting",
+    pas: "passing",
+  };
+
+  return map[variant] || "rating";
+};
+
 const sortPlayers = (
   playersArray: Player[],
   sortingAtr: string,

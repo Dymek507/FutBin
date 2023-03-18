@@ -1,5 +1,6 @@
 import { Player } from "../modules/modelTypes";
 
+// ! hooks should start with use
 const generatePrice = (playerData: Player) => {
   // Hook which determines player price base on various stats
   const {
@@ -20,6 +21,7 @@ const generatePrice = (playerData: Player) => {
   } = playerData;
 
   //Multipliers
+  //! const SKILL_FOOT_MULTI = 5000;
   const skillFootMulti = 5000;
   const totalStatsMulti = 10;
   const ratingMulti = 0.0000001;
@@ -31,6 +33,7 @@ const generatePrice = (playerData: Player) => {
   const totalStatsPrice = totalStatsInGame * totalStatsMulti;
   //Rating part of price
 
+  //  ! getPriceThreshold(rating)
   const priceThreshold = () => {
     if (rating > 90) {
       return rating ** 7 * 81;
@@ -51,6 +54,7 @@ const generatePrice = (playerData: Player) => {
 
   // Określanie wartości kluczowych atrybutów
   if (
+    // ! position to enum
     position === "CB" ||
     position === "LB" ||
     position === "RB" ||

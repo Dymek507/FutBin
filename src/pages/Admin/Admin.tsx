@@ -4,15 +4,10 @@ import { useAppDispatch } from "../../store/app/hooks";
 import ResultsList from "./ResultsList";
 
 const Admin = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getResults())
-  }, [dispatch])
-
-
-
-
-
+    dispatch(getResults());
+  }, [dispatch]);
 
   return (
     <div className="w-full">
