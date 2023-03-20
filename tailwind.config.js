@@ -9,6 +9,10 @@ const Myclass = plugin(function ({ addUtilities }) {
       justifyContent: "center",
       alignItems: "center",
     },
+    ".wh-full": {
+      width: "100%",
+      height: "100%",
+    },
     ".my-rotate-y-180": {
       transform: "rotateY(180deg)",
     },

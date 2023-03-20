@@ -1,0 +1,50 @@
+// @ts-nocheck
+import React, { useState } from "react";
+
+import { motion, AnimatePresence } from "framer-motion";
+import Card from "../../../components/Card";
+import dummyPlayer from "../../../data/dummyPlayer";
+import landingPageImages from "../../../assets/landing_page";
+import { appearAnimation, infiniteAnimation, slideAnimation } from "./Animations";
+
+
+
+const FirstView = () => {
+
+  const slideRightAnimation = slideAnimation(1, 2);
+  const slideLeftAnimation = slideAnimation(-1, 4);
+
+  return (
+    <div>
+      <div className='relative h-screen flex-center overflow-x-hidden' style={{ background: 'linear-gradient(215deg,rgba(229, 0, 0, 1) 0%,rgba(132, 0, 0, 1) 35%,rgba(0, 36, 108, 1) 70%,rgba(0, 77, 231, 1) 100%)' }}>
+        <div className="self-start flex justify-end w-full mr-4   z-[5]">
+          <nav className="text-white text-2xl p-4">
+            <ul className="flex flex-row gap-5">
+              <li className="border-b-2">Play matches</li>
+              <li>Buy packs</li>
+              <li>Draw players</li>
+              <li>Assembly squad</li>
+            </ul>
+          </nav>
+        </div>
+        {/* Outlined text */}
+        {/* <motion.svg
+          viewBox="0 0 450 50" className="absolute"
+          {...infiniteAnimation}
+        >
+          <text y="130">Fut Draft</text>
+        </motion.svg> */}
+        <motion.img className="absolute inset-0 wh-full object-fill" src={landingPageImages.mist_1} alt="mist" />
+        <motion.img className="absolute inset-[50%, 50%] object-fill z-[2]" src={landingPageImages.mist_2} alt="mist" />
+        <motion.img className="absolute bottom-0 object-fill z-[4]" src={landingPageImages.mist_3} alt="mist" />
+        {/* Normal text */}
+        <motion.p {...appearAnimation} className="absolute text-[20rem] inset-[50%, 50%] text-white" >Fut Draft</motion.p>
+        <motion.img className="absolute inset-[50%, 50%] h-full z-[3]" src={landingPageImages.lewandowski} alt="lewandowski_photo"
+
+        />
+      </div>
+    </div>
+  )
+}
+
+export default FirstView

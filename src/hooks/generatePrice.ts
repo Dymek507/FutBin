@@ -124,7 +124,6 @@ const generatePrice = (playerData: Player) => {
   } else {
     displayPrice = price.toString();
   }
-  console.log(price);
   return { playerPrice: price, displayPrice };
 };
 

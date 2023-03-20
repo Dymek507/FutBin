@@ -56,16 +56,21 @@ declare module '@mui/material/styles' {
 
 }
 
-const HomeScreen = loadable(() => import('./pages/Home/HomeScreen'))
+const HomeScreen = loadable(() => import('./pages/Home/HomeScreen/HomeScreen'))
 const MyPlayers = loadable(() => import('./pages/MyPlayers/MyPlayers'))
 const Admin = loadable(() => import('./pages/Admin/Admin'))
 
 const router = createHashRouter([
   {
     path: "/",
+    element: <HomeScreen />,
+  },
+  {
+    path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <HomeScreen /> },
+      //How to make home screen/ without layout
+      // { index: true, element: <HomeScreen /> },
       { path: "new-packs", element: <NewPacks /> },
       { path: "my-packs", element: <MyPacks /> },
       { path: "my-players", element: <MyPlayers /> },
