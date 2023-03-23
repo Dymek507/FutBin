@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useGenerateStats from "../../hooks/useGenerateStats";
-import { Player } from "../../modules/modelTypes";
+import { Player } from "../../types/modelTypes";
 
 
 interface CardProps {

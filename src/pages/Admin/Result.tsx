@@ -2,7 +2,7 @@ import { IconButton, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import InfoModal from '../../components/InfoModal'
 import useGetUserData from '../../hooks/useGetUserData'
-import { ResultT } from '../../modules/modelTypes'
+import { ResultT } from '../../types/modelTypes'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch } from '../../store/app/hooks'
 import { deleteResultAction } from '../../store/admin-actions'

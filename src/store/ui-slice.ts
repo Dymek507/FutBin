@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ResultT, SnackT, UserData } from "../modules/modelTypes";
+import { ResultT, SnackT, UserData } from "../types/modelTypes";
 import { dummyResults } from "../data/dummyResults";
 
 interface UiState {

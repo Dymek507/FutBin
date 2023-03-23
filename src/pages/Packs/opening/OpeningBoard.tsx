@@ -7,12 +7,12 @@ import { Button, Grid } from "@mui/material";
 
 import Card from "../../../components/Card";
 
-import type { Player } from "../../../modules/modelTypes";
+import type { Player } from "../../../types/modelTypes";
 import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 import GridView from "../../../components/GridView";
 import manageMoney from "../../../store/app/manageMoney";
-import useGeneratePrice from "../../../hooks/generatePrice";
-import generatePrice from "../../../hooks/generatePrice";
+import useGeneratePrice from "../../../utils/generatePrice/generatePrice";
+import generatePrice from "../../../utils/generatePrice/generatePrice";
 
 type OpeningBoardProps = {
   onClose: (state: boolean) => void

@@ -4,7 +4,7 @@ import { playersActions } from "./players-slice";
 import { db } from "../firebaseConfig";
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { ISlot } from "../modules/modelTypes";
+import { ISlot } from "../types/modelTypes";
 
 export const fetchPlayersData = (): ThunkAction<
   void,
@@ -19,7 +19,6 @@ export const fetchPlayersData = (): ThunkAction<
       const userDocRef = doc(db, `users/${uId}`);
       try {
         const userDoc = await getDoc(userDocRef);
-
         if (userDoc.data() !== undefined) {
           const players = userDoc.data()?.playersData;
           if (userDoc.data()?.playersData.length !== 0) {
@@ -28,7 +27,7 @@ export const fetchPlayersData = (): ThunkAction<
         } else {
         }
       } catch (error) {
-        console.log("Błąd" + error);
+        throw new Error("Błąd" + error);
       }
     }
   };
@@ -50,7 +49,10 @@ export const sendPlayersData = (): ThunkAction<
           playersData: myPlayers,
         });
       } catch (error) {
-        console.log(`Błąd wysyłania ${error}`);
+        throw new Response(
+          JSON.stringify({ message: "Could not fetch players" }),
+          { status: 500 }
+        );
       }
     } else {
       alert("Nie jesteś zalogowany");

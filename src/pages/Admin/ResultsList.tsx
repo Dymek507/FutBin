@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Result from './Result'
 import { Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import AddResultModal from './AddResultModal'
+import AddResultModal from './AddResultModal/AddResultModal'
 import { useAppSelector } from '../../store/app/hooks'
 import InfoModal from '../../components/InfoModal'
 

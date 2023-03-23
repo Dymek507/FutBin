@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Pack from './Pack';
-import { PackT } from '../../modules/modelTypes';
+import { PackT } from '../../types/modelTypes';
 
 interface SwapPacksProps {
   packs: PackT[],

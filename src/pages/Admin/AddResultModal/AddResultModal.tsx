@@ -1,66 +1,16 @@
-import { Button, ButtonGroup, MenuItem, Modal, Box, TextField, InputLabel, Select, SelectChangeEvent } from '@mui/material'
+import { Button, ButtonGroup, MenuItem, Modal, Box, SelectChangeEvent } from '@mui/material'
 import React, { useState } from 'react'
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { useAppDispatch } from '../../store/app/hooks';
+import { useAppDispatch } from '../../../store/app/hooks';
 import { v4 as uuidv4 } from 'uuid';
-import { ResultT } from '../../modules/modelTypes';
-import { addResultAction } from '../../store/admin-actions';
+import { ResultT } from '../../../types/modelTypes';
+import { addResultAction } from '../../../store/admin-actions';
+import { goalButtons, users } from '../../../data/usersUid';
+import CustomSelect from './CustomSelect';
 
 type AddResultModalProps = {
   open: boolean;
   onClose: () => void
 }
-
-const users = [
-  {
-    value: '1mZUXLATajP3b8LFiOpPOvjilZR2',
-    label: 'Michał',
-  },
-  {
-    value: '6zCLcdUg6ng394sIAkrULMBcifr2',
-    label: 'Michał Ś.',
-  },
-  {
-    value: 'GOBwLmtYkgZItkBzqKBSBV1n6yX2',
-    label: 'Mateusz',
-  },
-  {
-    value: 'WnE3BocTFBULtk7JAFLUMpQWai82',
-    label: 'Damian',
-  },
-
-];
-const goalButtons = [
-  {
-    id: 0,
-  },
-  {
-    id: 1,
-  },
-  {
-    id: 2,
-  },
-  {
-    id: 3,
-  },
-  {
-    id: 4,
-  },
-  {
-    id: 5,
-  },
-  {
-    id: 6,
-  },
-  {
-    id: 7,
-  },
-  {
-    id: 8,
-  },
-];
-
-
 
 const AddResultModal = ({ open,
   onClose }: AddResultModalProps) => {
@@ -69,24 +19,6 @@ const AddResultModal = ({ open,
   const [userOneGoals, setUserOneGoals] = useState<number>(0)
   const [userTwoGoals, setUserTwoGoals] = useState<number>(0)
   const dispatch = useAppDispatch()
-
-  const CustomSelect = styled(Select)(({ theme }) => ({
-    maxWidth: '200px',
-    '& .MuiSvgIcon-root': {
-      color: theme.palette.primary.contrastText
-    },
-    color: "white",
-    '.MuiOutlinedInput-notchedOutline': {
-      borderColor: 'white',
-    },
-    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'white',
-    },
-    '&:hover .MuiOutlinedInput-notchedOutline': {
-      color: "white",
-      borderColor: 'white',
-    },
-  }));
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -106,10 +38,7 @@ const AddResultModal = ({ open,
       dispatch(addResultAction(result));
       onClose()
     }
-
-
   };
-
   const handleChangeOne = (event: SelectChangeEvent<unknown>) => {
     setUserOneUid(event.target.value as string);
   };
@@ -166,17 +95,17 @@ const AddResultModal = ({ open,
             </CustomSelect>
           </div>
           <div className='flex text-[1.2em] xs:text-[1.5em] sm:text-[2em]'>
-            <div className='flex flex-col items-center w-24 grow gap-2'>
+            <div className='flex flex-col items-center w-24 gap-2 grow'>
               {goalButtons.map(({ id }) => <div key={id} onClick={() => setUserOneGoals(id)} className='flex-center text-[1em] text-white w-[2em] h-[2em] border-2 border-white rounded-md' style={{ backgroundColor: `${id === userOneGoals ? 'white' : 'transparent'}`, color: `${id === userOneGoals ? 'black' : 'white'}` }}>{id}</div>)
               }
             </div>
-            <div className='flex flex-col items-center w-24 grow gap-2'>
+            <div className='flex flex-col items-center w-24 gap-2 grow'>
               {goalButtons.map(({ id }) => <div key={id} onClick={() => setUserTwoGoals(id)} className='flex-center text-[1em] text-white w-[2em] h-[2em]  border-2 border-white rounded-md' style={{ backgroundColor: `${id === userTwoGoals ? 'white' : 'transparent'}`, color: `${id === userTwoGoals ? 'black' : 'white'}` }}>{id}</div>)
               }
             </div>
           </div>
         </Box>
-        <ButtonGroup className='w-full mt-10 flex-center gap-2'>
+        <ButtonGroup className='w-full gap-2 mt-10 flex-center'>
           <Button variant="contained" size='large' color='secondary' type="submit">Confirm</Button>
         </ButtonGroup>
         {/* </ThemeProvider> */}

@@ -1,19 +1,6 @@
 import React, { useEffect, useState } from "react";
-import blankPhoto from "../assets/blankPlayerPic.svg";
-import {
-  goldN,
-  goldR,
-  silverN,
-  silverR,
-  bronzeN,
-  bronzeR,
-} from "../assets/CardBackgrounds";
-import { useFetchImages } from "../hooks/useFetchImages";
-import useGeneratePrice from "../hooks/generatePrice";
 import useGenerateStats from "../hooks/useGenerateStats";
-import { Player } from "../modules/modelTypes";
-
-import styles from "./Card.module.css";
+import { Player } from "../types/modelTypes";
 
 interface CardProps {
   playerData: Player;
@@ -63,37 +50,42 @@ const Card = ({
   return (
     <div
       onClick={addPlayer}
-      className={styles.playerCard}
+      className="relative bg-center bg-[length:22.5em_31em] bg-no-repeat h-[28em] w-[17.5em]"
       style={{
         fontSize: fontSize,
         filter: `${highlightPlayer ? "drop-shadow(0px 0px 30px #C7BA30)" : ""}`,
         backgroundImage: `url('${cardBackground}')`,
       }}
     >
-      <div className={styles.playerInfo}>
-        <div className={styles.playerOveral}>{rating}</div>
-        <div className={styles.playerPosition}>{position}</div>
-        <div className={styles.playerNationality}>
-          <img src={playerNation} alt="NationFlag" />
+      <div className="absolute flex flex-col top-[2.6em] left-[2.8em] w-auto items-center">
+        <div className="font-din text-[3.9em] leading-[0.7em]">{rating}</div>
+        <div className="font-din-thin font-bold text-[1.88em] ">{position}</div>
+        <div className="w-[2.75em] py-[0.4em] border-y border-black">
+          <img src={playerNation} alt="nation_flag" />
         </div>
-        <div className={styles.playerClub}>
-          <img src={playerClub} alt="ClubLogo" />
+        <div className="w-[2.25em] pt-[.4em]">
+          <img src={playerClub} alt="club_logo" />
         </div>
       </div>
-      <div className={styles.playerPicContainer}>
+      <div className="absolute top-[2.7em] right-[0.1em]">
         <img
-          className={styles.playerPic}
+          className="object-contain h-[12em]"
           src={playerPhoto}
           alt="Player_photo"
         />
       </div>
-      <div className="font-din text-[1.75em] font-bold truncate uppercase text-center absolute w-[7.5em] top-[8.35em] left-[1.25em] tracking-wide border-b border-black">
+      {/* Common name */}
+      <div className="absolute font-din text-[2.2em] leading-[1.2em] font-bold truncate uppercase text-center w-[7.5em] top-[6.7em] left-[0.2em] pb-0">
         {commonName}
       </div>
       <div
         className={`flex flex-col justify-center items-center absolute bottom-[3.25em] left-[0.31em] h-[6.25em] w-[16.875em]`}
       >
-        <div className={styles.playerStatsContainer}>
+        {/* Stats container */}
+        <div className="font-din text-[2em] font-semibold tracking-widest border-t border-black mx-[2em]
+        grid grid-cols-card-stats grid-rows-card-stats 
+        [&>*:nth-child(even)]:font-din-thin [&>*:nth-child(even)]:font-extralight
+        ">
           <div className="col-start-2">{pace}</div>
           <div className="col-start-4">{position !== "GK" ? "PAC" : "DIV"}</div>
           <div className="col-start-6">{dribbling}</div>
@@ -106,7 +98,7 @@ const Card = ({
           <div className="col-start-4">{position !== "GK" ? "PAS" : "KIC"}</div>
           <div className="col-start-6">{physicality}</div>
           <div className="col-start-8">{position !== "GK" ? "PHY" : "POS"}</div>
-          <div className={styles.statsVerticalLine}>
+          <div className="col-start-5 col-end-6 row-start-1 row-end-4 justify-self-center align-middle">
             <div className="bg-black h-[2.5em] w-[1px] mt-[0.5em]"></div>
           </div>
         </div>

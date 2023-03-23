@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { receivePackData } from "../../store/packs-actions";
 import OpeningBoard from "./opening/OpeningBoard";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
-import { PackT } from "../../modules/modelTypes";
+import { PackT } from "../../types/modelTypes";
 import SwapPacks from "./SwapPacks";
 import InfoScreen from "../../components/InfoScreen";
 
@@ -69,7 +69,7 @@ const MyPacks = () => {
       {showPrevPlayers && <OpeningBoard onClose={closePrevPackHandler} />}
       {/* <OpeningAnimation isVisible={true} progress={100} /> */}
       {!showPrevPlayers && !showModal && (
-        <div className=" w-full">
+        <div className="w-full ">
           <div className="flex justify-center items-center h-[10%] gap-4">
             <Button variant="contained" size="large" color="secondary" onClick={openPrevPackHandler}>
               Open previous pack

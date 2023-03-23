@@ -33,6 +33,7 @@ module.exports = {
   theme: {
     fontFamily: {
       din: ["DIN_Pro", "ui-sans-serif"],
+      "din-thin": ["DIN_Pro_thin", "ui-sans-serif"],
     },
     extend: {
       animation: {
@@ -62,6 +63,12 @@ module.exports = {
       flex: {
         2: "2 2 0%",
       },
+      gridTemplateColumns: {
+        "card-stats": "1fr auto 0.2em 1fr 1em auto 0.2em 1fr 1fr",
+      },
+      gridTemplateRows: {
+        "card-stats": "repeat(3, 0.94em)",
+      },
       keyframes: {
         movey: {
           "0%": { transform: "translate(0px,0px)" },
@@ -83,5 +90,5 @@ module.exports = {
       },
     },
   },
-  plugins: [Myclass],
+  plugins: [Myclass, require("tailwindcss-debug-screens")],
 };

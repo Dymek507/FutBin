@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { PackT } from "../../modules/modelTypes";
+import { PackT } from "../../types/modelTypes";
 import { PackImages } from "../../assets/packs"
 import packImages from "../../assets/packs"
 import { Typography } from "@mui/material";

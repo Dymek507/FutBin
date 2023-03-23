@@ -16,10 +16,8 @@ const fetcher = (url: string) =>
   axios.get(url, axiosFetchBlob).then((r) => r.data);
 
 export const useFetcherSWR = (endPoint: string) => {
-  const [endPointSave, setEndPointSave] = useState("");
   const [image, setImage] = useState<string>("");
   const [shouldFetch, setShouldFetch] = useState<boolean>(true);
-  // console.log(shouldFetch);
 
   const { data, error, isLoading } = useSWR(
     shouldFetch ? `https://futdb.app/api/${endPoint}` : null,
@@ -34,6 +32,15 @@ export const useFetcherSWR = (endPoint: string) => {
       setShouldFetch(false);
     }
   }, [data]);
+
+  // useEffect(() => {
+  //   if (error) {
+  //     throw new Response(
+  //       JSON.stringify({ message: "Could not fetch players" }),
+  //       { status: 500 }
+  //     );
+  //   }
+  // }, [error]);
 
   useEffect(() => {
     setShouldFetch(true);

@@ -38,11 +38,23 @@ export const useFetchImages = (
   useEffect(() => {
     if (isLoadingClub && isLoadingNation && isLoadingPhoto && startLoading) {
       startLoading = false;
+      console.log("Fetching Players");
+      enqueueSnackbar("Fetching Players", {
+        variant: "info",
+      });
     }
     if (!isLoadingClub && !isLoadingNation && !isLoadingPhoto) {
       setImagesLoaded(true);
     }
-  }, [isLoadingClub, isLoadingNation, isLoadingPhoto]);
+  }, [isLoadingClub, isLoadingNation, isLoadingPhoto, enqueueSnackbar]);
+
+  useEffect(() => {
+    if (errorClub || errorNation || errorPhoto) {
+      enqueueSnackbar("Błąd pobierania danych", {
+        variant: "error",
+      });
+    }
+  }, [errorClub, errorNation, errorPhoto, enqueueSnackbar]);
 
   return { playerPhoto, playerNation, playerClub };
 };

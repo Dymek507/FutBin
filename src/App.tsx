@@ -9,7 +9,6 @@ import { db } from "./firebaseConfig";
 import { useAppDispatch } from "./store/app/hooks";
 import { logOut } from "./store/ui-actions";
 
-import "./index.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -24,6 +23,7 @@ import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Login/RegisterPage";
 // import Admin from "./pages/Admin/Admin";
 import Layout from "./layouts/Layout";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -64,10 +64,12 @@ const router = createHashRouter([
   {
     path: "/",
     element: <HomeScreen />,
+    // errorElement: <ErrorPage />,
   },
   {
     path: "/",
     element: <Layout />,
+    // errorElement: <ErrorPage />,
     children: [
       //How to make home screen/ without layout
       // { index: true, element: <HomeScreen /> },

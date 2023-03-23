@@ -3,7 +3,7 @@ import axios from "axios";
 import { playersActions } from "./players-slice";
 import { collection, getDocs } from "@firebase/firestore";
 import { db } from "../firebaseConfig";
-import { Player } from "../modules/modelTypes";
+import { Player } from "../types/modelTypes";
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
@@ -40,7 +40,11 @@ export const drawPlayer = (
       const playerId = Math.floor(Math.random() * 16000);
       return await axios
         .get(`https://futdb.app/api/players/${playerId}`, axiosGetData)
-        .then((res) => res.data.player);
+        .then((res) => res.data.player)
+        .catch((error) => {
+          console.log(error);
+          throw new Error(error);
+        });
     };
 
     const rerender = async (): Promise<void> => {

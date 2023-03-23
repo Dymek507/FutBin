@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useAppSelector } from '../../store/app/hooks';
-import { Player, ISlot } from '../../modules/modelTypes'
+import { Player, ISlot } from '../../types/modelTypes'
 import MicroCard from './MicroCard';
 
 import blankSlot from '../../assets/blank-card-micro.png'

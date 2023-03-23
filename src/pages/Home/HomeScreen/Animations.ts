@@ -22,27 +22,28 @@ export const slideAnimation = (direction: 1 | -1, multiply: number) => {
   };
 };
 
-// export const infiniteAnimation = () => {
-// return {
-//   initial: {
-//     x: -1800,
-//     opacity: 1,
-//   },
-//   animate: {
-//     x: 1800,
-//     opacity: 1,
-//   },
-//   exit: {
-//     opacity: 0,
-//   },
-//   transition: {
-//     // type: "linear",
-//     delay: 0.3,
-//     duration: 20,
-//     // repeat: Infinity,
-//     repeatType: "loop",
-//   },
-// }};
+export const infiniteAnimation = () => {
+  return {
+    initial: {
+      x: -1800,
+      opacity: 1,
+    },
+    animate: {
+      x: 1800,
+      opacity: 1,
+    },
+    exit: {
+      opacity: 0,
+    },
+    transition: {
+      // type: "linear",
+      delay: 0.3,
+      duration: 20,
+      // repeat: Infinity,
+      repeatType: "loop",
+    },
+  };
+};
 
 export const appearAnimation = (duration: number, delay: number) => {
   return {

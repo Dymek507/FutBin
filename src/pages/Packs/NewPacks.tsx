@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { packsActions } from "../../store/packs-slice";
 import { sendPackData } from "../../store/packs-actions";
 import { useAppDispatch } from "../../store/app/hooks";
-import { PackT } from "../../modules/modelTypes";
+import { PackT } from "../../types/modelTypes";
 import SwapPacks from "./SwapPacks";
 import { packsData } from "../../data/packsData";
 

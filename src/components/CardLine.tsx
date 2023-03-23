@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useGenerateStats from "../hooks/useGenerateStats";
-import { Player } from "../modules/modelTypes";
+import { Player } from "../types/modelTypes";
 
 interface CardLineProps {
   playerData: Player;
@@ -35,8 +35,6 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
     playerPrice,
   } = useGenerateStats(playerData, 'line')
 
-
-
   const addPlayer = () => {
     setHighlightPlayer((prevState) => !prevState);
     sendPlayer({ ...playerData, playerPrice });
@@ -46,11 +44,13 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
     //Main bar container
     <div
       onClick={addPlayer}
-      className="flex text-[1.3rem] h-[3.2em] w-full shadow-2xl gap-[0.2em]"
+      className=
+      "flex text-[1.3rem] h-[3.2em] w-full shadow-2xl gap-[0.2em]"
       style={{
         background: cardBackground,
         filter: `${highlightPlayer ? 'brightness(40%)' : ""}`,
-      }}
+      }
+      }
     >
       {/*Player nation and photo*/}
       < div
@@ -66,7 +66,7 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
         />
       </div >
       {/*Player rating*/}
-      < div className="flex justify-center items-center mr-1" >
+      < div className="flex items-center justify-center mr-1" >
         <p className="text-[1.5em] px-[0.2em] border-r border-black">
           {rating}
         </p>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import ChoseOnPositionModal from "./ChoseOnPositionModal";
 import Slot from "./Slot";
-import { Player } from "../../modules/modelTypes";
+import { Player } from "../../types/modelTypes";
 import { addPlayerOnPosition, fetchPlayersData, fetchSquadData } from "../../store/players-actions";
 import { LinearProgress } from "@mui/material";
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { PackT } from "../modules/modelTypes";
+import type { PackT } from "../types/modelTypes";
 
 interface PackState {
   myPacks: PackT[] | [];

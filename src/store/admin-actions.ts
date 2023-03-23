@@ -1,7 +1,7 @@
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import { db } from "../firebaseConfig";
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
-import { ResultT } from "../modules/modelTypes";
+import { ResultT } from "../types/modelTypes";
 import { adminActions } from "./admin-slice";
 import { RootState } from "./store";
 import resultHandler from "./app/resultHandler";

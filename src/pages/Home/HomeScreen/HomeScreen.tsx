@@ -11,12 +11,15 @@ import SecondView from "./SecondView";
 import { appearAnimation, slideAnimation } from "./Animations";
 import ThirdView from "./ThirdView";
 
+import ball from "../../../assets/landing_page/ball.png";
+import FourthView from "./FourthView";
+
 
 
 const HomeScreen = () => {
   const { scrollYProgress, scrollY } = useScroll();
 
-  const y = useTransform(scrollYProgress, latest => latest * 200)
+  const y = useTransform(scrollYProgress, [0, 1], [0, 700]);
 
 
   const slideRightAnimation = slideAnimation(1, 2);
@@ -26,19 +29,23 @@ const HomeScreen = () => {
 
 
   return (
-    <div className="relative w-full overflow-x-hidden bg-[#1b1c53] ">
-      <section className="fixed box-content inset-0 border-2 h-[80vh] mt-[10vh] w-6 ml-6 z-[10] rounded-full">
-        <motion.div
+    <section className="relative w-full overflow-x-hidden bg-[#1b1c53] ">
+      {/* <section className="fixed box-content inset-0 border-2 h-[80vh] mt-[10vh] w-6 ml-6 z-[10] rounded-full"> */}
+      <div className="fixed box-content inset-0 h-[80vh] mt-[10vh] w-6 ml-6 z-[10] rounded-full">
+        <motion.img
+          src={ball}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="absolute top-0 left-0 bg-white h-6 w-6 z-[10] rounded-full" style={{ top: y || 0 }} />
+          className="absolute top-0 left-0 bg-white h-6 w-6 z-[10] rounded-full" style={{ y }} />
         {/* className="absolute  inset-0 bg-white h-12 w-12 z-[10] rounded-full" /> */}
-      </section>
+      </div>
+
       <FirstView />
 
       <SecondView />
       <ThirdView />
-    </div>
+      <FourthView />
+    </section>
 
 
   );

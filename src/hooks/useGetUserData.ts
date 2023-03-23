@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebaseConfig";
-import { UserData, UserDataOnDb } from "../modules/modelTypes";
+import { UserData, UserDataOnDb } from "../types/modelTypes";
 import { dummyUserDbData } from "../data/dummyUser";
 
 const useGetUserData = (uid: string | null): UserDataOnDb => {

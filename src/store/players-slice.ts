@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { Player, ISlot } from "../modules/modelTypes";
+import type { Player, ISlot } from "../types/modelTypes";
 import type { RootState } from "./store";
 import { formation1 } from "../data/formations";
 

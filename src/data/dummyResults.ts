@@ -1,4 +1,4 @@
-import { ResultT } from "../modules/modelTypes";
+import { ResultT } from "../types/modelTypes";
 
 export const dummyResults: ResultT[] = [
   {

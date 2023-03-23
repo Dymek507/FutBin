@@ -20,21 +20,31 @@ import {
   ViewList,
   ViewModule,
 } from "@mui/icons-material";
-import sortPlayers from "../../components/utils/sortPlayers";
+import sortPlayers from "./utils/sortPlayers";
 import { useTheme } from "@emotion/react";
-import { Player } from "../../modules/modelTypes";
+import { Player } from "../../types/modelTypes";
 import { styled } from "@mui/material";
 import InfoScreen from "../../components/InfoScreen";
 import GridView from "../../components/GridView";
 
-const sortOptions = [
-  { label: "Overall", type: "ovr" },
-  { label: "Pace", type: "pac" },
-  { label: "Shooting", type: "sho" },
-  { label: "Passing", type: "pas" },
-  { label: "Dribbling", type: "dri" },
-  { label: "Defending", type: "def" },
-  { label: "Physicality", type: "phy" },
+export enum Variant {
+  rat = "rating",
+  pac = "pace",
+  sho = "shooting",
+  pas = "passing",
+  dri = "dribbling",
+  def = "defending",
+  phy = "physicality",
+}
+
+const sortOptions: { label: string, type: Variant }[] = [
+  { label: "Overall", type: Variant.rat },
+  { label: "Pace", type: Variant.pac },
+  { label: "Shooting", type: Variant.sho },
+  { label: "Passing", type: Variant.pas },
+  { label: "Dribbling", type: Variant.dri },
+  { label: "Defending", type: Variant.def },
+  { label: "Physicality", type: Variant.phy },
 ];
 
 const MyPlayers = () => {
@@ -43,7 +53,7 @@ const MyPlayers = () => {
   const uId = useAppSelector((state) => state.ui.userData?.uId);
   const [playersGridView, setPlayersGridView] = useState<boolean>(true);
   const [pickedPlayers, setPickedPlayers] = useState<Player[]>([]);
-  const [sortingAtr, setSortingAtr] = useState<string>("ovr");
+  const [sortingAtr, setSortingAtr] = useState<Variant>(Variant.rat);
   const [sortingDir, setSortingDir] = useState<boolean>(true);
   const playersArray = useMemo(
     () => sortPlayers(myPlayers, sortingAtr, sortingDir),
@@ -81,7 +91,7 @@ const MyPlayers = () => {
   };
 
   const sortingHandler = (event: SelectChangeEvent<unknown>) => {
-    setSortingAtr(event.target.value as string);
+    setSortingAtr(event.target.value as Variant);
   };
 
   const CustomSelect = styled(Select)(({ theme }) => ({

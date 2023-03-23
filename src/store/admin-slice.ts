@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ResultT } from "../modules/modelTypes";
+import { ResultT } from "../types/modelTypes";
 import { dummyResults } from "../data/dummyResults";
 
 interface AdminState {

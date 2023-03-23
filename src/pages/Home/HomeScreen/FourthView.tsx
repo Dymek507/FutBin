@@ -6,7 +6,7 @@ import Card from "../../../components/Card";
 import dummyPlayer from "../../../data/dummyPlayer";
 import { Grid, Typography } from "@mui/material";
 import Animation from "../Animation";
-import monitorGame from '../../../assets/landing_page/monitor_game_1.png'
+import monitorPlayers from '../../../assets/landing_page/monitor_players.png'
 
 const slideLeftVariant = {
   visible: { opacity: 1, scale: 1, x: 0, transition: { duration: 2, delay: 1 } },
@@ -17,7 +17,7 @@ const slideRightVariant = {
   hidden: { opacity: 0, scale: 0, x: '100%' }
 };
 
-const SecondView = () => {
+const FourthView = () => {
 
   const controls = useAnimation();
   const [ref, inView] = useInView()
@@ -37,7 +37,7 @@ const SecondView = () => {
       <Grid item xs={5} className='self-center'>
         <motion.img
           variants={slideLeftVariant}
-          src={monitorGame}
+          src={monitorPlayers}
           animate={controls}
           initial="hidden"
           className="h-1/2"
@@ -56,7 +56,7 @@ const SecondView = () => {
   )
 }
 
-export default SecondView
+export default FourthView
 
 // {/* <Animation /> */ }
 // {/* <motion.div

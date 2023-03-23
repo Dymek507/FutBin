@@ -4,7 +4,7 @@ import { signOut } from "firebase/auth";
 import { auth, db } from "../firebaseConfig";
 import { RootState } from "./store";
 import { uiActions } from "./ui-slice";
-import { UserData } from "../modules/modelTypes";
+import { UserData } from "../types/modelTypes";
 
 //Poprawić akcje ui i ui slice
 
