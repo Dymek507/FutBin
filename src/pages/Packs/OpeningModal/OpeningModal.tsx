@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Modal from "@mui/material/Modal";
 
-import OpeningAnimation from "./OpeningAnimation";
-import WalkoutAnimation from "./WalkoutAnimation";
+import OpeningAnimation from "./OpeningAnimation/OpeningAnimation";
+import WalkoutAnimation from "./OpeningWalkout";
 import OpeningBoard from "./OpeningBoard";
 import sortPlayers from "../../MyPlayers/utils/sortPlayers";
 import { PackT, Player } from "../../../types/modelTypes";

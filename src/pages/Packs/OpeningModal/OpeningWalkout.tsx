@@ -32,8 +32,27 @@ const WalkoutAnimation = ({ closeWalkout, player }: WalkoutAnimationProps) => {
 
 
   return (
-    <div onClick={closeWalkout} className="w-full h-full text-2xl z-30 ">
-      <div className="absolute inset-0 h-full w-full flex flex-col gap-8 justify-between items-center text-sm sm:text-3xl bg-black bg-walkout-bg-2 bg-cover bg-center">
+    <div onClick={closeWalkout} className="z-30 w-full h-full text-2xl ">
+      <Fireworks
+        options={{
+          delay: {
+            min: 90,
+            max: 100,
+          },
+          explosion: 2,
+        }}
+        style={{
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "80%",
+          position: "fixed",
+          backgroundColor: "black",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      ></Fireworks>
+      <div className="absolute inset-0 flex flex-col items-center justify-between w-full h-full gap-8 text-sm bg-center bg-cover sm:text-3xl bg-walkout-bg-2">
         <div className="absolute left-[2%] sm:left-[10%] bottom-[10%] h-[16em] w-[10em] bg-walkout-fr-l bg-contain bg-no-repeat">
           <motion.div
             custom={10}

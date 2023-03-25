@@ -6,11 +6,11 @@ import { playersActions } from "../../store/players-slice";
 import { drawPlayer } from "../../store/players-fetch";
 import { sendPackData } from "../../store/packs-actions";
 
-import OpeningModal from "./opening/OpeningModal";
+import OpeningModal from "./OpeningModal/OpeningModal";
 import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { receivePackData } from "../../store/packs-actions";
-import OpeningBoard from "./opening/OpeningBoard";
+import OpeningBoard from "./OpeningModal/OpeningBoard";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { PackT } from "../../types/modelTypes";
 import SwapPacks from "./SwapPacks";

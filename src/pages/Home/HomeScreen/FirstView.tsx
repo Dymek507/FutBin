@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import ball from "../../../assets/landing_page/ball.png";
 
 
+
 const bouncingAnimation = {
   initial: {
     y: 0,
@@ -45,7 +46,7 @@ const FirstView = () => {
 
   return (
     <div>
-      <div className='relative h-screen overflow-x-hidden flex-center' style={{ background: 'linear-gradient(215deg,rgba(229, 0, 0, 1) 0%,rgba(132, 0, 0, 1) 35%,rgba(0, 36, 108, 1) 70%,rgba(0, 77, 231, 1) 100%)' }}>
+      <div className='relative h-screen overflow-x-hidden flex-center' style={{ background: 'linear-gradient(200deg,rgba(229, 0, 0, 1) 0%,rgba(132, 0, 0, 1) 35%,rgba(0, 36, 108, 1) 70%,rgba(0, 77, 231, 1) 100%)' }}>
         <div className="self-start flex justify-end w-full mr-4   z-[5]">
           <nav className="p-4 text-2xl text-white">
             <ul className="flex flex-row gap-5">
@@ -74,7 +75,7 @@ const FirstView = () => {
         )} className="absolute text-[20rem] inset-[50%, 50%] text-white" >Fut Draft</motion.p>
         <motion.img className="absolute inset-[50%, 50%] h-full z-[3]" src={landingPageImages.lewandowski} alt="lewandowski_photo"
         />
-        <motion.img {...bouncingAnimation} src={ball} className="absolute bottom-0 left-64 bg-white h-32 w-32 z-[10] rounded-full" />
+        {/* <motion.img {...bouncingAnimation} src={ball} className="absolute bottom-0 left-64 bg-white h-32 w-32 z-[10] rounded-full" /> */}
       </div>
     </div>
   )

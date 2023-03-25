@@ -5,7 +5,7 @@ export type Player = {
   weakFoot: number;
   totalStatsInGame: number;
   rarity: number;
-  color: string;
+  color: "bronze" | "silver" | "gold";
   commonName: string;
   league: number;
   position: string;

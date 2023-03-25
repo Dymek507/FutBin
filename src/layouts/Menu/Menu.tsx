@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { uiActions } from "../store/ui-slice";
-import { logOut } from "../store/ui-actions";
-import { playersActions } from "../store/players-slice";
+import { uiActions } from "../../store/ui-slice";
+import { logOut } from "../../store/ui-actions";
+import { playersActions } from "../../store/players-slice";
+import { drawerStyles, listItemStyles } from "./menuStyles";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -15,14 +15,11 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import GroupsIcon from "@mui/icons-material/Groups";
 import InventoryIcon from "@mui/icons-material/Inventory";
-
-import NEY from "../assets/menu-effect-1.webp";
 import { AdminPanelSettings } from "@mui/icons-material";
-import { useAppDispatch, useAppSelector } from "../store/app/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -85,23 +82,17 @@ const Menu = () => {
       icon: <AdminPanelSettings />,
       link: "/admin",
     },
-  ];
-  const subMenuList = [
     {
-      id: 1,
-      text: "Settings",
-      icon: <SettingsIcon />,
-      link: "/settings",
-      onClick: () => { },
-    },
-    {
-      id: 2,
+      id: 7,
       text: "Logout",
       icon: <LogoutIcon />,
       link: "/logout",
       onClick: logoutHandler,
     },
   ];
+
+
+
 
   const list = (
     <Box sx={{ width: 250 }} role="presentation">
@@ -114,15 +105,7 @@ const Menu = () => {
           >
             <ListItem
               disablePadding
-              sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(7,26,42,1)",
-                  color: "white",
-                  "& .MuiListItemIcon-root": {
-                    color: "white",
-                  },
-                },
-              }}
+              sx={listItemStyles}
             >
               <ListItemButton
                 sx={{
@@ -138,41 +121,6 @@ const Menu = () => {
           </Link>
         ))}
       </List>
-      <Divider
-        sx={{
-          backgroundColor: "white",
-          marginX: "20px",
-        }}
-      />
-      <List>
-        {subMenuList.map((item) => (
-          <ListItem
-            key={item.id}
-            disablePadding
-            sx={{
-              "&:hover": {
-                backgroundColor: "rgba(7,26,42,1)",
-                color: "white",
-                "& .MuiListItemIcon-root": {
-                  color: "white",
-                },
-              },
-            }}
-          >
-            <ListItemButton
-              sx={{
-                "& .MuiSvgIcon-root": {
-                  color: "white",
-                },
-              }}
-              onClick={item.onClick}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
     </Box>
   );
 
@@ -181,14 +129,7 @@ const Menu = () => {
       <React.Fragment>
         <Drawer
           PaperProps={{
-            sx: {
-              backgroundColor: "rgba(12,52,86,1)",
-              color: "white",
-              backgroundImage: `url(${NEY})`,
-              backgroundSize: "50vh auto",
-              backgroundPosition: "30% 110%",
-              backgroundRepeat: "no-repeat",
-            },
+            sx: drawerStyles,
           }}
           sx={{
             display: {

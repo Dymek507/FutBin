@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import useGenerateStats from "../../hooks/useGenerateStats";
+import React, { useEffect, useMemo, useState } from "react";
+import { useFetchImages } from "../../hooks/useFetchImages";
+import generateStats from "../../utils/generateStats/generateStats";
 import { Player } from "../../types/modelTypes";
 
 
@@ -28,13 +29,19 @@ const Card = ({
     setHighlightPlayer(ifPicked);
   }, [pickedArray, playerData]);
 
-  const { cardBackground, playerPhoto,
-    playerClub,
-    playerNation,
+  //Add default photo if player has no photo
+  //Adding photos to Card
+  const { playerPhoto, playerClub, playerNation } = useFetchImages(
+    playerData.id,
+    playerData.club,
+    playerData.nation
+  );
+
+  const { cardBackground,
     commonName,
     rating,
     position,
-    playerPrice } = useGenerateStats(playerData, 'card')
+    playerPrice } = useMemo(() => generateStats(playerData, "card"), [playerData])
 
   const addPlayer = () => {
     sendPlayer({ ...playerData, playerPrice });

@@ -22,7 +22,7 @@ import SquadPage from "./pages/Squad/SquadPage";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Login/RegisterPage";
 // import Admin from "./pages/Admin/Admin";
-import Layout from "./layouts/Layout";
+import Layout from "./layouts/MainLayout";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 declare module '@mui/material/styles' {
@@ -52,8 +52,6 @@ declare module '@mui/material/styles' {
     darker?: string;
   }
 
-
-
 }
 
 const HomeScreen = loadable(() => import('./pages/Home/HomeScreen/HomeScreen'))
@@ -62,17 +60,15 @@ const Admin = loadable(() => import('./pages/Admin/Admin'))
 
 const router = createHashRouter([
   {
-    path: "/",
+    path: "",
     element: <HomeScreen />,
-    // errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
   },
   {
-    path: "/",
+    path: "",
     element: <Layout />,
-    // errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
-      //How to make home screen/ without layout
-      // { index: true, element: <HomeScreen /> },
       { path: "new-packs", element: <NewPacks /> },
       { path: "my-packs", element: <MyPacks /> },
       { path: "my-players", element: <MyPlayers /> },
@@ -105,9 +101,7 @@ function App() {
       const userDocRef = doc(db, `users/${uId}`);
       try {
         const userDoc = await getDoc(userDocRef);
-
         const userData = userDoc.data();
-
         dispatch(
           uiActions.login({
             logged: true,
@@ -140,8 +134,6 @@ function App() {
 
     return authentication();
   }, [auth, dispatch]);
-
-
 
   const theme = createTheme({
     palette: {

@@ -13,11 +13,13 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { UserData } from "../types/modelTypes";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../store/app/hooks";
+import { useAppDispatch } from "../store/app/hooks";
 import { logOut } from "../store/ui-actions";
 import { doc, onSnapshot } from "@firebase/firestore";
 import { db } from "../firebaseConfig";
 import { uiActions } from "../store/ui-slice";
+
+import avatar from "../assets/avatar.jpg";
 
 
 
@@ -62,7 +64,7 @@ export default function AccountMenu({ userData }: AccountMenuProps) {
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Typography fontSize='1.5em' sx={{ pr: 2 }}>{userData.money}</Typography>
-        <Typography fontSize='1.5em' sx={{}}>{userData.login}</Typography>
+        <Typography fontSize='1.5em' >{userData.login}</Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -72,7 +74,7 @@ export default function AccountMenu({ userData }: AccountMenuProps) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 40, height: 40 }}>M</Avatar>
+            <Avatar src={avatar} sx={{ width: 40, height: 40 }}>M</Avatar>
           </IconButton>
         </Tooltip>
       </Box>

@@ -1,4 +1,3 @@
-import { display } from "@mui/system";
 import { Player } from "../../types/modelTypes";
 import {
   getPriceThreshold,
@@ -8,7 +7,7 @@ import {
 } from "./generatePriceFunctions";
 
 const generatePrice = (playerData: Player) => {
-  // Hook which determines player price base on various stats
+  // Function which determines player price base on various stats
   const {
     position,
     color,
@@ -30,13 +29,17 @@ const generatePrice = (playerData: Player) => {
 
   //Price part which depends on skill moves and weak foot
   const skillFootPrice = (skillMoves + weakFoot) * mapMulti.skillFoot;
+
   //Price part which depends on total stats
   const totalStatsPrice = totalStatsInGame * mapMulti.totalStats;
+
   //Price part which depends on player rating
   const ratingPrice = getPriceThreshold(rating) * mapMulti.rating;
+
   // Price part which depends on player position
   const positionPrice =
     getPositionPrice(position, playerData) * mapMulti.position;
+
   // Price part which depends on player color and rarity
   const colorAndRarityPrice = getColorAndRarityPrice(color, rarity);
 

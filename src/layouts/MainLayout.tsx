@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 import { Outlet } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 

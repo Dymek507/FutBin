@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import useGenerateStats from "../hooks/useGenerateStats";
+import React, { useEffect, useMemo, useState } from "react";
+import { useFetchImages } from "../hooks/useFetchImages";
+import generateStats from "../utils/generateStats/generateStats";
 import { Player } from "../types/modelTypes";
 
 interface CardProps {
@@ -27,10 +28,15 @@ const Card = ({
     setHighlightPlayer(ifPicked);
   }, [pickedArray, playerData]);
 
+  //Add default photo if player has no photo
+  //Adding photos to Card
+  const { playerPhoto, playerClub, playerNation } = useFetchImages(
+    playerData.id,
+    playerData.club,
+    playerData.nation
+  );
+
   const { cardBackground,
-    playerPhoto,
-    playerClub,
-    playerNation,
     commonName,
     rating,
     position,
@@ -41,7 +47,7 @@ const Card = ({
     passing,
     physicality,
     playerPrice,
-    displayPrice } = useGenerateStats(playerData, "card")
+    displayPrice } = useMemo(() => generateStats(playerData, "card"), [playerData])
 
   const addPlayer = () => {
     sendPlayer({ ...playerData, playerPrice });
@@ -98,7 +104,7 @@ const Card = ({
           <div className="col-start-4">{position !== "GK" ? "PAS" : "KIC"}</div>
           <div className="col-start-6">{physicality}</div>
           <div className="col-start-8">{position !== "GK" ? "PHY" : "POS"}</div>
-          <div className="col-start-5 col-end-6 row-start-1 row-end-4 justify-self-center align-middle">
+          <div className="col-start-5 col-end-6 row-start-1 row-end-4 align-middle justify-self-center">
             <div className="bg-black h-[2.5em] w-[1px] mt-[0.5em]"></div>
           </div>
         </div>
