@@ -1,14 +1,12 @@
-
 import React, { useRef, useState, useEffect } from "react";
-
 import { motion, AnimatePresence, useScroll, useInView, useSpring, useTransform } from "framer-motion";
 import FirstView from "./FirstView";
 import SecondView from "./SecondView";
 import { appearAnimation, slideAnimation } from "./Animations";
-import ChoseClubView from "./ChoseClubView";
 
 import ball from "../../../assets/landing_page/ball.png";
 import MockupView from "./MockupView";
+import ClubView from "./ClubView/ClubView";
 
 
 
@@ -22,21 +20,19 @@ const HomeScreen = () => {
   const slideLeftAnimation = slideAnimation(-1, 4);
 
   return (
-    <section className="relative w-full overflow-x-hidden bg-[#1b1c53] ">
-      {/* <section className="fixed box-content inset-0 border-2 h-[80vh] mt-[10vh] w-6 ml-6 z-[10] rounded-full"> */}
-      <div className="fixed box-content inset-0 h-[80vh] mt-[10vh] w-6 ml-6 z-[10] rounded-full">
+    <main className="relative w-screen h-screen overflow-x-hidden bg-[#1b1c53] overflow-y-scroll snap-y snap-mandatory bg-gradient-to-tr from-sky-700 to-slate-500">
+      {/* <div className="fixed box-content inset-0 h-[80vh] mt-[10vh] w-6 ml-6 z-[10] rounded-full">
         <motion.img
           src={ball}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           className="absolute top-0 left-0 bg-white h-6 w-6 z-[10] rounded-full" style={{ y }} />
-        {/* className="absolute  inset-0 bg-white h-12 w-12 z-[10] rounded-full" /> */}
-      </div>
+      </div> */}
       <FirstView />
-      <ChoseClubView />
+      <ClubView />
       <SecondView />
       <MockupView />
-    </section>
+    </main>
 
 
   );

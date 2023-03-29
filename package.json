@@ -37,6 +37,7 @@
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
     "react-ui-cards": "^3.0.2",
+    "styled-components": "^5.3.9",
     "swiper": "^9.1.0",
     "swr": "^2.0.1",
     "use-window-size-v2": "^2.0.3",
@@ -71,6 +72,7 @@
   },
   "devDependencies": {
     "@types/loadable__component": "^5.13.4",
+    "@types/styled-components": "^5.1.26",
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.53.0",
@@ -86,5 +88,9 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
+  },
+  "headwind.classRegex": {
+    "html": "\\bclass\\s*=\\s*[\\\"\\'](https://github.com/heybourn/headwind/blob/master/[_a-zA-Z0-9\\s\\-\\:\\/]+)[\\\"\\']",
+    "javascriptreact": "(?:\\bclassName\\s*=\\s*[\\\"\\'](https://github.com/heybourn/headwind/blob/master/[_a-zA-Z0-9\\s\\-\\:\\/]+)[\\\"\\'])|(?:\\btw\\s*`([_a-zA-Z0-9\\s\\-\\:\\/]*)`)"
   }
 }

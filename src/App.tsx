@@ -1,95 +1,22 @@
 import React, { useEffect, lazy, Suspense } from "react";
-import { createBrowserRouter, RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { uiActions } from "./store/ui-slice";
 import { doc, getDoc } from "@firebase/firestore";
-import loadable from '@loadable/component'
 import { createTheme, LinearProgress, ThemeProvider } from "@mui/material";
 import { db } from "./firebaseConfig";
 import { useAppDispatch } from "./store/app/hooks";
 import { logOut } from "./store/ui-actions";
+import { router } from './App.routes'
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { themeMain } from "./AppMuiTheme";
 
-// import HomeScreen from "./pages/Home/HomeScreen";
-import NewPacks from "./pages/Packs/NewPacks";
-import MyPacks from "./pages/Packs/MyPacks";
-// import MyPlayers from "./pages/MyPlayers/MyPlayers";
-import SquadPage from "./pages/Squad/SquadPage";
-import LoginPage from "./pages/Login/LoginPage";
-import RegisterPage from "./pages/Login/RegisterPage";
-// import Admin from "./pages/Admin/Admin";
-import Layout from "./layouts/MainLayout";
-import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: React.CSSProperties['color'];
-    };
-  }
 
-  interface BreakpointOverrides {
-    xxs: true;
-  }
-
-  interface Palette {
-    neutral: Palette['primary'];
-  }
-
-  interface PaletteOptions {
-    neutral: PaletteOptions['primary'];
-  }
-
-  interface PaletteColor {
-    darker?: string;
-  }
-
-  interface SimplePaletteColorOptions {
-    darker?: string;
-  }
-
-}
-
-const HomeScreen = loadable(() => import('./pages/Home/HomeScreen/HomeScreen'))
-const MyPlayers = loadable(() => import('./pages/MyPlayers/MyPlayers'))
-const Admin = loadable(() => import('./pages/Admin/Admin'))
-
-const router = createHashRouter([
-  {
-    path: "",
-    element: <HomeScreen />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "",
-    element: <Layout />,
-    errorElement: <ErrorPage />,
-    children: [
-      { path: "new-packs", element: <NewPacks /> },
-      { path: "my-packs", element: <MyPacks /> },
-      { path: "my-players", element: <MyPlayers /> },
-      { path: "squad", element: <SquadPage /> },
-      { path: "admin", element: <Admin /> },
-      {
-        path: "/account",
-        children: [
-          {
-            path: "login",
-            element: <LoginPage />,
-          },
-          {
-            path: "register",
-            element: <RegisterPage />,
-          },
-        ],
-      },
-    ],
-  },
-]);
 
 function App() {
   const dispatch = useAppDispatch();
@@ -120,6 +47,7 @@ function App() {
     }
   };
 
+  //After app starts, this code check if user is logged in. If yes, fetch user data from firebase and save it in redux store.
   useEffect(() => {
     const authentication = onAuthStateChanged(auth, async (user) => {
       if (user !== null) {
@@ -135,40 +63,9 @@ function App() {
     return authentication();
   }, [auth, dispatch]);
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        light: "#757ce8",
-        main: "rgba(12,52,86,0.85)",
-        dark: "#002884",
-        contrastText: "#fff",
-      },
-      secondary: {
-        light: "#ff7961",
-        main: "#f50057",
-        dark: "#ad0340",
-        contrastText: "#fff",
-      },
-      neutral: {
-        main: '#64748B',
-        contrastText: '#fff',
-      },
-    },
-    breakpoints: {
-      values: {
-        xxs: 0,
-        xs: 420,
-        sm: 640,
-        md: 900,
-        lg: 1200,
-        xl: 1536,
-      },
-    },
-  });
-
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeMain}>
         <Suspense fallback={<div className="w-screen h-screen ">
           <LinearProgress />
         </div>}>

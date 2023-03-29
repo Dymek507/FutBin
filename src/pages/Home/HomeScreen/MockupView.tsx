@@ -31,7 +31,7 @@ const MockupView = () => {
   }, [controls, inView])
 
   return (
-    <Grid ref={ref} container className='grid w-screen h-screen p-12 text-white'>
+    <Grid ref={ref} container className='grid w-screen h-screen p-12 text-white snap-center'>
       <Grid item xs={12} className='flex-center '>
         <Typography variant="h1" className="text-6xl font-bold ">
           Play matches with friends!</Typography>

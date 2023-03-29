@@ -1,7 +1,11 @@
+//@ts-nocheck
+
 import React, { useState, useEffect, useMemo, Suspense } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { fetchPlayersData, deletePlayer } from "../../store/players-actions";
 import manageMoney from "../../store/app/manageMoney"
+
+import { bestPlayers } from "../../data/top-players"
 
 import {
   Button,
@@ -50,6 +54,9 @@ const sortOptions: { label: string, type: Variant }[] = [
 const MyPlayers = () => {
   const dispatch = useAppDispatch();
   const myPlayers = useAppSelector((state) => state.players.myPlayers);
+  // console.log(myPlayers)
+  // const myPlayers = bestPlayers.slice(380, 403);
+  // console.log(bestPlayers.length)
   const uId = useAppSelector((state) => state.ui.userData?.uId);
   const [playersGridView, setPlayersGridView] = useState<boolean>(true);
   const [pickedPlayers, setPickedPlayers] = useState<Player[]>([]);

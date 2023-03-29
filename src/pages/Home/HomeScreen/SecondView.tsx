@@ -29,7 +29,7 @@ const SecondView = () => {
   }, [controls, inView])
 
   return (
-    <Grid ref={ref} container className='grid w-screen h-screen p-12 text-black bg-gray-200'>
+    <Grid ref={ref} container className='grid w-screen h-screen p-12 text-black bg-gray-200 snap-center'>
       <Grid item xs={12} className='flex-center '>
         <Typography variant="h1" className="text-6xl font-bold ">
           Play matches with friends!</Typography>
@@ -46,7 +46,7 @@ const SecondView = () => {
       </Grid>
       <Grid item xs={7} className='flex items-center justify-end pr-12 '>
         <Typography variant="h4" className="text-6xl font-bold">
-          Win and add results to collect money</Typography>
+          "Get ready to draft your dream team with FutDraft! Our app lets you draw packs, sell and exchange players, and build your ultimate squad. With our easy-to-use interface and comprehensive database of players, you'll be able to create a team that will take on any challenge."</Typography>
       </Grid>
     </Grid>
 
