@@ -27,8 +27,8 @@ export const clubsData = [
     logo: clubLogos.bvb,
     colors: {
       text: "#fff",
-      main: "#000",
-      secondary: "#FFD700",
+      main: "#FFD700",
+      secondary: "#000",
     },
   },
   {

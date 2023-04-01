@@ -1,19 +1,52 @@
-export const slideAnimation = (direction: 1 | -1, multiply: number) => {
+export const slideAnimationX = (
+  direction: "left" | "right",
+  multiply: number,
+  initialOpacity?: number,
+  distance?: string
+) => {
   return {
     initial: {
-      x: direction > 0 ? 2000 : -2000,
-      opacity: 1,
+      x: direction === "right" ? "100%" : "-100%",
+      opacity: 0,
     },
     animate: {
       x: 0,
-      opacity: 1,
+      opacity: 0.3,
       transition: {
         delay: multiply * 0.3,
         duration: 4,
       },
     },
     exit: {
-      x: direction < 0 ? 2000 : -2000,
+      x: direction === "right" ? "100%" : "-100%",
+      opacity: 1,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+};
+export const slideAnimationY = (
+  direction: "top" | "bottom",
+  multiply: number,
+  initialOpacity: number,
+  distance: string
+) => {
+  return {
+    initial: {
+      y: direction === "bottom" ? distance : -distance,
+      opacity: initialOpacity,
+    },
+    animate: {
+      y: 0,
+      opacity: 0.3,
+      transition: {
+        delay: multiply * 0.3,
+        duration: 4,
+      },
+    },
+    exit: {
+      y: direction === "bottom" ? distance : -distance,
       opacity: 1,
       transition: {
         duration: 1,
@@ -51,7 +84,7 @@ export const appearAnimation = (duration: number, delay: number) => {
       opacity: 0,
     },
     animate: {
-      opacity: 1,
+      opacity: 0.3,
     },
     exit: {
       opacity: 0,

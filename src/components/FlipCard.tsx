@@ -10,16 +10,22 @@ import {
   bronzeR,
 } from "../assets/CardBackgrounds";
 
-const FlipCard = () => {
+interface FlipCardProps {
+  front: JSX.Element;
+  back: JSX.Element;
+  className?: string;
+}
+
+const FlipCard = ({ front, back, className }: FlipCardProps) => {
   const [rotate, setRotate] = useState(false)
   return (
-    <div className='w-[300px] h-[420px] bg-transparent cursor-pointer group perspective' onClick={() => setRotate(prev => !prev)}>
-      <div className='relative w-full h-full duration-1000 preserve-3d ' style={{ transform: `${rotate ? 'rotateY(180deg)' : 'rotateY(0deg)'}` }}>
+    <div className={'bg-transparent cursor-pointer  group perspective' + className} onClick={() => setRotate(prev => !prev)}>
+      <div className='relative w-full h-full duration-1000 preserve-3d ' style={{ transform: `${rotate ? 'rotateY(180deg)' : 'rotateY(0deg)'} ` }}>
         <div className='absolute w-full h-full duration-1000 backface-hidden flex-center' >
-          {/* <Card playerData={dummyPlayer} fontSize={'14px'} /> */}
+          {front}
         </div>
         <div className='absolute w-full h-full overflow-hidden duration-1000 backface-hidden my-rotate-y-180' >
-          <img src={goldR} className="w-full h-full" />
+          {back}
         </div>
 
       </div>

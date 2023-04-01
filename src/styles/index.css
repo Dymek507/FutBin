@@ -16,18 +16,20 @@
 @tailwind utilities;
 
 body {
-  overscroll-behavior: contain;
+  /* overscroll-behavior: contain;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
-  background: linear-gradient(
+  user-select: none; */
+  /* background: linear-gradient(
     0deg,
     rgba(4, 26, 3, 1) 0%,
     rgba(7, 45, 5, 1) 39%,
     rgba(14, 77, 11, 1) 100%
-  );
+  ); */
+  /* background: linear-gradient(0deg, #0fb8ad 0%, #1fc8db 51%, #000000 85%);
+  background-attachment: scroll; */
 }
 
 svg {

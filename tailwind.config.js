@@ -90,5 +90,5 @@ module.exports = {
       },
     },
   },
-  plugins: [Myclass, require("tailwindcss-debug-screens")],
+  plugins: [Myclass, require("tailwindcss-debug-screens"), require("daisyui")],
 };
