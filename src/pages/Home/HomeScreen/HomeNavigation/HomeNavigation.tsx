@@ -2,21 +2,34 @@ import React, { useState } from 'react';
 
 import { motion, AnimateSharedLayout } from 'framer-motion';
 import MenuItem from './MenuItem';
+import { SectionRefType } from '../types/homeTypes';
+import { VIEWS_LIST } from '../data/views_list';
 
-const menuItems = ['Play matches', 'Buy packs', 'Draw players', 'Assembly squad'];
 
-const HomeNavigation = () => {
-  const [selected, setSelected] = useState(0);
+interface IHomeNavigationProps {
+  scrollTo: (sectionRef: SectionRefType) => void;
+  setPage: (page: number) => void;
+  selected: number;
+}
+
+const HomeNavigation = ({ scrollTo, setPage, selected }: IHomeNavigationProps) => {
+
+  const handlerClick = (page: number, sectionRef: SectionRefType) => {
+    scrollTo(sectionRef);
+    setPage(page);
+  }
+
+
   return (
     <div className="flex justify-end mr-4 wh-full color-black ">
       <div className="flex justify-evenly">
         <AnimateSharedLayout>
-          {menuItems.map((el, i) => (
+          {VIEWS_LIST.map((el) => (
             <MenuItem
-              text={el}
-              key={i}
-              selected={selected === i}
-              onClick={() => setSelected(i)}
+              text={el.text}
+              key={el.page}
+              selected={selected === el.page}
+              onClick={() => handlerClick(el.page, el.ref)}
             />
           ))}
         </AnimateSharedLayout>
@@ -26,14 +39,3 @@ const HomeNavigation = () => {
 }
 
 export default HomeNavigation;
-
-{/* <nav className="p-4 text-3xl text-white">
-            <ul className="flex flex-row gap-5">
-              <Link to="/my-players">
-                <li className="border-b-2">Play matches</li>
-              </Link>
-              <li>Buy packs</li>
-              <li>Draw players</li>
-              <li>Assembly squad</li>
-            </ul >
-          </nav > */}

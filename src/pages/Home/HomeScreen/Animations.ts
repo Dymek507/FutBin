@@ -84,7 +84,7 @@ export const appearAnimation = (duration: number, delay: number) => {
       opacity: 0,
     },
     animate: {
-      opacity: 0.3,
+      opacity: 1,
     },
     exit: {
       opacity: 0,

@@ -28,20 +28,20 @@ const Result = ({ resultData }: ResultProps) => {
   return (
     <>
       <InfoModal open={showInfoModal} onClose={() => setShowInfoModal(false)} >
-        <div className='relative h-full flex flex-col items-center gap-6 mt-8 text-white'>
+        <div className='relative flex flex-col items-center h-full gap-6 mt-8 text-white'>
           <IconButton onClick={deleteHandler}>
-            <DeleteIcon />
+            <DeleteIcon className='text-white' />
           </IconButton>
           <Typography variant='h2'>Match Result</Typography>
           <Typography variant='h5'>{date}</Typography>
           <div className='flex w-full gap-4 px-4'>
-            <div className='flex flex-col items-center grow gap-4 pt-2 bg-sky-800 h-72 w-72'>
+            <div className='flex flex-col items-center gap-4 pt-2 grow bg-sky-800 h-72 w-72'>
               <Typography variant='h4'>{userOneData.login}</Typography>
               <Typography variant='h4'>{userOneGoals}</Typography>
               <Typography variant='h4'>+{resultHandler(userOneGoals, userTwoGoals)}</Typography>
 
             </div>
-            <div className='flex flex-col items-center grow gap-4 pt-2 bg-sky-800 h-72 w-72'>
+            <div className='flex flex-col items-center gap-4 pt-2 grow bg-sky-800 h-72 w-72'>
               <Typography variant='h4'>{userTwoData.login}</Typography>
               <Typography variant='h4'>{userTwoGoals}</Typography>
               <Typography variant='h4'>+{resultHandler(userTwoGoals, userOneGoals)}</Typography>
@@ -49,7 +49,8 @@ const Result = ({ resultData }: ResultProps) => {
           </div>
         </div>
       </InfoModal>
-      <div onClick={() => setShowInfoModal(true)} className='flex-center px-4 h-12 text-2xl bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl shadow-xl'>
+      {/* Result Component */}
+      <div onClick={() => setShowInfoModal(true)} className='h-12 px-4 text-2xl text-black shadow-xl flex-center bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl'>
         <div className='flex flex-row'><p className='ml-2'>{userOneData.login}</p><p className='mx-2'>{userOneGoals}</p>:<p className='mx-2'>{userTwoGoals}</p><p className='mr-2'>{userTwoData.login}</p></div>
       </div>
     </>

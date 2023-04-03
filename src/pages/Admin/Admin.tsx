@@ -9,11 +9,6 @@ const Admin = () => {
     dispatch(getResults())
   }, [dispatch])
 
-
-
-
-
-
   return (
     <div className="w-full">
       <ResultsList />

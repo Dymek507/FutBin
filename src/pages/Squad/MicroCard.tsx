@@ -29,7 +29,6 @@ const Card = ({
     setHighlightPlayer(ifPicked);
   }, [pickedArray, playerData]);
 
-  //Add default photo if player has no photo
   //Adding photos to Card
   const { playerPhoto, playerClub, playerNation } = useFetchImages(
     playerData.id,
@@ -50,7 +49,7 @@ const Card = ({
   return (
     <div
       onClick={addPlayer}
-      className="relative w-[15em] h-[20em] bg-[length:19em_22em] bg-center bg-no-repeat "
+      className="relative w-[15em] h-[20em] bg-[length:19em_22em] bg-center bg-no-repeat text-black cursor-pointer"
       style={{
         fontSize: fontSize,
         filter: `${highlightPlayer ? "drop-shadow(0px 0px 30px #C7BA30)" : ""}`,

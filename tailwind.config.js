@@ -34,6 +34,8 @@ module.exports = {
     fontFamily: {
       din: ["DIN_Pro", "ui-sans-serif"],
       "din-thin": ["DIN_Pro_thin", "ui-sans-serif"],
+      "helvetica-neue": ["Helvetica_Neue", "ui-sans-serif"],
+      "helvetica-neue-light": ["Helvetica_Neue_light", "ui-sans-serif"],
     },
     extend: {
       animation: {

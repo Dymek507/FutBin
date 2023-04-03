@@ -1,45 +1,39 @@
 import { Grid, Typography } from '@mui/material'
 
-import { AnimatePresence, motion } from 'framer-motion'
-import React, { useState } from 'react'
-import { clubsData } from './data/clubsData'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
+import React, { forwardRef, useEffect, useState } from 'react'
+import { CLUBS_DATA } from '../data/clubs_data'
 import styled, { css } from 'styled-components'
 import { IconEffect } from './helpers/ClubViewStyles'
-import { IClubTheme } from './helpers/ClubViewTypes'
-import LogoTriangle from './LogoTriangle'
-import Background from './Background'
-import LogoBig from './LogoBig'
 import LogoSmall from './LogoSmall'
 import ClubName from './ClubName'
 
-const defaultTheme: IClubTheme = {
-  id: 0,
-  name: "",
-  logo: "",
-  colors: {
-    text: "E50000",
-    main: "#13766D",
-    secondary: "white",
-  },
+import { DEFAULT_CLUB } from '../data/clubs_data'
+import { IClubTheme } from '../types/homeTypes'
+
+interface IClubViewProps {
+  themeChangeHandler: (clubTheme: IClubTheme) => void;
+  clubTheme: IClubTheme;
+
 }
 
-const ClubView = () => {
-  const [clubTheme, setClubTheme] = useState(defaultTheme);
+const ClubView = forwardRef<HTMLInputElement, IClubViewProps>(({ themeChangeHandler, clubTheme }, ref) => {
+
+
 
   return (
-    <section className={`flex flex-col justify-end items-center relative w-screen h-screen overflow-hidden duration-500 transition-colors text-[14px] sm:text-[20px] snap-center bg-gradient-to-b from-[#000C15] to-[#13766D]`}
-      style={{ background: `linear-gradient(180deg, #000C15 0%, #000C15 30%, ${clubTheme.colors.main} 100%)` }
+    <section ref={ref} className={`flex flex-col justify-end items-center relative w-screen h-screen overflow-hidden duration-500 transition-colors text-[14px] sm:text-[20px] snap-center `}
+      style={{ background: `linear-gradient(180deg, #000C15 0%, #000C15 35%, ${clubTheme.colors.main} 100%)` }
       }>
-      {/* <Background clubTheme={clubTheme} /> */}
       <ClubName clubTheme={clubTheme} />
       <div className='z-10 flex gap-2 mb-24'>
-        {clubsData.map(club => (
+        {CLUBS_DATA.map(club => (
           <motion.img
             layoutId={club.name}
             key={club.id}
             src={club.logo}
             alt={club.name}
-            onClick={() => setClubTheme(club)}
+            onClick={() => themeChangeHandler(club)}
             className='w-[4em]'
             transition={{ duration: 0.5 }}
           />
@@ -54,7 +48,7 @@ const ClubView = () => {
             src={clubTheme.logo}
             alt={clubTheme.name}
             className='absolute top-[5em] right-[2em] h-[12em]'
-            onClick={() => setClubTheme(defaultTheme)}
+            onClick={() => themeChangeHandler(DEFAULT_CLUB)}
             transition={{ duration: 0.5 }}
           />
         )}
@@ -62,6 +56,6 @@ const ClubView = () => {
     </section >
 
   )
-}
+})
 
 export default ClubView

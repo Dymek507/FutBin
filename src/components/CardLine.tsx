@@ -51,7 +51,7 @@ const CardLine = ({ playerData, sendPlayer, pickedArray }: CardLineProps) => {
     <div
       onClick={addPlayer}
       className=
-      "flex text-[1.3rem] h-[3.2em] w-full shadow-2xl gap-[0.2em]"
+      "flex text-[1.3rem] h-[3.2em] w-full shadow-2xl gap-[0.2em] text-black course-pointer"
       style={{
         background: cardBackground,
         filter: `${highlightPlayer ? 'brightness(40%)' : ""}`,

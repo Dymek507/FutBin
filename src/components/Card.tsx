@@ -56,7 +56,7 @@ const Card = ({
   return (
     <div
       onClick={addPlayer}
-      className="relative bg-center bg-[length:22.5em_31em] bg-no-repeat h-[28em] w-[17.5em]"
+      className="relative bg-center bg-[length:22.5em_31em] bg-no-repeat h-[28em] w-[17.5em] text-black cursor-pointer"
       style={{
         fontSize: fontSize,
         filter: `${highlightPlayer ? "drop-shadow(0px 0px 30px #C7BA30)" : ""}`,

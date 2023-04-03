@@ -10,6 +10,14 @@
   font-family: "DIN_Pro_thin";
   src: url(/src/assets/fonts/DIN_Pro_thin.otf);
 }
+@font-face {
+  font-family: "Helvetica_Neue";
+  src: url(/src/assets/fonts/Helvetica\ Neue\ Medium\ Extended.otf);
+}
+@font-face {
+  font-family: "Helvetica_Neue_light";
+  src: url(/src/assets/fonts/Helvetica\ Neue\ UltraLight.otf);
+}
 
 @tailwind base;
 @tailwind components;

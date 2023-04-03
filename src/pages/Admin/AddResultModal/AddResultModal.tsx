@@ -4,8 +4,9 @@ import { useAppDispatch } from '../../../store/app/hooks';
 import { v4 as uuidv4 } from 'uuid';
 import { ResultT } from '../../../types/modelTypes';
 import { addResultAction } from '../../../store/admin-actions';
-import { goalButtons, users } from '../../../data/usersUid';
+import { USERS_UID } from '../data/users_uid';
 import CustomSelect from './CustomSelect';
+import { GOAL_BUTTONS } from '../data/goal_buttons';
 
 type AddResultModalProps = {
   open: boolean;
@@ -74,7 +75,7 @@ const AddResultModal = ({ open,
               value={userOneUid}
               onChange={handleChangeOne}
             >
-              {users.map((option) => (
+              {USERS_UID.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -87,7 +88,7 @@ const AddResultModal = ({ open,
               value={userTwoUid}
               onChange={handleChangeTwo}
             >
-              {users.map((option) => (
+              {USERS_UID.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -96,11 +97,11 @@ const AddResultModal = ({ open,
           </div>
           <div className='flex text-[1.2em] xs:text-[1.5em] sm:text-[2em]'>
             <div className='flex flex-col items-center w-24 gap-2 grow'>
-              {goalButtons.map(({ id }) => <div key={id} onClick={() => setUserOneGoals(id)} className='flex-center text-[1em] text-white w-[2em] h-[2em] border-2 border-white rounded-md' style={{ backgroundColor: `${id === userOneGoals ? 'white' : 'transparent'}`, color: `${id === userOneGoals ? 'black' : 'white'}` }}>{id}</div>)
+              {GOAL_BUTTONS.map(({ id }) => <div key={id} onClick={() => setUserOneGoals(id)} className='flex-center text-[1em] text-white w-[2em] h-[2em] border-2 border-white rounded-md' style={{ backgroundColor: `${id === userOneGoals ? 'white' : 'transparent'}`, color: `${id === userOneGoals ? 'black' : 'white'}` }}>{id}</div>)
               }
             </div>
             <div className='flex flex-col items-center w-24 gap-2 grow'>
-              {goalButtons.map(({ id }) => <div key={id} onClick={() => setUserTwoGoals(id)} className='flex-center text-[1em] text-white w-[2em] h-[2em]  border-2 border-white rounded-md' style={{ backgroundColor: `${id === userTwoGoals ? 'white' : 'transparent'}`, color: `${id === userTwoGoals ? 'black' : 'white'}` }}>{id}</div>)
+              {GOAL_BUTTONS.map(({ id }) => <div key={id} onClick={() => setUserTwoGoals(id)} className='flex-center text-[1em] text-white w-[2em] h-[2em]  border-2 border-white rounded-md' style={{ backgroundColor: `${id === userTwoGoals ? 'white' : 'transparent'}`, color: `${id === userTwoGoals ? 'black' : 'white'}` }}>{id}</div>)
               }
             </div>
           </div>
@@ -108,7 +109,6 @@ const AddResultModal = ({ open,
         <ButtonGroup className='w-full gap-2 mt-10 flex-center'>
           <Button variant="contained" size='large' color='secondary' type="submit">Confirm</Button>
         </ButtonGroup>
-        {/* </ThemeProvider> */}
       </Box >
 
     </Modal >

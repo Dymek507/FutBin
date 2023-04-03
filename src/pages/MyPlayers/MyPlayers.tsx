@@ -149,7 +149,6 @@ const MyPlayers = () => {
           </Button>
           {/* Change view style */}
           <div>
-
             <IconButton
               color="inherit"
               onClick={() => {
@@ -168,7 +167,6 @@ const MyPlayers = () => {
             >
               {sortingDir ? <ArrowUpward /> : <ArrowDownward />}
             </IconButton>
-
             {/* Sorting by attribute */}
             <FormControl
             >
