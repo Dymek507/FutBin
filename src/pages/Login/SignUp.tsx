@@ -18,8 +18,6 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { green, purple } from "@mui/material/colors";
 import { doc, setDoc } from "@firebase/firestore";
 import { uiActions } from "../../store/ui-slice";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
@@ -56,15 +54,6 @@ export default function SignUp() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Logout from account
-    // await signOut(auth)
-    //   .then(() => {
-    //     console.log("Sign-out successful.");
-    //   })
-    //   .catch((error) => {
-    //     console.log("An error happened.");
-    //   });
-
     const data = new FormData(event.currentTarget);
     console.log(data);
 
@@ -112,8 +101,9 @@ export default function SignUp() {
   };
 
   return (
-
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{
+      backgroundColor: "white",
+    }}>
       <CssBaseline />
       <Box
         sx={{

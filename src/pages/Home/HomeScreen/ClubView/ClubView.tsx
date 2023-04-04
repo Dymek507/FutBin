@@ -10,6 +10,7 @@ import ClubName from './ClubName'
 
 import { DEFAULT_CLUB } from '../data/clubs_data'
 import { IClubTheme } from '../types/homeTypes'
+import BackgroundHex from '../BackgroundHex'
 
 interface IClubViewProps {
   themeChangeHandler: (clubTheme: IClubTheme) => void;
@@ -25,6 +26,7 @@ const ClubView = forwardRef<HTMLInputElement, IClubViewProps>(({ themeChangeHand
     <section ref={ref} className={`flex flex-col justify-end items-center relative w-screen h-screen overflow-hidden duration-500 transition-colors text-[14px] sm:text-[20px] snap-center `}
       style={{ background: `linear-gradient(180deg, #000C15 0%, #000C15 35%, ${clubTheme.colors.main} 100%)` }
       }>
+      <BackgroundHex fillOne="none" strokeColor={clubTheme.colors.main} />
       <ClubName clubTheme={clubTheme} />
       <div className='z-10 flex gap-2 mb-24'>
         {CLUBS_DATA.map(club => (

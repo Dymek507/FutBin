@@ -219,7 +219,6 @@ const MyPlayers = () => {
               md={4}
               lg={3}
               xl={2} />
-
           )}
         </Suspense>
       </Box> : <div className="w-full"><InfoScreen text1="No Players" text2="Open packs" /></div>}

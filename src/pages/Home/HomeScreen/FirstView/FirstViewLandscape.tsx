@@ -1,53 +1,41 @@
-
 import React, { forwardRef } from "react";
-
 import { motion } from "framer-motion";
-import landingPageImages from "../../../../assets/landing_page";
-import { appearAnimation, slideAnimationX } from "../Animations";
+import landingPageImages from "../../../../assets/landing_page/first_page";
+import { slideAnimationX } from "../Animations";
 
-import SVGFilter from "./SVGFilter";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Link } from "react-router-dom";
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import { SectionRefType } from "../types/homeTypes";
+import { useMediaQuery } from "react-responsive";
+import BackgroundWater from "./BackgroundWater";
+import ButtonMotion from "./ButtonMotion";
 
 interface IFirstViewProps {
   scrollTo: (sectionRef: SectionRefType) => void;
 }
 
-const FirstView = forwardRef<HTMLInputElement, IFirstViewProps>(({ scrollTo }, ref) => {
+const FirstViewPortrait = forwardRef<HTMLInputElement, IFirstViewProps>(({ scrollTo }, ref) => {
+  const { island_only_landscape: landscapeImg } = landingPageImages;
   return (
-    <section ref={ref} className='relative h-screen text-xl bg-no-repeat snap-center flex bg-[#000C15]'>
-      {/* Background ocean */}
-      <div className="bg-bottom bg-cover wh-full " style={{ backgroundImage: `url(${landingPageImages.ocean_background})` }} >
-        <div className="absolute bg-bottom top-0 bottom-0 left-[0vw] wh-full bg-cover" style={{
-          backgroundImage: `url(${landingPageImages.ocean_background})`,
-          filter: 'url("#turbulence")'
-        }} />
-        <SVGFilter />
-      </div>
-      {/* Background island */}
-      <div className="absolute inset-0 -left-32 md:-left-54 lg:left-0 xl:left-10 bg-no-repeat bg-[length:auto_90%] z-[1]" style={{ backgroundImage: `url(${landingPageImages.island_only_landscape})` }} />
-      <div className="absolute flex items-center justify-end w-full wh-full">
-        {/* Text and button */}
-        <div className="flex flex-col items-center gap-12 mr-32">
-          <motion.p className="self-end leading-none text-[2em] md:text-[6em] xl:text-[8em] text-white font-semibold" {...slideAnimationX("left", 0.3
-          )}>Fut Draft</motion.p>
-          <motion.div className="flex flex-col items-center gap-4" {...appearAnimation(0.6, 1.2)}>
-            <button className="text-white normal-case text-xl rounded-none w-fit btn btn-outline hover:bg-white z-[1] pb-1"
-            >
-              <Link to="/new-packs">
-                Open App
-              </Link>
-            </button>
-          </motion.div>
+    <section ref={ref} className='relative h-screen text-xl xs:text-2xl bg-no-repeat snap-center flex bg-[#000C15] text-white '>
+      {/* Background image */}
+      <BackgroundWater />
+      {/* Main content */}
+      <main className="absolute inset-0 flex flex-col items-center w-full overflow-hidden md:flex-row">
+        {/* Island picture which changes according to orientation */}
+        <img className="z-[1] h-2/3 md:h-3/4 lg:h-5/6 self-start" src={landscapeImg} alt="Island" />
+        <div className="flex flex-col justify-center gap-8 text-center grow align-center md:mr-6">
+          {/* Text */}
+          <motion.p className="text-[4em] md:text-[3em] lg:text-[5em] xl:text-[8em] font-semibold leading-none z-[0]" {...slideAnimationX("left", 0.3)}>Fut Draft</motion.p>
+          {/* Button */}
+          <ButtonMotion />
         </div>
-      </div>
-      <div className="absolute bottom-0 left-0 w-full mb-8 flex-center z-[2]">
-        <ArrowBackIosIcon onClick={() => scrollTo("club")} className="text-white -rotate-90" fontSize="large" />
-      </div>
+        <div className="absolute bottom-0 left-0 w-screen flex-center">
+          <ExpandMoreIcon className="cursor-pointer" onClick={() => scrollTo("club")} sx={{ fontSize: "6rem" }} />
+        </div>
+      </main>
     </section >
-
   )
 })
-
-export default FirstView
+export default FirstViewPortrait

@@ -7,7 +7,7 @@ import { SnackbarProvider } from "notistack";
 const Layout = () => {
   return (
     <SnackbarProvider maxSnack={4}>
-      <div className="flex flex-col w-full min-h-screen bg-main-b-stadium [background-position-x:60%] bg-no-repeat">
+      <div className="flex flex-col w-full min-h-screen">
         <Menu />
         <NavBar />
         <div className="flex min-h-[calc(100vh-4rem)] justify-center overflow-x-hidden">
@@ -20,3 +20,4 @@ const Layout = () => {
 
 
 export default Layout;
+

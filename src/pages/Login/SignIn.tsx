@@ -2,7 +2,6 @@ import React from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { logIn } from "../../store/ui-actions"
-
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,7 +13,6 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch } from "../../store/app/hooks";
 
 function Copyright(props: any) {
@@ -52,8 +50,9 @@ export default function SignIn() {
   };
 
   return (
-
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{
+      backgroundColor: "white",
+    }}>
       <CssBaseline />
       <Box
         sx={{

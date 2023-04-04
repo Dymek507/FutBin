@@ -14,14 +14,7 @@ import { DEFAULT_CLUB } from "./data/clubs_data";
 import { IClubTheme, SectionRefType } from "./types/homeTypes";
 import MatchesView from "./MatchesView";
 
-
-
-
-
 const HomeScreen = () => {
-  // const y = useTransform(scrollYProgress, [0, 1], [0, 700]);
-  const y = useMotionValue(0)
-  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" },);
   const [clubTheme, setClubTheme] = useState(DEFAULT_CLUB)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -44,6 +37,7 @@ const HomeScreen = () => {
     container: mainRef
   })
 
+  const isMobile = useMediaQuery({ query: '(max-width: 639px)' },);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (latest < 0.2) {
@@ -63,8 +57,6 @@ const HomeScreen = () => {
     setClubTheme(clubTheme)
   }
 
-
-
   const scrollToSection = (sectionRef: SectionRefType) => {
     refMap[sectionRef]?.current?.scrollIntoView({
       behavior: "smooth",
@@ -74,25 +66,21 @@ const HomeScreen = () => {
   const setCurrentPageHandler = (page: number) => {
     setCurrentPage(page)
   }
-
-
-
-
   return (
     <main ref={mainRef} className="relative h-screen overflow-x-hidden overflow-y-scroll snap-y snap-mandatory" >
-      <LeftBar currentPage={currentPage} />
-      <div className="fixed flex justify-end w-full pr-8 z-[3] text-white ">
-        {isPortrait ? (
+      {/* <LeftBar currentPage={currentPage} /> */}
+      {/* <div className="fixed flex justify-end w-full pr-8 z-[3] text-white ">
+        {isMobile ? (
           <div className="text-[2em] m-[0.2em]">
             <MenuIcon fontSize="inherit" onClick={() => scrollToSection("club")} />
           </div>) :
           <HomeNavigation scrollTo={scrollToSection} setPage={setCurrentPageHandler} selected={currentPage} />
         }
-      </div >
-      {isPortrait ? <FirstViewPortrait ref={homeRef} /> : <FirstViewLandscape ref={homeRef} scrollTo={scrollToSection} />}
+      </div > */}
+      {isMobile ? <FirstViewPortrait ref={homeRef} scrollTo={scrollToSection} /> : <FirstViewLandscape ref={homeRef} scrollTo={scrollToSection} />}
       <ClubView ref={clubRef} themeChangeHandler={themeChangeHandler} clubTheme={clubTheme} />
-      <MatchesView ref={matchesRef} clubTheme={clubTheme} />
-      <PacksView ref={packsRef} clubTheme={clubTheme} />
+      {/* <MatchesView ref={matchesRef} clubTheme={clubTheme} />
+      <PacksView ref={packsRef} clubTheme={clubTheme} /> */}
       <PlayersView ref={playersRef} clubTheme={clubTheme} />
     </main>
 

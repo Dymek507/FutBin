@@ -1,73 +1,47 @@
 import React, { useRef, useState, useEffect, forwardRef } from "react";
 
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer"
-import Card from "../../../components/Card";
-import dummyPlayer from "../../../data/dummyPlayer";
 import { Grid, Typography } from "@mui/material";
-import Animation from "../Animation";
-import { websiteMockups } from '../../../assets/landing_page/mockups'
+import { fifaPlay, websiteMockups } from "../../../assets/landing_page/mockups/index";
 import { IClubTheme } from "./types/homeTypes";
 
-const slideLeftAnimation = (duration: number, delay: number) => {
-  return {
-    visible: { opacity: 1, x: 0, transition: { duration, delay } },
-    hidden: { opacity: 0, x: '-200%', }
-  };
-}
 
-interface IMatchesViewProps {
+interface IPacksViewProps {
   clubTheme: IClubTheme,
 }
-const MatchesView = forwardRef<HTMLInputElement, IMatchesViewProps>(({ clubTheme }, ref) => {
+const PacksView = forwardRef<HTMLInputElement, IPacksViewProps>(({ clubTheme }, ref) => {
 
   const controls = useAnimation();
-  const [viewRef, inView] = useInView()
+  // const [ref, inView] = useInView()
 
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible")
-    }
-  }, [controls, inView])
+  // useEffect(() => {
+  //   if (inView) {
+  //     controls.start("visible")
+  //   }
+  // }, [controls, inView])
 
   return (
-    <section ref={ref} className="wh-full " style={{ background: `linear-gradient(180deg, #000 0%, #000 40%, ${clubTheme.colors.main} 100%)` }}>
-      <Grid ref={viewRef} container className='grid w-screen h-screen p-12 text-black snap-center'>
-        <Grid item xs={12} className='flex-center '>
-          <Typography variant="h1" className="text-6xl font-bold ">
+    <section ref={ref} className="wh-full" style={{ background: `linear-gradient(180deg, ${clubTheme.colors.main} 0%, #ddd 80%, #ddd 100%)` }}>
+      <Grid container className='grid w-screen h-screen p-12 text-black snap-center'>
+        <Grid item xs={12} className='flex-center'>
+          <Typography variant="h1" className="text-6xl font-bold">
             Play matches with friends!</Typography>
         </Grid>
-        <Grid item xs={5} className='relative'>
-          <motion.img
-            variants={slideLeftAnimation(2, 0)}
-            src={websiteMockups.playersPhone}
-            animate={controls}
-            initial="hidden"
-            className="absolute bottom-0 right-0 h-[15em] z-10"
-          />
-          <motion.img
-            variants={slideLeftAnimation(2, 1)}
-            src={websiteMockups.playersLaptop}
-            animate={controls}
-            initial="hidden"
-            className="absolute bottom-0 left-0 h-[22em] z-10"
-          />
-          <motion.img
-            variants={slideLeftAnimation(2, 2)}
-            src={websiteMockups.playersTablet}
-            animate={controls}
-            initial="hidden"
-            className="absolute bottom-12 right-10 h-[20em]"
-          />
+        <Grid item xs={5} className='self-center h-[50vh]'>
+          <div className="relative h-[30em] bg-no-repeat" style={{ backgroundImage: `url(${websiteMockups.tvMockup}` }}>
+            <div className="absolute w-[566px] h-[320px] left-[19px] top-[24px] ">
+              <img src={fifaPlay} alt="fifa_play" className="wh-full" />
+            </div>
+          </div>
         </Grid>
         <Grid item xs={7} className='flex items-center justify-end pr-12 '>
           <Typography variant="h4" className="text-6xl font-bold">
-            Win and add results to collect money</Typography>
+            "Get ready to draft your dream team with FutDraft! Our app lets you draw packs, sell and exchange players, and build your ultimate squad. With our easy-to-use interface and comprehensive database of players, you'll be able to create a team that will take on any challenge."</Typography>
         </Grid>
       </Grid>
     </section>
   )
 })
 
-export default MatchesView
-
+export default PacksView

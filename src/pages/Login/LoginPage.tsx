@@ -4,7 +4,7 @@ import SignIn from "./SignIn";
 
 const LoginPage = () => {
   return (
-    <div className="bg-white">
+    <div className="flex-center">
       <SignIn />
     </div>
   );

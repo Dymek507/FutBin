@@ -22,7 +22,7 @@ const PacksView = forwardRef<HTMLInputElement, IPacksViewProps>(({ clubTheme }, 
   // }, [controls, inView])
 
   return (
-    <section ref={ref} className="wh-full" style={{ background: `linear-gradient(180deg, ${clubTheme.colors.main} 0%, #ddd 80%, #ddd 100%)` }}>
+    <section ref={ref} className="wh-full" style={{ background: `linear-gradient(180deg, #ddd 0%, #ddd 40%, ${clubTheme.colors.main} 100%)` }}>
       <Grid container className='grid w-screen h-screen p-12 text-black snap-center'>
         <Grid item xs={12} className='flex-center'>
           <Typography variant="h1" className="text-6xl font-bold">

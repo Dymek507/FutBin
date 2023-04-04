@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-
-
 import { packsActions } from "../../store/packs-slice";
 import { playersActions } from "../../store/players-slice";
 import { drawPlayer } from "../../store/players-fetch";
 import { sendPackData } from "../../store/packs-actions";
 
 import OpeningModal from "./OpeningModal/OpeningModal";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { receivePackData } from "../../store/packs-actions";
 import OpeningBoard from "./OpeningModal/OpeningBoard";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { PackT } from "../../types/modelTypes";
-import SwapPacks from "./SwapPacks";
+import PacksDisplay from "./PacksDisplay";
 import InfoScreen from "../../components/InfoScreen";
 
 const MyPacks = () => {
@@ -85,7 +83,7 @@ const MyPacks = () => {
               <InfoScreen text1="No Packs" text2="Buy some!" />
             )}
             {myPacks.length !== 0 && (
-              <SwapPacks packs={myPacks} buyPack={OpenPack} />
+              <PacksDisplay packs={myPacks} buyPack={OpenPack} />
             )
             }
           </div>

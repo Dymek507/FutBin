@@ -2,12 +2,14 @@ import React, { useRef, useState, useEffect, forwardRef } from "react";
 
 import { motion, AnimatePresence, useAnimation, useScroll, useMotionValue } from "framer-motion";
 import { useInView } from "react-intersection-observer"
-import Card from "../../../components/Card";
-import dummyPlayer from "../../../data/dummyPlayer";
-import { Grid, Typography } from "@mui/material";
-import Animation from "../Animation";
+
+import { Typography } from "@mui/material";
+import { default as Grid } from '@mui/material/Unstable_Grid2';
+
 import { websiteMockups } from '../../../assets/landing_page/mockups'
 import { IClubTheme } from "./types/homeTypes";
+import BackgroundHex from "./BackgroundHex";
+
 
 const slideLeftAnimation = (duration: number, delay: number) => {
   return {
@@ -34,41 +36,50 @@ const PlayersView = forwardRef<HTMLInputElement, IPlayersViewProps>(({ clubTheme
   }, [controls, inView])
 
   return (
-    <section ref={ref} className="wh-full " style={{ background: `linear-gradient(180deg, #ddd 0%, #ddd 40%, ${clubTheme.colors.main} 100%)` }}>
-      <Grid ref={viewRef} container className='grid w-screen h-screen p-12 text-black snap-center'>
-        <Grid item xs={12} className='flex-center '>
-          <Typography variant="h1" className="text-6xl font-bold ">
-            Play matches with friends!</Typography>
-        </Grid>
-        <Grid item xs={5} className='relative'>
+    <section ref={ref} className="relative wh-full" style={{ background: `linear-gradient(180deg, ${clubTheme.colors.main} 0%, #000C15 35%, #000C15 100%)` }
+    }>
+      <BackgroundHex fillOne="none" strokeColor={clubTheme.colors.main} />
+      <Grid ref={viewRef} container className='text-white snap-center'>
+        <Grid xxs={5} className='flex-center h-[50vh] w-full'>
+          {/* mockup phone image */}
           <motion.img
-            variants={slideLeftAnimation(2, 0)}
+            initial={{ opacity: 0, x: '200%' }}
+            animate={controls}
+            variants={slideLeftAnimation(1, 0.5)}
             src={websiteMockups.playersPhone}
-            animate={controls}
-            initial="hidden"
-            className="absolute bottom-0 right-0 h-[15em] z-10"
+            alt="mockup phone"
+            className="w-auto h-3/4 "
           />
-          <motion.img
-            variants={slideLeftAnimation(2, 1)}
-            src={websiteMockups.playersLaptop}
-            animate={controls}
-            initial="hidden"
-            className="absolute bottom-0 left-0 h-[22em] z-10"
-          />
-          <motion.img
-            variants={slideLeftAnimation(2, 2)}
-            src={websiteMockups.playersTablet}
-            animate={controls}
-            initial="hidden"
-            className="absolute bottom-12 right-10 h-[20em]"
-          />
+
         </Grid>
-        <Grid item xs={7} className='flex items-center justify-end pr-12 '>
-          <Typography variant="h4" className="text-6xl font-bold">
-            Win and add results to collect money</Typography>
+        <Grid xxs={7} className='flex-col gap-2 flex-center'>
+
+        </Grid>
+        {/* <Grid xxs={7} className='flex-col gap-2 flex-center'>
+          <div className="pl-2 border-l-2">
+            <p className="text-3xl">Play games</p>
+            <p className="text-xl font-semibold ">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora quisquam dolor facilis odit numquam .</p>
+          </div>
+        </Grid> */}
+        <Grid xxs={7} className='flex-col gap-2 flex-center'>
+          <div className="pr-2 text-right border-r-2">
+            <p className="text-3xl">Play games</p>
+            <p className="text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora quisquam dolor facilis odit numquam .</p>
+          </div>
+        </Grid>
+        <Grid xxs={5} className=' flex-center h-[50vh]'>
+          {/* mockup phone image */}
+          <motion.img
+            initial={{ opacity: 0, x: '200%' }}
+            animate={controls}
+            variants={slideLeftAnimation(1, 0.5)}
+            src={websiteMockups.playersPhone}
+            alt="mockup phone"
+            className="w-auto h-3/4"
+          />
         </Grid>
       </Grid>
-    </section>
+    </section >
   )
 })
 

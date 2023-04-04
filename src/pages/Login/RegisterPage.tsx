@@ -3,7 +3,7 @@ import SignUp from "./SignUp";
 
 const RegisterPage = () => {
   return (
-    <div className="bg-white">
+    <div className="flex-center">
       <SignUp />
     </div>
   );
