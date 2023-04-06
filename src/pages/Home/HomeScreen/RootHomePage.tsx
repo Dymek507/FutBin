@@ -7,12 +7,9 @@ import ClubView from "./ClubView/ClubView";
 import FirstViewPortrait from "./FirstView/FirstViewPortrait";
 import FirstViewLandscape from "./FirstView/FirstViewLandscape";
 import { useMediaQuery } from "react-responsive";
-import { Link } from "react-router-dom";
-import HomeNavigation from "./HomeNavigation/HomeNavigation";
-import LeftBar from "./HomeNavigation/LeftBar";
 import { DEFAULT_CLUB } from "./data/clubs_data";
 import { IClubTheme, SectionRefType } from "./types/homeTypes";
-import MatchesView from "./MatchesView";
+
 
 const HomeScreen = () => {
   const [clubTheme, setClubTheme] = useState(DEFAULT_CLUB)
@@ -79,9 +76,9 @@ const HomeScreen = () => {
       </div > */}
       {isMobile ? <FirstViewPortrait ref={homeRef} scrollTo={scrollToSection} /> : <FirstViewLandscape ref={homeRef} scrollTo={scrollToSection} />}
       <ClubView ref={clubRef} themeChangeHandler={themeChangeHandler} clubTheme={clubTheme} />
-      {/* <MatchesView ref={matchesRef} clubTheme={clubTheme} />
-      <PacksView ref={packsRef} clubTheme={clubTheme} /> */}
-      <PlayersView ref={playersRef} clubTheme={clubTheme} />
+      {/* <MatchesView ref={matchesRef} clubTheme={clubTheme} /> */}
+      <PacksView ref={packsRef} clubTheme={clubTheme} isMobile={isMobile} />
+      <PlayersView ref={playersRef} clubTheme={clubTheme} isMobile={isMobile} />
     </main>
 
 

@@ -1,82 +1,46 @@
 import React, { useRef, useState, useEffect, forwardRef } from "react";
 
 import { motion, AnimatePresence, useAnimation, useScroll, useMotionValue } from "framer-motion";
-import { useInView } from "react-intersection-observer"
+
 
 import { Typography } from "@mui/material";
 import { default as Grid } from '@mui/material/Unstable_Grid2';
 
-import { websiteMockups } from '../../../assets/landing_page/mockups'
+import { openingMockups, playersMockups } from '../../../assets/landing_page/mockups'
 import { IClubTheme } from "./types/homeTypes";
-import BackgroundHex from "./BackgroundHex";
+import { useMediaQuery } from "react-responsive";
+import Mockups from "./Mockups";
+import TextMockups from "./TextMockups";
 
 
-const slideLeftAnimation = (duration: number, delay: number) => {
-  return {
-    visible: { opacity: 1, x: 0, transition: { duration, delay } },
-    hidden: { opacity: 0, x: '-200%', }
-  };
-}
+
 
 interface IPlayersViewProps {
   clubTheme: IClubTheme,
+  isMobile: boolean
 }
-const PlayersView = forwardRef<HTMLInputElement, IPlayersViewProps>(({ clubTheme }, ref) => {
+const PlayersView = forwardRef<HTMLInputElement, IPlayersViewProps>(({ clubTheme, isMobile }, ref) => {
 
-
-  const controls = useAnimation();
-  const [viewRef, inView] = useInView()
-
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible")
-
-    }
-  }, [controls, inView])
 
   return (
-    <section ref={ref} className="relative wh-full" style={{ background: `linear-gradient(180deg, ${clubTheme.colors.main} 0%, #000C15 35%, #000C15 100%)` }
+    < section ref={ref} className="relative wh-full" style={{ background: `#065C6B` }
     }>
-      <BackgroundHex fillOne="none" strokeColor={clubTheme.colors.main} />
-      <Grid ref={viewRef} container className='text-white snap-center'>
-        <Grid xxs={5} className='flex-center h-[50vh] w-full'>
-          {/* mockup phone image */}
-          <motion.img
-            initial={{ opacity: 0, x: '200%' }}
-            animate={controls}
-            variants={slideLeftAnimation(1, 0.5)}
-            src={websiteMockups.playersPhone}
-            alt="mockup phone"
-            className="w-auto h-3/4 "
-          />
-
+      <Grid container className='text-sm text-white snap-center'>
+        <Grid xxs={6} md={8} className='h-[50vh]'>
+          <Mockups mockups={openingMockups} />
         </Grid>
-        <Grid xxs={7} className='flex-col gap-2 flex-center'>
-
+        <Grid xxs={6} md={4} className='flex-col gap-2 flex-center'>
+          <TextMockups title="Open packs">
+            Open a pack of 8 players. Probability of getting higher-rated players depending on the price of the pack. Additionally, an opening animation will be displayed when you get a player with a rating of 82 or higher.
+          </TextMockups>
         </Grid>
-        {/* <Grid xxs={7} className='flex-col gap-2 flex-center'>
-          <div className="pl-2 border-l-2">
-            <p className="text-3xl">Play games</p>
-            <p className="text-xl font-semibold ">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora quisquam dolor facilis odit numquam .</p>
-          </div>
-        </Grid> */}
-        <Grid xxs={7} className='flex-col gap-2 flex-center'>
-          <div className="pr-2 text-right border-r-2">
-            <p className="text-3xl">Play games</p>
-            <p className="text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora quisquam dolor facilis odit numquam .</p>
-          </div>
+        <Grid xxs={6} md={4} className='flex-col gap-2 flex-center'>
+          <TextMockups title="Manage team" direction="right">
+            Take control of your players and manage your team with ease. Move your best players to the first team or sell them to earn coins and invest in more packs, helping you to build a stronger squad.
+          </TextMockups>
         </Grid>
-        <Grid xxs={5} className=' flex-center h-[50vh]'>
-          {/* mockup phone image */}
-          <motion.img
-            initial={{ opacity: 0, x: '200%' }}
-            animate={controls}
-            variants={slideLeftAnimation(1, 0.5)}
-            src={websiteMockups.playersPhone}
-            alt="mockup phone"
-            className="w-auto h-3/4"
-          />
+        <Grid xxs={6} md={8} className=' flex-center h-[50vh]'>
+          <Mockups mockups={playersMockups} direction="right" />
         </Grid>
       </Grid>
     </section >

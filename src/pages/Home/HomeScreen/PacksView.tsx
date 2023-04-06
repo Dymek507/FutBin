@@ -1,51 +1,49 @@
 import React, { useRef, useState, useEffect, forwardRef } from "react";
 
-import { useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer"
-import { Grid, Typography } from "@mui/material";
-import { fifaPlay, websiteMockups } from "../../../assets/landing_page/mockups/index";
+
+import { Typography } from "@mui/material";
+import { default as Grid } from '@mui/material/Unstable_Grid2';
+
+import { packsMockups, tvMockup } from '../../../assets/landing_page/mockups'
 import { IClubTheme } from "./types/homeTypes";
+import { useMediaQuery } from "react-responsive";
+import Mockups from "./Mockups";
+import TextMockups from "./TextMockups";
+
+
 
 
 interface IPacksViewProps {
   clubTheme: IClubTheme,
+  isMobile: boolean
 }
-const PacksView = forwardRef<HTMLInputElement, IPacksViewProps>(({ clubTheme }, ref) => {
+const PacksView = forwardRef<HTMLInputElement, IPacksViewProps>(({ clubTheme, isMobile }, ref) => {
 
-  const controls = useAnimation();
-  // const [ref, inView] = useInView()
-
-  // useEffect(() => {
-  //   if (inView) {
-  //     controls.start("visible")
-  //   }
-  // }, [controls, inView])
 
   return (
-    <section ref={ref} className="wh-full" style={{ background: `linear-gradient(180deg, #ddd 0%, #ddd 40%, ${clubTheme.colors.main} 100%)` }}>
-      <Grid container className='grid w-screen h-screen p-12 text-black snap-center'>
-        <Grid item xs={12} className='flex-center'>
-          <Typography variant="h1" className="text-6xl font-bold">
-            Play matches with friends!</Typography>
+    < section ref={ref} className="relative wh-full" style={{ background: `#065C6B` }
+    }>
+      <Grid container className='p-2 text-xs text-white snap-center'>
+        <Grid xxs={12} sm={8} className='flex-center h-[40vh] sm-[50vh]'>
+          <img className="max-h-full h-3/4 xs:h-full" src={tvMockup} alt="" />
         </Grid>
-        <Grid item xs={5} className='self-center h-[50vh]'>
-          <div className="relative h-[30em] bg-no-repeat" style={{ backgroundImage: `url(${websiteMockups.tvMockup}` }}>
-            <div className="absolute w-[566px] h-[320px] left-[19px] top-[24px] ">
-              <img src={fifaPlay} alt="fifa_play" className="wh-full" />
-            </div>
-          </div>
+        <Grid xxs={12} sm={4} className='flex-col gap-2 mx-4 sm:mx-0 flex-center'>
+          <TextMockups title="Play matches">
+            Play matches with your friends and earn coins by recording the results of each game. Whether you win or lose, you can accumulate rewards as you compete against one another.
+          </TextMockups>
         </Grid>
-        <Grid item xs={7} className='flex items-center justify-end pr-12 '>
-          <Typography variant="h4" className="text-6xl font-bold">
-            "Get ready to draft your dream team with FutDraft! Our app lets you draw packs, sell and exchange players, and build your ultimate squad. With our easy-to-use interface and comprehensive database of players, you'll be able to create a team that will take on any challenge."</Typography>
+        <Grid xxs={6} md={4} className='flex-col gap-2 flex-center'>
+          <TextMockups title="Buy packs" direction="right">
+            Use your earned coins to purchase packs of your choice, tailored to your budget. With various types of packs available, you can choose the ones that suit your preferences and your wallet.
+          </TextMockups>
+        </Grid>
+        <Grid xxs={6} md={8} className=' flex-center h-[50vh]'>
+          <Mockups mockups={packsMockups} direction="right" />
         </Grid>
       </Grid>
-
-
-
-
-    </section>
+    </section >
   )
 })
 
 export default PacksView
+
