@@ -1,5 +1,5 @@
 import React from 'react'
-import landingPageImages from '../../../../assets/landing_page/first_page';
+import landingPageImages from '../../../assets/landing_page/first_page';
 import SVGFilter from './SVGFilter';
 
 const BackgroundWater = () => {

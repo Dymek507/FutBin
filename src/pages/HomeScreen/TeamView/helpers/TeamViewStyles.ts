@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const IconEffect = styled.div`
   transform: rotate3d(0.5, -0.866, 0, 15deg) rotate(1deg);

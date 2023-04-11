@@ -9,7 +9,7 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 
 const HomeScreen = loadable(
-  () => import("./pages/Home/HomeScreen/RootHomePage")
+  () => import("./pages/HomeScreen/RootHomePage")
 );
 const NewPacks = loadable(() => import("./pages/Packs/NewPacksPage"));
 const MyPacks = loadable(() => import("./pages/Packs/MyPacksPage"));

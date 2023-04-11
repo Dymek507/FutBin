@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom';
 
 interface IMenuItem {
   text: string;
@@ -14,9 +13,7 @@ const MenuItem = ({ text, selected, onClick }: IMenuItem) => (
     onClick={onClick}
     animate={{ opacity: selected ? 1 : .5 }}
   >
-
     {text}
-
     {selected && (
       <motion.div
         className="absolute top-[110%] left-0 w-full h-[2px] bg-white rounded-2xl opacity-80"

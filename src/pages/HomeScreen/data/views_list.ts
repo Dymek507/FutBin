@@ -8,8 +8,8 @@ interface IViewsList {
 
 export const VIEWS_LIST: IViewsList[] = [
   { text: "Home", ref: "home", page: 1 },
-  { text: "Chose Team", ref: "club", page: 2 },
-  { text: "Play matches", ref: "matches", page: 3 },
-  { text: "Draw packs", ref: "packs", page: 4 },
-  { text: "Assembly squad", ref: "players", page: 5 },
+  { text: "Team", ref: "team", page: 2 },
+  { text: "Packs", ref: "packs", page: 3 },
+  { text: "Players", ref: "players", page: 4 },
+  { text: "Contact", ref: "contact", page: 5 },
 ];

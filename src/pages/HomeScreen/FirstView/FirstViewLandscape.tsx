@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { motion } from "framer-motion";
-import landingPageImages from "../../../../assets/landing_page/first_page";
+import landingPageImages from "../../../assets/landing_page/first_page";
 import { slideAnimationX } from "../Animations";
 
 
@@ -32,7 +32,7 @@ const FirstViewPortrait = forwardRef<HTMLInputElement, IFirstViewProps>(({ scrol
           <ButtonMotion />
         </div>
         <div className="absolute bottom-0 left-0 w-screen flex-center">
-          <ExpandMoreIcon className="cursor-pointer" onClick={() => scrollTo("club")} sx={{ fontSize: "6rem" }} />
+          <ExpandMoreIcon className="cursor-pointer" onClick={() => scrollTo("team")} sx={{ fontSize: "6rem" }} />
         </div>
       </main>
     </section >

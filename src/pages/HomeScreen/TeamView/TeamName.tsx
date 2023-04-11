@@ -16,9 +16,8 @@ const ClubName = ({ clubTheme, className }: ClubNameProps) => {
     >
       <motion.div
         key={clubTheme.name}
-        initial={{ x: '-150%', opacity: 0 }}
-        animate={{ x: '0', opacity: [0.2, 0.5, 1] }}
-        // exit={{ x: '-150%', opacity: [1, 0.5, 0.2], }}
+        initial={{ x: '-250%', opacity: 0 }}
+        animate={{ x: '0', opacity: [0, 0.5, 1] }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <p className="font-semibold text-center">

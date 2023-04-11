@@ -1,5 +1,5 @@
-import clubLogos from "../../../../assets/landing_page/club_logos";
-import clubPlayer from "../../../../assets/landing_page/club_players";
+import clubLogos from "../../../assets/landing_page/club_logos";
+import clubPlayer from "../../../assets/landing_page/club_players";
 import { IClubTheme } from "../types/homeTypes";
 
 export const CLUBS_DATA: IClubTheme[] = [
@@ -41,7 +41,7 @@ export const CLUBS_DATA: IClubTheme[] = [
   },
   {
     id: 3,
-    name: "Borusia Dortmund",
+    name: "Borussia Dortmund",
     logo: clubLogos.bvb,
     player: clubPlayer.reus,
     clubData: {

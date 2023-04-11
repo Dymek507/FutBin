@@ -17,4 +17,4 @@ export interface IClubTheme {
   };
 }
 
-export type SectionRefType = "home" | "club" | "matches" | "packs" | "players";
+export type SectionRefType = "home" | "team" | "packs" | "players" | "contact";

@@ -1,14 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useInView, useSpring, useTransform, useMotionValue, useMotionValueEvent } from "framer-motion";
 import PacksView from "./PacksView";
-import MenuIcon from '@mui/icons-material/Menu';
+
 import PlayersView from "./PlayersView";
-import ClubView from "./ClubView/ClubView";
+import TeamView from "./TeamView/TeamView";
 import FirstViewPortrait from "./FirstView/FirstViewPortrait";
 import FirstViewLandscape from "./FirstView/FirstViewLandscape";
 import { useMediaQuery } from "react-responsive";
 import { DEFAULT_CLUB } from "./data/clubs_data";
 import { IClubTheme, SectionRefType } from "./types/homeTypes";
+import LeftBar from "./HomeNavigation/LeftBar";
+import ContactView from "./ContactView"
+import HomeNavigation from "./HomeNavigation/HomeNavigation";
 
 
 const HomeScreen = () => {
@@ -17,17 +20,17 @@ const HomeScreen = () => {
 
   const mainRef = useRef<null | HTMLInputElement>(null);
   const homeRef = useRef<null | HTMLInputElement>(null);
-  const clubRef = useRef<null | HTMLInputElement>(null);
-  const matchesRef = useRef<null | HTMLInputElement>(null);
+  const teamRef = useRef<null | HTMLInputElement>(null);
   const packsRef = useRef<null | HTMLInputElement>(null);
   const playersRef = useRef<null | HTMLInputElement>(null);
+  const contactRef = useRef<null | HTMLInputElement>(null);
 
   const refMap = {
     home: homeRef,
-    club: clubRef,
-    matches: matchesRef,
+    team: teamRef,
     packs: packsRef,
     players: playersRef,
+    contact: contactRef,
   };
 
   const { scrollYProgress } = useScroll({
@@ -65,20 +68,14 @@ const HomeScreen = () => {
   }
   return (
     <main ref={mainRef} className="relative h-screen overflow-x-hidden overflow-y-scroll snap-y snap-mandatory" >
-      {/* <LeftBar currentPage={currentPage} /> */}
-      {/* <div className="fixed flex justify-end w-full pr-8 z-[3] text-white ">
-        {isMobile ? (
-          <div className="text-[2em] m-[0.2em]">
-            <MenuIcon fontSize="inherit" onClick={() => scrollToSection("club")} />
-          </div>) :
-          <HomeNavigation scrollTo={scrollToSection} setPage={setCurrentPageHandler} selected={currentPage} />
-        }
-      </div > */}
+      <LeftBar currentPage={currentPage} />
+      <HomeNavigation currentPage={currentPage} setCurrentPage={setCurrentPageHandler} scrollToSection={scrollToSection} isMobile={isMobile} />
       {isMobile ? <FirstViewPortrait ref={homeRef} scrollTo={scrollToSection} /> : <FirstViewLandscape ref={homeRef} scrollTo={scrollToSection} />}
-      <ClubView ref={clubRef} themeChangeHandler={themeChangeHandler} clubTheme={clubTheme} />
+      <TeamView ref={teamRef} themeChangeHandler={themeChangeHandler} clubTheme={clubTheme} />
       {/* <MatchesView ref={matchesRef} clubTheme={clubTheme} /> */}
       <PacksView ref={packsRef} clubTheme={clubTheme} isMobile={isMobile} />
       <PlayersView ref={playersRef} clubTheme={clubTheme} isMobile={isMobile} />
+      <ContactView ref={contactRef} clubTheme={clubTheme} isMobile={isMobile} />
     </main>
 
 
