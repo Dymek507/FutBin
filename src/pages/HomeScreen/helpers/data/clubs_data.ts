@@ -1,5 +1,5 @@
-import clubLogos from "../../../assets/landing_page/club_logos";
-import clubPlayer from "../../../assets/landing_page/club_players";
+import clubLogos from "../../../../assets/landing_page/club_logos";
+import clubPlayer from "../../../../assets/landing_page/club_players";
 import { IClubTheme } from "../types/homeTypes";
 
 export const CLUBS_DATA: IClubTheme[] = [
@@ -97,7 +97,7 @@ export const CLUBS_DATA: IClubTheme[] = [
 
 export const DEFAULT_CLUB: IClubTheme = {
   id: 0,
-  name: "",
+  name: "Choose your club",
   logo: "",
   player: "",
   colors: {

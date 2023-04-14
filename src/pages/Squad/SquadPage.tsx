@@ -1,10 +1,12 @@
 import React, { useState, useEffect, Suspense } from "react";
+
+import { LinearProgress } from "@mui/material";
+
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
-import ChoseOnPositionModal from "./ChoseOnPositionModal";
-import Slot from "./Slot";
+import ChoseOnPositionModal from "./helpers/ChoseOnPositionModal";
+import Slot from "./helpers/Slot";
 import { Player } from "../../types/modelTypes";
 import { addPlayerOnPosition, fetchPlayersData, fetchSquadData } from "../../store/players-actions";
-import { LinearProgress } from "@mui/material";
 
 export const formation1 = [
   { nr: 1, pos: "GK", x: 0, y: 50, playerId: null },
@@ -51,7 +53,7 @@ const Squad = () => {
   }
   return (
 
-    <div className="flex justify-center items-center w-full ">
+    <div className="flex items-center justify-center w-full ">
       {showModal ?
         <ChoseOnPositionModal open={showModal} onClose={() => setShowModal(false)} avaiablePlayer={avaiablePlayer} addOnPositionHandler={addOnPositionHandler} currentPosition={currentPosition} />
         : null}

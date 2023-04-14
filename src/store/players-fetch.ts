@@ -1,11 +1,13 @@
 import axios from "axios";
 
-import { playersActions } from "./players-slice";
 import { collection, getDocs } from "@firebase/firestore";
+import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
+
+import { playersActions } from "./players-slice";
 import { db } from "../firebaseConfig";
 import { Player } from "../types/modelTypes";
-import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import { TOP_PLAYERS } from "../data/top-players";
 
 const AuthToken = process.env.REACT_APP_FUT_DB_KEY;
 
@@ -36,6 +38,7 @@ export const drawPlayer = (
   playerRating: number
 ): ThunkAction<void, RootState, unknown, AnyAction> => {
   return async (dispatch) => {
+    //If player rating is lower than 75, draw player id and fetch player data from futdb api
     const fetchPlayerData = async (): Promise<Player> => {
       const playerId = Math.floor(Math.random() * 16000);
       return await axios
@@ -46,9 +49,22 @@ export const drawPlayer = (
           throw new Error(error);
         });
     };
+    //Draw player from top players file stored in app.
+    const fetchPlayerDataFromTopPlayers = () => {
+      const player =
+        TOP_PLAYERS[Math.floor(Math.random() * TOP_PLAYERS.length)];
+      return player;
+    };
 
     const rerender = async (): Promise<void> => {
-      const playerData = await fetchPlayerData();
+      let playerData: Player;
+
+      if (playerRating > 79) {
+        playerData = fetchPlayerDataFromTopPlayers();
+      } else {
+        playerData = await fetchPlayerData();
+      }
+
       const unavailablePlayersIds = await getUnavailablePlayersIds();
 
       if (

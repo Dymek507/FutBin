@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { IClubTheme } from '../types/homeTypes';
+import { IClubTheme } from '../../helpers/types/homeTypes';
 
 interface LogoSmallProps {
   club: IClubTheme;

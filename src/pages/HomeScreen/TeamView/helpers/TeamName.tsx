@@ -1,8 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Typography } from '@mui/material'
-import { infiniteAnimation } from '../Animations'
-import { IClubTheme } from '../types/homeTypes'
+import { infiniteAnimation } from '../../helpers/Animations'
+import { IClubTheme } from '../../helpers/types/homeTypes'
 
 interface ClubNameProps {
   clubTheme: IClubTheme;

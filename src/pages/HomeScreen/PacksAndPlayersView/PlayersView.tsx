@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { default as Grid } from '@mui/material/Unstable_Grid2';
-import { openingMockups, playersMockups } from '../../assets/landing_page/mockups'
-import { IClubTheme } from "./types/homeTypes";
-import Mockups from "./Mockups";
-import TextMockups from "./TextMockups";
+import { openingMockups, playersMockups } from '../../../assets/landing_page/mockups'
+import { IClubTheme } from "../helpers/types/homeTypes";
+import Mockups from "./helpers/Mockups";
+import TextMockups from "./helpers/TextMockups";
 
 
 
@@ -16,10 +16,9 @@ const PlayersView = forwardRef<HTMLInputElement, IPlayersViewProps>(({ clubTheme
 
 
   return (
-    < section ref={ref} className="bg-green-700 wh-full"
-    >
-      {/* < section ref={ref} className="relative wh-full " style={{ background: `#065C6B` }
-      }> */}
+
+    < section ref={ref} className="relative wh-full " style={{ background: `#065C6B` }
+    }>
       <Grid container className='text-sm text-white snap-center wh-full' >
         <Grid xxs={6} md={7} lg={9} className='h-1/2'>
           <Mockups mockups={openingMockups} />

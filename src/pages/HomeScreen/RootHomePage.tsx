@@ -1,17 +1,18 @@
-import React, { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useInView, useSpring, useTransform, useMotionValue, useMotionValueEvent } from "framer-motion";
-import PacksView from "./PacksView";
+import React, { useRef, useState } from "react";
 
-import PlayersView from "./PlayersView";
-import TeamView from "./TeamView/TeamView";
+import { useScroll, useMotionValueEvent } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
+
+import HomeNavigation from "./HomeNavigation/HomeNavigation";
 import FirstViewPortrait from "./FirstView/FirstViewPortrait";
 import FirstViewLandscape from "./FirstView/FirstViewLandscape";
-import { useMediaQuery } from "react-responsive";
-import { DEFAULT_CLUB } from "./data/clubs_data";
-import { IClubTheme, SectionRefType } from "./types/homeTypes";
-import LeftBar from "./HomeNavigation/LeftBar";
-import ContactView from "./ContactView"
-import HomeNavigation from "./HomeNavigation/HomeNavigation";
+import PacksView from "./PacksAndPlayersView/PacksView";
+import PlayersView from "./PacksAndPlayersView/PlayersView";
+import TeamView from "./TeamView/TeamView";
+import ContactView from "./ContactView/ContactView"
+
+import { DEFAULT_CLUB } from "./helpers/data/clubs_data";
+import { IClubTheme, SectionRefType } from "./helpers/types/homeTypes";
 
 
 const HomeScreen = () => {
@@ -37,7 +38,7 @@ const HomeScreen = () => {
     container: mainRef
   })
 
-  const isMobile = useMediaQuery({ query: '(max-width: 639px)' },);
+  const isMobile = useMediaQuery({ query: '(max-width: 639px)' });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (latest < 0.2) {
@@ -68,11 +69,9 @@ const HomeScreen = () => {
   }
   return (
     <main ref={mainRef} className="relative h-screen overflow-x-hidden overflow-y-scroll snap-y snap-mandatory" >
-      <LeftBar currentPage={currentPage} />
-      <HomeNavigation currentPage={currentPage} setCurrentPage={setCurrentPageHandler} scrollToSection={scrollToSection} isMobile={isMobile} />
+      <HomeNavigation currentPage={currentPage} setCurrentPage={setCurrentPageHandler} scrollToSection={scrollToSection} />
       {isMobile ? <FirstViewPortrait ref={homeRef} scrollTo={scrollToSection} /> : <FirstViewLandscape ref={homeRef} scrollTo={scrollToSection} />}
       <TeamView ref={teamRef} themeChangeHandler={themeChangeHandler} clubTheme={clubTheme} />
-      {/* <MatchesView ref={matchesRef} clubTheme={clubTheme} /> */}
       <PacksView ref={packsRef} clubTheme={clubTheme} isMobile={isMobile} />
       <PlayersView ref={playersRef} clubTheme={clubTheme} isMobile={isMobile} />
       <ContactView ref={contactRef} clubTheme={clubTheme} isMobile={isMobile} />

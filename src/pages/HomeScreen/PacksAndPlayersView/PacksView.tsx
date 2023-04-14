@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { default as Grid } from '@mui/material/Unstable_Grid2';
-import { packsMockups, tvMockup } from '../../assets/landing_page/mockups'
-import { IClubTheme } from "./types/homeTypes";
-import Mockups from "./Mockups";
-import TextMockups from "./TextMockups";
+import { packsMockups, tvMockup } from '../../../assets/landing_page/mockups'
+import { IClubTheme } from "../helpers/types/homeTypes";
+import Mockups from "./helpers/Mockups";
+import TextMockups from "./helpers/TextMockups";
 
 
 
@@ -18,7 +18,7 @@ const PacksView = forwardRef<HTMLInputElement, IPacksViewProps>(({ clubTheme, is
   return (
     <section ref={ref} className="wh-full" style={{ background: `#065C6B` }
     }>
-      <Grid container className='text-xs text-white wh-full snap-center bg-slate-500'>
+      <Grid container className='text-xs text-white wh-full snap-center '>
         <Grid xxs={12} sm={8} md={5} className='flex-center'>
           <img className="w-1/2 max-h-full " src={tvMockup} alt="" />
         </Grid>

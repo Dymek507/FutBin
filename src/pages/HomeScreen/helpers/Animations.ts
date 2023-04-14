@@ -1,12 +1,12 @@
 export const slideAnimationX = (
   direction: "left" | "right",
   multiply: number,
-  initialOpacity?: number,
-  distance?: string
+  distance: string,
+  initialOpacity?: number
 ) => {
   return {
     initial: {
-      x: direction === "right" ? "100%" : "-100%",
+      x: direction === "right" ? distance : `-${distance}`,
       opacity: 0,
     },
     animate: {
@@ -18,7 +18,7 @@ export const slideAnimationX = (
       },
     },
     exit: {
-      x: direction === "right" ? "100%" : "-100%",
+      x: direction === "right" ? distance : `-${distance}`,
       opacity: 1,
       transition: {
         duration: 1,

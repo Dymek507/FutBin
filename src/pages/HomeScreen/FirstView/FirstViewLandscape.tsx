@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
 import { motion } from "framer-motion";
 import landingPageImages from "../../../assets/landing_page/first_page";
-import { slideAnimationX } from "../Animations";
+import { slideAnimationX } from "../helpers/Animations";
 
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { SectionRefType } from "../types/homeTypes";
+import { SectionRefType } from "../helpers/types/homeTypes";
 import { useMediaQuery } from "react-responsive";
 import BackgroundWater from "./BackgroundWater";
 import ButtonMotion from "./ButtonMotion";
@@ -27,9 +27,9 @@ const FirstViewPortrait = forwardRef<HTMLInputElement, IFirstViewProps>(({ scrol
         <img className="z-[1] h-2/3 md:h-3/4 lg:h-5/6 self-start" src={landscapeImg} alt="Island" />
         <div className="flex flex-col justify-center gap-8 text-center grow align-center md:mr-6">
           {/* Text */}
-          <motion.p className="text-[4em] md:text-[3em] lg:text-[5em] xl:text-[8em] font-semibold leading-none z-[0]" {...slideAnimationX("left", 0.3)}>Fut Draft</motion.p>
+          <motion.p className="text-[4em] md:text-[3em] lg:text-[5em] xl:text-[8em] font-semibold leading-none z-[0]" {...slideAnimationX("left", 0.3, "50%")}>Fut Draft</motion.p>
           {/* Button */}
-          <ButtonMotion />
+          <ButtonMotion link="/my-players" >Open App</ButtonMotion>
         </div>
         <div className="absolute bottom-0 left-0 w-screen flex-center">
           <ExpandMoreIcon className="cursor-pointer" onClick={() => scrollTo("team")} sx={{ fontSize: "6rem" }} />

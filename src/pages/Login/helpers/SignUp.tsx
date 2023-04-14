@@ -1,26 +1,17 @@
 import React, { useState } from "react";
-import { app, db } from "../../firebaseConfig";
+import { Link, useNavigate } from "react-router-dom";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  signOut,
 } from "firebase/auth";
-
-import { Link, useNavigate } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import { doc, setDoc } from "@firebase/firestore";
-import { uiActions } from "../../store/ui-slice";
-import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
+import { FormControlLabel, Checkbox, Grid, Box, Avatar, Button, CssBaseline, TextField, Typography, Container } from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+
+import { app, db } from "../../../firebaseConfig";
+import { uiActions } from "../../../store/ui-slice";
+import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 
 function Copyright(props: any) {
   return (
@@ -175,7 +166,7 @@ export default function SignUp() {
                     color="primary"
                   />
                 }
-                label="Użyłem hasła nie używanego na innych witrynach. Połączenie niezabezpieczone."
+                label="I used a password not used on other sites. Connection not secure.."
               />
             </Grid>
           </Grid>
@@ -186,11 +177,11 @@ export default function SignUp() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Zarejestruj !
+            Register !
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link to={"/account/login"}>Masz już konto? Zaloguj się</Link>
+              <Link to={"/account/login"}>Already have an account? Log in</Link>
             </Grid>
           </Grid>
         </Box>

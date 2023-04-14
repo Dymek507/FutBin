@@ -1,19 +1,12 @@
 import React from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { logIn } from "../../store/ui-actions"
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { FormControlLabel, Checkbox, Grid, Box, Avatar, Button, CssBaseline, TextField, Typography, Container } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { useAppDispatch } from "../../store/app/hooks";
+
+import { logIn } from "../../../store/ui-actions"
+import { useAppDispatch } from "../../../store/app/hooks";
 
 function Copyright(props: any) {
   return (

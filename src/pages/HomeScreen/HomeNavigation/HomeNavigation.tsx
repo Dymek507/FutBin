@@ -1,22 +1,23 @@
-import React, { useState } from 'react'
-import { SectionRefType } from '../types/homeTypes';
-import MenuIcon from '@mui/icons-material/Menu';
+import React from 'react'
+
 import { AnimateSharedLayout } from 'framer-motion';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Button, Menu, MenuItem as MuiMenuItem } from '@mui/material';
+
+import { SectionRefType } from '../helpers/types/homeTypes';
 import MenuItem from './MenuItem';
-import { VIEWS_LIST } from '../data/views_list';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MuiMenuItem from '@mui/material/MenuItem';
-import VerticalMenuItem from './VerticalMenuItem';
+import { VIEWS_LIST } from '../helpers/data/views_list';
+import { useMediaQuery } from 'react-responsive';
 
 interface IHomeNavigationProps {
   scrollToSection: (sectionRef: SectionRefType) => void;
   setCurrentPage: (page: number) => void;
   currentPage: number;
-  isMobile: boolean;
 }
-const HomeNavigation = ({ scrollToSection, setCurrentPage, currentPage, isMobile }: IHomeNavigationProps) => {
+const HomeNavigation = ({ scrollToSection, setCurrentPage, currentPage }: IHomeNavigationProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const isDesktop = useMediaQuery({ query: '(min-width: 899px)' },);
 
   const clickHandler = (page: number, ref: SectionRefType) => {
     scrollToSection(ref)
@@ -28,13 +29,11 @@ const HomeNavigation = ({ scrollToSection, setCurrentPage, currentPage, isMobile
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
     <div className="fixed flex justify-end w-full z-[3] text-white ">
-      {isMobile ?
+      {/* Mobile navigation */}
+      {!isDesktop ?
         <div className="text-[2em] m-[0.2em]">
           <Button
             id="basic-button"
@@ -45,42 +44,39 @@ const HomeNavigation = ({ scrollToSection, setCurrentPage, currentPage, isMobile
           >
             <MenuIcon fontSize="large" sx={{ color: "white" }} />
           </Button>
-          <div className='bg-sky-500'>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-              PaperProps={{
-                style: {
-                  backgroundColor: "#ccc",
-                },
-              }}
-            >
 
-              {VIEWS_LIST.map((el) => (
-                <MuiMenuItem onClick={() => clickHandler(el.page, el.ref)}>{el.text}</MuiMenuItem>
-              ))}
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={() => setAnchorEl(null)}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+            PaperProps={{
+              style: {
+                backgroundColor: "#ccc",
+              },
+            }}
+          >
+            {VIEWS_LIST.map((el) => (
+              <MuiMenuItem onClick={() => clickHandler(el.page, el.ref)}>{el.text}</MuiMenuItem>
+            ))}
+          </Menu>
 
-            </Menu>
-          </div>
         </div> :
-        <div className="flex justify-end mr-4 wh-full color-black ">
-          <div className="flex justify-evenly">
-            <AnimateSharedLayout>
-              {VIEWS_LIST.map((el) => (
-                <MenuItem
-                  text={el.text}
-                  key={el.page}
-                  selected={currentPage === el.page}
-                  onClick={() => clickHandler(el.page, el.ref)}
-                />
-              ))}
-            </AnimateSharedLayout>
-          </div>
+        // Screen navigation
+        <div className="flex mr-4 justify-evenly">
+          <AnimateSharedLayout>
+            {VIEWS_LIST.map((el) => (
+              <MenuItem
+                text={el.text}
+                key={el.page}
+                selected={currentPage === el.page}
+                onClick={() => clickHandler(el.page, el.ref)}
+              />
+            ))}
+          </AnimateSharedLayout>
         </div>
       }
     </div >

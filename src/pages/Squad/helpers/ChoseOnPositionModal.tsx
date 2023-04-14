@@ -1,7 +1,7 @@
 import { LinearProgress, Modal } from '@mui/material'
 import React, { Suspense } from 'react'
-import { Player } from '../../types/modelTypes';
-import GridView from '../../components/GridView';
+import { Player } from '../../../types/modelTypes';
+import GridView from '../../../components/GridView';
 
 interface ChoseOnPositionModalProps {
   open: boolean;

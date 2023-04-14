@@ -1,6 +1,6 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
+import { motion, AnimatePresence } from "framer-motion";
 import { LinearProgress } from "@mui/material";
 
 import styles from "./OpeningAnimation.module.css";
@@ -14,7 +14,6 @@ const OpeningAnimation = ({ isVisible, progress }: OpeningAnimationProps) => {
   return (
     <div className="absolute w-full h-screen overflow-hidden z-[40]">
       <AnimatePresence>
-        {/* {true && ( */}
         {isVisible && (
           <>
             <motion.div

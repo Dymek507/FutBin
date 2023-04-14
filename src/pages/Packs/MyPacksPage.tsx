@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
+
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+
 import { packsActions } from "../../store/packs-slice";
 import { playersActions } from "../../store/players-slice";
 import { drawPlayer } from "../../store/players-fetch";
 import { sendPackData } from "../../store/packs-actions";
-
 import OpeningModal from "./OpeningModal/OpeningModal";
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
 import { receivePackData } from "../../store/packs-actions";
 import OpeningBoard from "./OpeningModal/OpeningBoard";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { PackT } from "../../types/modelTypes";
-import PacksDisplay from "./PacksDisplay";
+import PacksDisplay from "./helpers/PacksDisplay";
 import InfoScreen from "../../components/InfoScreen";
 
 const MyPacks = () => {
@@ -56,7 +57,6 @@ const MyPacks = () => {
 
   return (
     <>
-
       {showModal && (
         <OpeningModal
           showModal={showModal}
@@ -65,10 +65,9 @@ const MyPacks = () => {
         />
       )}
       {showPrevPlayers && <OpeningBoard onClose={closePrevPackHandler} />}
-      {/* <OpeningAnimation isVisible={true} progress={100} /> */}
       {!showPrevPlayers && !showModal && (
-        <div className="w-full ">
-          <div className="flex justify-center items-center h-[10%] gap-4">
+        <div className="w-full">
+          <div className="flex items-center justify-center gap-4 h-1/6">
             <Button variant="contained" size="large" color="secondary" onClick={openPrevPackHandler}>
               Open previous pack
             </Button>
@@ -77,7 +76,7 @@ const MyPacks = () => {
             </Link>
           </div>
           <div
-            className="flex flex-col justify-center items-center h-[90%] gap-8"
+            className="flex flex-col items-center justify-center gap-8 h-5/6"
           >
             {myPacks.length === 0 && (
               <InfoScreen text1="No Packs" text2="Buy some!" />

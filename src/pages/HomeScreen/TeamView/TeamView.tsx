@@ -1,23 +1,21 @@
-import Grid from '@mui/material/Unstable_Grid2';
+import React, { forwardRef } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import React, { forwardRef } from 'react'
-import { CLUBS_DATA } from '../data/clubs_data'
-import ClubName from './TeamName'
+import Grid from '@mui/material/Unstable_Grid2';
 
-import { DEFAULT_CLUB } from '../data/clubs_data'
-import { IClubTheme } from '../types/homeTypes'
+import { CLUBS_DATA } from '../helpers/data/clubs_data'
+import ClubName from './helpers/TeamName'
+import { DEFAULT_CLUB } from '../helpers/data/clubs_data'
+import { IClubTheme } from '../helpers/types/homeTypes'
 
 interface IClubViewProps {
   themeChangeHandler: (clubTheme: IClubTheme) => void;
   clubTheme: IClubTheme;
-
 }
+
 type clubDataKey = "league" | "manager" | "stadium" | "capacity" | "founded"
 
 const ClubView = forwardRef<HTMLInputElement, IClubViewProps>(({ themeChangeHandler, clubTheme }, ref) => {
-
-
   return (
     <section ref={ref} className={`flex flex-col relative w-screen h-screen overflow-hidden duration-500 transition-colors text-[14px] sm:text-[20px] snap-center`}
       style={{ background: `linear-gradient(180deg, #000C15 0%,#065C6B 90%, #065C6B 100%)` }
@@ -35,7 +33,7 @@ const ClubView = forwardRef<HTMLInputElement, IClubViewProps>(({ themeChangeHand
                 layoutId={clubTheme.name}
                 key={clubTheme.name}
                 src={clubTheme.logo}
-                alt={clubTheme.name}
+                alt={clubTheme.logo ? clubTheme.name : ''}
                 className='absolute inset-0 object-contain w-full max-w-[33vh] '
                 onClick={() => themeChangeHandler(DEFAULT_CLUB)}
                 transition={{ duration: 0.5 }}
@@ -68,37 +66,7 @@ const ClubView = forwardRef<HTMLInputElement, IClubViewProps>(({ themeChangeHand
           ))}
         </Grid>
       </Grid>
-
-      {/* <ClubName clubTheme={clubTheme} />
-      <AnimatePresence>
-        {clubTheme && (
-          <motion.img
-            layoutId={clubTheme.name}
-            key={clubTheme.name}
-            src={clubTheme.logo}
-            alt={clubTheme.name}
-            className='h-[12em]'
-            onClick={() => themeChangeHandler(DEFAULT_CLUB)}
-            transition={{ duration: 0.5 }}
-          />
-        )}
-      </AnimatePresence>
-      <div className='z-10 flex gap-2 mb-24'>
-        {CLUBS_DATA.map(club => (
-          <motion.img
-            layoutId={club.name}
-            key={club.id}
-            src={club.logo}
-            alt={club.name}
-            onClick={() => themeChangeHandler(club)}
-            className='w-[4em]'
-            transition={{ duration: 0.5 }}
-          />
-        ))}
-      </div> */}
-
     </section >
-
   )
 })
 

@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+import { Button } from "@mui/material";
 
 import { sendPlayersData, fetchPlayersData } from "../../../store/players-actions";
 import { playersActions } from "../../../store/players-slice";
-import { Button, Grid } from "@mui/material";
-
-import Card from "../../../components/Card";
-
 import type { Player } from "../../../types/modelTypes";
 import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 import GridView from "../../../components/GridView";
 import manageMoney from "../../../store/app/manageMoney";
-import useGeneratePrice from "../../../utils/generatePrice/generatePrice";
 import generatePrice from "../../../utils/generatePrice/generatePrice";
 
 type OpeningBoardProps = {
   onClose: (state: boolean) => void
 }
-
 
 const OpeningBoard = ({ onClose }: OpeningBoardProps) => {
   const [pickedPlayers, setPickedPlayers] = useState<Player[] | []>([]);
@@ -91,21 +86,19 @@ const OpeningBoard = ({ onClose }: OpeningBoardProps) => {
     currentPack.forEach((player) => {
       if (uId !== null) {
         if (player.playerPrice !== undefined) {
-          console.log(player.playerPrice)
           manageMoney(uId, player.playerPrice);
         } else {
           const { playerPrice } = generatePrice(player)
           manageMoney(uId, playerPrice)
         }
-        // dispatch(deletePlayer(player.id));
       }
     });
     onClose(false);
   };
 
   return (
-    <div className="relative flex flex-col w-screen h-screen bg-opening-c bg-cover overflow-x-hidden">
-      <div className="flex justify-center mt-12 mb-4 gap-2">
+    <div className="relative flex flex-col w-screen h-screen overflow-x-hidden bg-cover bg-opening-c">
+      <div className="flex justify-center gap-2 mt-12 mb-4">
         <Button size="large" color="secondary" variant="contained" onClick={sendAllPlayer}>
           Send All
         </Button>
@@ -116,7 +109,7 @@ const OpeningBoard = ({ onClose }: OpeningBoardProps) => {
           Reject
         </Button>
       </div>
-      <div className="flex w-full overflow-x-hidden justify-center">
+      <div className="flex justify-center w-full overflow-x-hidden">
         {currentPack &&
           <GridView playersArray={currentPack} pickPlayer={pickPlayer} cardSize="14px" pickedPlayers={pickedPlayers} xxs={12}
             xs={12}
