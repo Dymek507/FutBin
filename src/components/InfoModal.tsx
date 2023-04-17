@@ -12,26 +12,6 @@ type InfoModalProps = {
 const InfoModal = ({ children, open,
   onClose }: InfoModalProps) => {
 
-
-  const CustomSelect = styled(Select)(({ theme }) => ({
-    '& .MuiSvgIcon-root': {
-      color: theme.palette.primary.contrastText
-    },
-    color: "white",
-    '.MuiOutlinedInput-notchedOutline': {
-      borderColor: 'white',
-    },
-    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'white',
-    },
-    '&:hover .MuiOutlinedInput-notchedOutline': {
-      color: "white",
-      borderColor: 'white',
-    },
-  }));
-
-
-
   return (
     <Modal
       open={open}
