@@ -22,6 +22,7 @@ const uiSlice = createSlice({
       money: 0,
       result: { wins: 0, draws: 0, loses: 0 },
       goals: { goalsFor: 0, goalsAgainst: 0 },
+      packs: [],
     },
     allPlayersData: {
       results: dummyResults,
@@ -44,6 +45,7 @@ const uiSlice = createSlice({
         money: 0,
         result: { wins: 0, draws: 0, loses: 0 },
         goals: { goalsFor: 0, goalsAgainst: 0 },
+        packs: [],
       };
     },
     toggle(state) {

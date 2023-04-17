@@ -34,8 +34,7 @@ export default function SignIn() {
       .then((userCredential) => {
         const userUid = userCredential.user.uid;
         dispatch(logIn(userUid));
-        console.log("zalogowano");
-        navigate("/");
+        navigate("/home");
       })
       .catch((err) => {
         alert(err.message);

@@ -52,7 +52,6 @@ const Squad = () => {
     setCurrentPosition(nr)
   }
   return (
-
     <div className="flex items-center justify-center w-full ">
       {showModal ?
         <ChoseOnPositionModal open={showModal} onClose={() => setShowModal(false)} avaiablePlayer={avaiablePlayer} addOnPositionHandler={addOnPositionHandler} currentPosition={currentPosition} />

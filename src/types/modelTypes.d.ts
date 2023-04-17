@@ -51,6 +51,7 @@ export type UserData = {
   money: number;
   result: { wins: number; draws: number; loses: number };
   goals: { goalsFor: number; goalsAgainst: number };
+  packs: PackT[];
 };
 
 export type UserDataOnDb = {

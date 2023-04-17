@@ -4,11 +4,10 @@ import Modal from "@mui/material/Modal";
 import OpeningAnimation from "./OpeningAnimation/OpeningAnimation";
 import WalkoutAnimation from "./OpeningWalkout";
 import OpeningBoard from "./OpeningBoard";
-import sortPlayers from "../../MyPlayers/utils/sortPlayers";
+import sortPlayers, { SortingVariants } from "../../../utils/sortPlayers";
 import { PackT, Player } from "../../../types/modelTypes";
 import { useAppSelector } from "../../../store/app/hooks";
 import dummyPlayer from "../../../data/dummyPlayer";
-import { Variant } from "../../MyPlayers/MyPlayers";
 
 type OpeningModalProps = {
   showModal: boolean;
@@ -25,7 +24,7 @@ const OpeningModal = ({ showModal, onClose, packData }: OpeningModalProps) => {
   const [walkoutPlayer, setWalkoutPlayer] = useState<Player>(dummyPlayer);
 
   const playersArray = useMemo(
-    () => sortPlayers(currentPack, Variant.rat, true),
+    () => sortPlayers(currentPack, SortingVariants.rat, true),
     [currentPack]
   );
 

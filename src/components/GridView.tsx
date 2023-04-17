@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material'
-import React, { Suspense, lazy } from 'react'
+import React, { lazy } from 'react'
 import { Player } from '../types/modelTypes'
 // import Card from './Card';
 

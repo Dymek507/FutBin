@@ -48,11 +48,9 @@ const MyPacks = () => {
 
   const openPrevPackHandler = () => {
     setShowPrevPlayers(true);
-    console.log("prev");
   };
   const closePrevPackHandler = () => {
     setShowPrevPlayers(false);
-    console.log("prev");
   };
 
   return (
@@ -82,7 +80,7 @@ const MyPacks = () => {
               <InfoScreen text1="No Packs" text2="Buy some!" />
             )}
             {myPacks.length !== 0 && (
-              <PacksDisplay packs={myPacks} buyPack={OpenPack} />
+              <PacksDisplay packs={myPacks} onClick={OpenPack} />
             )
             }
           </div>

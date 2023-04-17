@@ -9,11 +9,11 @@ import { PackT } from '../../../types/modelTypes';
 
 interface PacksDisplayProps {
   packs: PackT[],
-  buyPack: (packData: PackT) => void,
+  onClick: (packData: PackT) => void,
   showPrice?: boolean
 }
 
-const PacksDisplay = ({ packs, buyPack, showPrice }: PacksDisplayProps) => {
+const PacksDisplay = ({ packs, onClick, showPrice }: PacksDisplayProps) => {
 
   const [current, setCurrent] = useState(0);
   const length = packs.length;
@@ -52,7 +52,7 @@ const PacksDisplay = ({ packs, buyPack, showPrice }: PacksDisplayProps) => {
                       key={pack.id}
                       packData={pack}
                       openModal={() => { }}
-                      onClick={buyPack}
+                      onClick={onClick}
                       showPrice={showPrice}
                     />
                   )}
@@ -71,7 +71,7 @@ const PacksDisplay = ({ packs, buyPack, showPrice }: PacksDisplayProps) => {
             {packs.map(pack => <Pack key={pack.id}
               packData={pack}
               openModal={() => { }}
-              onClick={buyPack}
+              onClick={onClick}
               showPrice={showPrice}
             />)}
           </div>

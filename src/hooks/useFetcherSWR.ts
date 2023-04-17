@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
 import axios, { AxiosRequestConfig } from "axios";
 
@@ -32,15 +32,6 @@ export const useFetcherSWR = (endPoint: string) => {
       setShouldFetch(false);
     }
   }, [data]);
-
-  // useEffect(() => {
-  //   if (error) {
-  //     throw new Response(
-  //       JSON.stringify({ message: "Could not fetch players" }),
-  //       { status: 500 }
-  //     );
-  //   }
-  // }, [error]);
 
   useEffect(() => {
     setShouldFetch(true);

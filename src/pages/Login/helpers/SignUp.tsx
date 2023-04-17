@@ -68,6 +68,7 @@ export default function SignUp() {
           money: 10000,
           result: { wins: 0, draws: 0, loses: 0 },
           goals: { goalsFor: 0, goalsAgainst: 0 },
+          packs: [],
         });
         dispatch(
           uiActions.login({
@@ -78,13 +79,14 @@ export default function SignUp() {
               money: 10000,
               result: { wins: 0, draws: 0, loses: 0 },
               goals: { goalsFor: 0, goalsAgainst: 0 },
+              packs: [],
             },
           }
           )
         );
       })
       .then(() => {
-        navigate("/");
+        navigate("/home");
       })
       .catch((err) => {
         alert(err.message);

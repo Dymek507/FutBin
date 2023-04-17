@@ -12,14 +12,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
-import FiberNewIcon from "@mui/icons-material/FiberNew";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import LogoutIcon from "@mui/icons-material/Logout";
-import GroupsIcon from "@mui/icons-material/Groups";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import { AdminPanelSettings } from "@mui/icons-material";
+
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
+import { MENU_LIST } from "./menu-data";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -38,70 +33,27 @@ const Menu = () => {
   };
 
   const logoutHandler = () => {
-    console.log("working in menu");
     dispatch(logOut());
     dispatch(playersActions.replaceAllMyPlayers([]));
     dispatch(uiActions.toggle());
-    navigate("/");
   };
 
-  const menuList = [
-    {
-      id: 1,
-      text: "Home",
-      icon: <HomeIcon />,
-      link: "/",
-    },
-    {
-      id: 2,
-      text: "New Packs",
-      icon: <FiberNewIcon />,
-      link: "/new-packs",
-    },
-    {
-      id: 3,
-      text: "My Packs",
-      icon: <InventoryIcon />,
-      link: "/my-packs",
-    },
-    {
-      id: 4,
-      text: "My Players",
-      icon: <BusinessCenterIcon />,
-      link: "/my-players",
-    },
-    {
-      id: 5,
-      text: "Squad",
-      icon: <GroupsIcon />,
-      link: "/squad",
-    },
-    {
-      id: 6,
-      text: "Admin",
-      icon: <AdminPanelSettings />,
-      link: "/admin",
-    },
-    {
-      id: 7,
-      text: "Logout",
-      icon: <LogoutIcon />,
-      link: "/logout",
-      onClick: logoutHandler,
-    },
-  ];
-
-
-
+  const menuClickHandler = (text: string) => {
+    if (text === "Logout") {
+      logoutHandler();
+    } else {
+      dispatch(uiActions.toggle());
+    }
+  };
 
   const list = (
     <Box sx={{ width: 250 }} role="presentation">
       <List>
-        {menuList.map((item) => (
+        {MENU_LIST.map((item) => (
           <Link
             key={item.id}
             to={item.link}
-            onClick={() => dispatch(uiActions.hideMenu())}
+            onClick={() => menuClickHandler(item.text)}
           >
             <ListItem
               disablePadding

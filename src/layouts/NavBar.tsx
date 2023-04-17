@@ -41,7 +41,7 @@ const NavBar = () => {
           <MenuIcon sx={{ fontSize: "2.5rem" }} />
         </IconButton>
         <div className="flex grow">
-          <Link to={"/"}>
+          <Link to={"/home"}>
             <Typography
               variant="h5"
               fontSize="1.3rem"

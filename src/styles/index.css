@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
 
-@import url("https://fonts.googleapis.com/css?family=Monoton&effect=neon");
-
 @font-face {
   font-family: "DIN_Pro";
   src: url(/src/assets/fonts/DIN_Pro.otf);
@@ -16,11 +14,7 @@
 @tailwind utilities;
 
 .main-background {
-  /* -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; */
   background-position: bottom;
+  background-size: cover;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='2000' height='1200' preserveAspectRatio='none' viewBox='0 0 2000 1200'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1327%26quot%3b)' fill='none'%3e%3crect width='2000' height='1200' x='0' y='0' fill='url(%23SvgjsLinearGradient1328)'%3e%3c/rect%3e%3cpath d='M1387.07-188.97C1094.15-95.79 1004.02 746.41 593.31 750.02 182.6 753.63 35.21 256.03-200.45 234.02' stroke='rgba(255%2c 0%2c 153%2c 0.9)' stroke-width='2'%3e%3c/path%3e%3cpath d='M1579.19-103.33C1297.59-70.39 1188.82 519.67 657.44 557.38 126.05 595.09-12.48 956.4-264.32 965.38' stroke='rgba(255%2c 0%2c 153%2c 0.9)' stroke-width='2'%3e%3c/path%3e%3cpath d='M1347.8-96.93C1101.81 34.24 1117.74 817.21 766.82 854.86 415.9 892.51 476.33 704.86 185.84 704.86-104.65 704.86-245.14 853.66-395.14 854.86' stroke='rgba(255%2c 0%2c 153%2c 0.9)' stroke-width='2'%3e%3c/path%3e%3cpath d='M1235.89-231.51C1044.89-171.95 1114.61 374.89 715.81 376.72 317.01 378.55-55.32 103.05-324.35 100.72' stroke='rgba(255%2c 0%2c 153%2c 0.9)' stroke-width='2'%3e%3c/path%3e%3cpath d='M1911.18-54.83C1620.85-27.09 1484.49 555.79 935.91 585.33 387.33 614.87 221.52 951.09-39.36 957.33' stroke='rgba(255%2c 0%2c 153%2c 0.9)' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1327'%3e%3crect width='2000' height='1200' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='10%25' y1='-16.67%25' x2='90%25' y2='116.67%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1328'%3e%3cstop stop-color='rgba(3%2c 40%2c 77%2c 1)' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(0%2c 87%2c 200%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
 }

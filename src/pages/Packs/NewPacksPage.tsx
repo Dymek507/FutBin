@@ -25,7 +25,7 @@ const NewPacks = () => {
         </Link>
       </div>
       <div className="h-5/6">
-        <PacksDisplay packs={packsData} buyPack={buyPack} showPrice={true} />
+        <PacksDisplay packs={packsData} onClick={buyPack} showPrice={true} />
       </div>
     </div>
 

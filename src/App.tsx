@@ -1,28 +1,27 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect, Suspense } from "react";
 import { RouterProvider } from "react-router-dom";
+
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { uiActions } from "./store/ui-slice";
 import { doc, getDoc } from "@firebase/firestore";
-import { createTheme, LinearProgress, ThemeProvider } from "@mui/material";
+import { LinearProgress, ThemeProvider } from "@mui/material";
+
+import { uiActions } from "./store/ui-slice";
 import { db } from "./firebaseConfig";
 import { useAppDispatch } from "./store/app/hooks";
 import { logOut } from "./store/ui-actions";
 import { router } from './App.routes'
+import { themeMain } from "./AppMuiTheme";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { themeMain } from "./AppMuiTheme";
-
-
-
 
 function App() {
   const dispatch = useAppDispatch();
   const auth = getAuth();
 
-
+  //Fetch user data from firebase and save it in redux store
   const fetchUserData = async (uId: string) => {
     if (uId !== null) {
       const userDocRef = doc(db, `users/${uId}`);
@@ -38,6 +37,7 @@ function App() {
               money: userData?.money,
               result: userData?.results,
               goals: userData?.goals,
+              packs: userData?.packs,
             },
           })
         );
@@ -66,7 +66,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={themeMain}>
-        <Suspense fallback={<div className="w-screen h-screen ">
+        <Suspense fallback={<div className="w-screen h-screen">
           <LinearProgress />
         </div>}>
           <RouterProvider router={router} />

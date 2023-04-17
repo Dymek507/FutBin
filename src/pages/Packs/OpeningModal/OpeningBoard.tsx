@@ -81,8 +81,6 @@ const OpeningBoard = ({ onClose }: OpeningBoardProps) => {
   };
 
   const rejectAllPlayers = () => {
-    console.log('reject')
-    console.log(currentPack)
     currentPack.forEach((player) => {
       if (uId !== null) {
         if (player.playerPrice !== undefined) {
